@@ -1,0 +1,140 @@
+.navbar-default {
+  background-color: #f8f8f8;
+  border: 1px solid #e7e7e7;
+  min-height: 50px;
+
+  .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    min-height: inherit;
+    display: flex;
+    justify-content: space-between;
+
+    .navbar-header {
+      display: flex;
+
+      .navbar-brand {
+        color: #777;
+        font-size: 18px;
+        line-height: 20px;
+        text-decoration: none;
+        padding: 15px;
+      }
+    }
+
+    .collapse {
+      display: none;
+    }
+
+    .navbar-collapse {
+      border-color: #e7e7e7;
+      position: absolute;
+      top: 52px;
+      background-color: #f8f8f8;
+      width: 300px;
+      right: 0;
+
+      .navbar-nav {
+        li {
+          list-style: none;
+
+          a {
+            color: #777;
+            text-decoration: none;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+
+  .burger {
+    .navbar-toggle:hover {
+      border-color: #ddd;
+    }
+
+    .navbar-toggle:focus {
+      background-color: #c9c7c7;
+    }
+
+    .navbar-toggle {
+      position: relative;
+      float: right;
+      padding: 9px 10px;
+      margin: 8px 15px 8px 8px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+
+      .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+        background-color: #888;
+      }
+
+      .icon-bar + .icon-bar {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    border-radius: 4px;
+
+    .container-fluid {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+
+      .navbar-header {
+
+        .navbar-brand {
+          font-size: 22px;
+        }
+      }
+
+      .collapse {
+        display: flex;
+      }
+
+      .navbar-collapse {
+        margin: 0 -15px 0 -15px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+
+        .navbar-nav {
+          li {
+            float: left;
+            margin-right: 30px;
+
+            a {
+              padding-top: 15px;
+              padding-bottom: 10px;
+            }
+          }
+        }
+
+        .navbar-right {
+          li {
+            float: right;
+            margin-right: 30px;
+          }
+        }
+      }
+
+      .burger {
+        display: none;
+      }
+
+    }
+
+  }
+}
+
+
+
+
