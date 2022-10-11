@@ -19,7 +19,7 @@
 
       <div class='navbar-nav navbar-right'>
         <ul>
-          <li><a>OB</a></li>
+          <li *ngIf='isUserAuth'><a>OB</a></li>
           <li *ngIf='isUserAuth'><a style='cursor: pointer' (click)='onLogout()'>Logout</a></li>
         </ul>
       </div>

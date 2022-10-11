@@ -27,12 +27,7 @@
     }
 
     .navbar-collapse {
-      border-color: #e7e7e7;
-      position: absolute;
-      top: 52px;
-      background-color: #f8f8f8;
-      width: 300px;
-      right: 0;
+
 
       .navbar-nav {
         li {
@@ -83,6 +78,16 @@
     }
   }
 
+  @media (max-width: 768px) {
+    .navbar-collapse{
+      border-color: #e7e7e7;
+      position: absolute;
+      top: 52px;
+      background-color: #f8f8f8;
+      width: 300px;
+      right: 0;
+    }
+  }
   @media (min-width: 768px) {
     border-radius: 4px;
 
@@ -102,7 +107,6 @@
       }
 
       .navbar-collapse {
-        margin: 0 -15px 0 -15px;
         display: grid;
         grid-template-columns: 2fr 1fr;
 
