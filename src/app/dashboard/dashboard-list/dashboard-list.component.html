@@ -1,1 +1,15 @@
-<p>dashboard-list works!</p>
+<div class='item-list-block'>
+  <div class='create' (click)='onModalOpen()'>
+    <p>Create new board</p>
+  </div>
+  <app-board-item
+    *ngFor='let boardEl of boards; let index = index'
+    [board]="boardEl"
+    [index]='index'
+  ></app-board-item>
+</div>
+
+<router-outlet></router-outlet>
+
+
+

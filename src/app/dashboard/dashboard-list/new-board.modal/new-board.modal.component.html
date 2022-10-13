@@ -1,0 +1,29 @@
+<ng-container *ngIf="display$ | async as display">
+  <section [class.open]="display === 'open'">
+    <form (ngSubmit)='onSubmit()' #form="ngForm">
+      <label for='name'>Name</label>
+      <input
+        type='text'
+        id='name'
+        name='name'
+        placeholder='Enter board name'
+        ngModel
+        #name="ngModel"
+      >
+      <label for='description'>Description</label>
+      <textarea
+        id='description'
+        name='description'
+        rows='6'
+        ngModel
+        #description="ngModel"
+      >
+    </textarea>
+      <button class="close" type='submit'>Create</button>
+    </form>
+  </section>
+</ng-container>
+
+
+
+

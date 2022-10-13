@@ -1,0 +1,21 @@
+<div
+  style='cursor: pointer'
+  class='list-group-item'
+  [ngClass]="{'big-view': fullMode}"
+  [routerLink]="[index]"
+  routerLinkActive='active'
+>
+  <div class='pull-left' style='cursor: default'>
+    <h4>{{ board.name }}</h4>
+    <p>
+      {{ board.description | limitTo: descriptionLimitLength}}
+      <b
+        (click)='onShowMoreContent($event)'
+        style='cursor: pointer'
+      >
+        {{ board.description.length > 20 ? spanText : ''}}
+      </b>
+    </p>
+  </div>
+</div>
+

@@ -1,0 +1,14 @@
+.item-list-block {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  .create{
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 114px;
+  }
+}
