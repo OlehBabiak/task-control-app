@@ -3,6 +3,7 @@ import {ModalService} from "../../../services/modal.service";
 import {Observable} from "rxjs";
 import {NgForm} from "@angular/forms";
 import {BoardService} from "../../../services/board.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-board-modal',
@@ -14,10 +15,12 @@ export class NewBoardModalComponent implements OnInit {
   display$: Observable<'open' | 'close'>;
   columns = ['Todo', 'In progress', 'Done'];
   submitted = false;
+  editMode = this.modalService.boardIndex
 
   constructor(
     private modalService: ModalService,
-    private boardService: BoardService
+    private boardService: BoardService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -26,8 +29,11 @@ export class NewBoardModalComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true
-    this.boardService.createBoard(this.boardForm.value)
+    if(this.modalService.boardIndex === null){
+      this.boardService.createBoard(this.boardForm.value)
+    }else{
+      this.boardService.editBoard(this.modalService.boardIndex, this.boardForm.value)
+    }
     this.modalService.close();
   }
-
 }

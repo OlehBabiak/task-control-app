@@ -5,8 +5,19 @@
   [routerLink]="[index]"
   routerLinkActive='active'
 >
+  <div class='icons'>
+    <div><h4>{{ board.name }}</h4></div>
+    <div>
+      <mat-icon
+        *ngFor='let icon of boardIcons'
+        aria-hidden="true"
+        aria-label="{{icon}} icon"
+        (click)='onDoChanges(icon, $event)'
+      >{{ icon }}
+      </mat-icon>
+    </div>
+  </div>
   <div class='pull-left' style='cursor: default'>
-    <h4>{{ board.name }}</h4>
     <p>
       {{ board.description | limitTo: descriptionLimitLength}}
       <b

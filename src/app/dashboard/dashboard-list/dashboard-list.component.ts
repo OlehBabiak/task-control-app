@@ -27,7 +27,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
 
 
   onModalOpen() {
-    this.modalService.open()
+    this.modalService.open(null)
   }
 
   ngOnDestroy() {

@@ -26,3 +26,13 @@
     border-bottom-left-radius: 4px;
   }
 
+  .icons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mat-icon {
+    color: #555;
+    margin: 5px;
+  }
+

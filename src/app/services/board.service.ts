@@ -9,9 +9,9 @@ export class BoardService {
   boardChanged = new Subject<BoardModel[]>()
 
   private boards: BoardModel[] = [
-    new BoardModel("Test board 1", "Test 1 description", new Date(11/5/2022), []),
-    new BoardModel("Test board 2", "Test 2 description kkdlkdf lfgldkfglkd ldfk glkfdmg lkdfm lkfmgldkfmglekrgmfmvdfk gdflkmgldfkgldkbnlkfbndf bdfknbldfkbnd lbdlkbnd fbkldnbldkbnldkfbn fkldnkfklfbldb ", new Date(11/5/2022), []),
-    new BoardModel("Test board 3", "Test 3 description", new Date(11/5/2022), []),
+    new BoardModel("Test board 1", "Test 1 description", new Date(11 / 5 / 2022), []),
+    new BoardModel("Test board 2", "Test 2 description kkdlkdf lfgldkfglkd ldfk glkfdmg lkdfm lkfmgldkfmglekrgmfmvdfk gdflkmgldfkgldkbnlkfbndf bdfknbldfkbnd lbdlkbnd fbkldnbldkbnldkfbn fkldnkfklfbldb ", new Date(11 / 5 / 2022), []),
+    new BoardModel("Test board 3", "Test 3 description", new Date(11 / 5 / 2022), []),
   ]
 
   constructor() {
@@ -27,8 +27,17 @@ export class BoardService {
 
   createBoard(board: BoardModel) {
     const newBoard = new BoardModel(board.name, board.description);
-    console.log(board)
-    this.boards.push(newBoard)
+    this.boards.push(newBoard);
+    this.boardChanged.next(this.boards.slice())
+  }
+
+  editBoard(id: number, newBoard: BoardModel) {
+    this.boards[id] = new BoardModel(newBoard.name, newBoard.description);
+    this.boardChanged.next(this.boards.slice())
+  }
+
+  deleteBoard(id: number) {
+    this.boards.splice(id, 1);
     this.boardChanged.next(this.boards.slice())
   }
 }

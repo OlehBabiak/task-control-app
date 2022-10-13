@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BoardModel} from "../../board-model";
+import {BoardService} from "../../../services/board.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ModalService} from "../../../services/modal.service";
 
 @Component({
   selector: 'app-board-item',
@@ -12,8 +15,15 @@ export class BoardItemComponent implements OnInit {
   descriptionLimitLength: string = '20';
   spanText: string = 'see more...'
   fullMode = false
+  boardIcons: string[] = ['edit', 'delete']
+  newBoard: BoardModel
 
-  constructor() {
+  constructor(
+    private boardService: BoardService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private modalService: ModalService
+    ) {
   }
 
   ngOnInit(): void {
@@ -22,7 +32,7 @@ export class BoardItemComponent implements OnInit {
 
   onShowMoreContent($event) {
     $event.stopPropagation()
-    if(this.descriptionLimitLength === '20'){
+    if (this.descriptionLimitLength === '20') {
       this.descriptionLimitLength = '1000';
       this.fullMode = true;
       this.spanText = 'see less...'
@@ -30,6 +40,15 @@ export class BoardItemComponent implements OnInit {
       this.descriptionLimitLength = '20';
       this.fullMode = false;
       this.spanText = 'see more...'
+    }
+  }
+
+  onDoChanges(icon: string, $event) {
+    $event.stopPropagation()
+    if (icon === this.boardIcons[0]) {
+      this.modalService.open(this.index)
+    } else {
+      this.boardService.deleteBoard(this.index)
     }
   }
 }

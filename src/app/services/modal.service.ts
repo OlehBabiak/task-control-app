@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
+  boardIndex: number;
 
-  constructor() { }
+  constructor() {
+  }
+
   private display: BehaviorSubject<'open' | 'close'> =
     new BehaviorSubject('close');
 
@@ -14,7 +17,9 @@ export class ModalService {
     return this.display.asObservable();
   }
 
-  open() {
+  open(index: number | null) {
+
+    this.boardIndex = index;
     this.display.next('open');
   }
 
