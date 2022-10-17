@@ -15,10 +15,10 @@ export class NewBoardModalComponent implements OnInit {
   display$: Observable<'open' | 'close'>;
   columns = ['Todo', 'In progress', 'Done'];
   submitted = false;
-  editMode = this.modalService.boardIndex
+  editMode = this.modalService.boardIndex;
 
   constructor(
-    private modalService: ModalService,
+    public modalService: ModalService,
     private boardService: BoardService,
     private router: Router
   ) {}

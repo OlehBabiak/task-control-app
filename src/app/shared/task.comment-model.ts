@@ -1,4 +1,4 @@
 export class TaskCommentModel {
-  constructor(public comment: string) {
+  constructor(public comment?: string) {
   }
 }

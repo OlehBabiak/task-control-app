@@ -5,7 +5,7 @@ import {BehaviorSubject, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ModalService {
-  boardIndex: number;
+  boardIndex: number | null = null;
 
   constructor() {
   }
@@ -18,7 +18,6 @@ export class ModalService {
   }
 
   open(index: number | null) {
-
     this.boardIndex = index;
     this.display.next('open');
   }

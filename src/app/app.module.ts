@@ -15,6 +15,7 @@ import {FormsModule} from "@angular/forms";
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
+import { TaskListComponent } from './dashboard/board.detail/task-list/task-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatIconModule} from '@angular/material/icon';
     BoardEditComponent,
     BoardDetailComponent,
     NewBoardModalComponent,
-    TruncatePipe
+    TruncatePipe,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,

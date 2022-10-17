@@ -1,0 +1,19 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {BoardModel} from "../../board-model";
+import {ColumnTaskModel} from "../../../shared/column.task-model";
+
+@Component({
+  selector: 'app-task-list',
+  templateUrl: './task-list.component.html',
+  styleUrls: ['./task-list.component.scss']
+})
+export class TaskListComponent implements OnInit {
+  @Input() tasks: ColumnTaskModel[]
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
+}

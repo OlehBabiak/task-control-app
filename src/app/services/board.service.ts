@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
 import {BoardModel} from "../dashboard/board-model";
 import {Subject} from "rxjs";
+import {BoardColumnModel} from "../shared/board.column-model";
+import {ColumnTaskModel} from "../shared/column.task-model";
+import {TaskCommentModel} from "../shared/task.comment-model";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,26 @@ export class BoardService {
 
   private boards: BoardModel[] = [
     new BoardModel("Test board 1", "Test 1 description", new Date(11 / 5 / 2022), []),
-    new BoardModel("Test board 2", "Test 2 description kkdlkdf lfgldkfglkd ldfk glkfdmg lkdfm lkfmgldkfmglekrgmfmvdfk gdflkmgldfkgldkbnlkfbndf bdfknbldfkbnd lbdlkbnd fbkldnbldkbnldkfbn fkldnkfklfbldb ", new Date(11 / 5 / 2022), []),
+    ////////////////////////////////////////
+    new BoardModel("Test board 2", "Test 2 description ", new Date(11 / 5 / 2022), [
+      new BoardColumnModel('Todo', []),
+
+      new BoardColumnModel('In Progress', [
+        new ColumnTaskModel('Some task 1', 'In Progress', new Date(11 / 5 / 2022), 'Detail description of task1',
+          [
+            new TaskCommentModel('First comment of task1'),
+            new TaskCommentModel('Second comment of task1'),
+          ]),
+        new ColumnTaskModel('Some task 2', 'In Progress', new Date(11 / 5 / 2022), 'Detail description of task2',
+          [
+            new TaskCommentModel('First comment of task2'),
+            new TaskCommentModel('Second comment of task2'),
+          ])
+      ]),
+
+      new BoardColumnModel('Done', []),
+    ]),
+    ///////////////////////////////////////
     new BoardModel("Test board 3", "Test 3 description", new Date(11 / 5 / 2022), []),
   ]
 

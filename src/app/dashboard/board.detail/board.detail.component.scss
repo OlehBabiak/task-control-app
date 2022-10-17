@@ -1,0 +1,31 @@
+.board-header {
+  background-color: aquamarine;
+}
+
+.container {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));;
+}
+
+.column {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #e7e7e7;
+  padding: 5px;
+}
+
+.column-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-comment-button:hover{
+  cursor: pointer;
+  background-color: #c9c7c7;
+}
+.add-comment-button>p{
+  text-align: center;
+  margin: 10px;
+}

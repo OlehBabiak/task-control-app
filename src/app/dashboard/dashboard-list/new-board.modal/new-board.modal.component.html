@@ -19,7 +19,7 @@
         #description="ngModel"
       >
     </textarea>
-      <button class="close" type='submit'>{{ !editMode ? 'Create' : 'Update'}}</button>
+      <button class="close" type='submit'>{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
     </form>
   </section>
 </ng-container>
