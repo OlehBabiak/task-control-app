@@ -9,12 +9,18 @@
       <div class='column-header'>
         <h3>{{ column.name }}</h3>
       </div>
-     <app-task-list [tasks] ='column.tasks' ></app-task-list>
-      <div class='add-comment-button'>
-        <p>+ Add new task</p>
+      <app-task-list [tasks]='column.tasks'></app-task-list>
+      <div>
+        <button class='button btn-primary'>+ Add task</button>
       </div>
     </div>
-
+    <button
+      (click)='onNewColumn()'
+      style='max-height: 45px'
+      class='button btn-primary'
+    >+ Add column
+    </button>
+    <router-outlet></router-outlet>
   </div>
 </div>
 

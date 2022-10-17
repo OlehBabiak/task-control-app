@@ -21,11 +21,17 @@
   align-items: center;
 }
 
-.add-comment-button:hover{
+.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4
+}
+
+.add-button:hover{
   cursor: pointer;
   background-color: #c9c7c7;
 }
-.add-comment-button>p{
+.add-comment-button{
   text-align: center;
   margin: 10px;
 }

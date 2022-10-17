@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "../dashboard.component";
 import {BoardEditComponent} from "../board-edit/board-edit.component";
 import {BoardDetailComponent} from "../board.detail/board.detail.component";
 import {NewBoardModalComponent} from "../dashboard-list/new-board.modal/new-board.modal.component";
+import {ColumnEditComponent} from "../board.detail/column-edit/column-edit.component";
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
-  {path: ':id', component: BoardDetailComponent},
+  {
+    path: ':id', component: BoardDetailComponent,
+    children: [{path: 'new', component: ColumnEditComponent}]
+  },
 ]
 
 @NgModule({
@@ -19,4 +23,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {
+}

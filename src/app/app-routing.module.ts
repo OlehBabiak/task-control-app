@@ -1,10 +1,15 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./home/home.component";
+import * as path from "path";
 
 const routes: Routes = [
   {path: '', redirectTo: '/recipes', pathMatch: "full"},
-  {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard-routing/dashboard-routing.module').then(module => module.DashboardRoutingModule)},
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard-routing/dashboard-routing.module')
+      .then(module => module.DashboardRoutingModule),
+  },
   // {path: 'archive'},
   {path: 'home', component: HomeComponent},
   // {path: 'auth', component: AuthComponent}
@@ -14,4 +19,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

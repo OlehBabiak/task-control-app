@@ -62,4 +62,11 @@ export class BoardService {
     this.boards.splice(id, 1);
     this.boardChanged.next(this.boards.slice())
   }
+
+  addBoardColumn(id: number, columnName) {
+    console.log(id, columnName.column)
+    const mewColumn = new BoardColumnModel(columnName.column)
+    this.boards[id].columns.push(mewColumn);
+    this.boardChanged.next(this.boards.slice())
+  }
 }

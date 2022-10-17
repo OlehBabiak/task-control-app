@@ -16,6 +16,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { TaskListComponent } from './dashboard/board.detail/task-list/task-list.component';
+import { ColumnEditComponent } from './dashboard/board.detail/column-edit/column-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TaskListComponent } from './dashboard/board.detail/task-list/task-list.
     BoardDetailComponent,
     NewBoardModalComponent,
     TruncatePipe,
-    TaskListComponent
+    TaskListComponent,
+    ColumnEditComponent
   ],
   imports: [
     BrowserModule,

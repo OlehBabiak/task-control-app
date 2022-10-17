@@ -15,14 +15,19 @@ export class BoardDetailComponent implements OnInit {
   constructor(
     private boardService: BoardService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    ) {
   }
 
   ngOnInit(): void {
+    console.log(this.boardDetail)
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.boardDetail = this.boardService.getBoard(this.id)
     })
   }
 
+  onNewColumn() {
+    this.router.navigate(['new'], {relativeTo: this.route})
+  }
 }
