@@ -1,6 +1,3 @@
-<div class='tasks'  *ngFor='let task of tasks'>
-  <div class='task'>
-    <h4>{{ task.name }}</h4>
-    <p>Comments count: {{ task.comments.length }}</p>
-  </div>
+<div class='tasks' *ngFor='let task of tasks'>
+  <app-task [task]='task'></app-task>
 </div>

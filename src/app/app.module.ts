@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { TaskListComponent } from './dashboard/board.detail/task-list/task-list.component';
 import { ColumnEditComponent } from './dashboard/board.detail/column-edit/column-edit.component';
 import { TaskComponent } from './dashboard/board.detail/task-list/task/task.component';
+import { TaskEditComponent } from './dashboard/board.detail/task-list/task-edit/task-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TaskComponent } from './dashboard/board.detail/task-list/task/task.comp
     TruncatePipe,
     TaskListComponent,
     ColumnEditComponent,
-    TaskComponent
+    TaskComponent,
+    TaskEditComponent
   ],
   imports: [
     BrowserModule,

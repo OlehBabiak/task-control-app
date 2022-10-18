@@ -70,7 +70,9 @@ export class BoardService {
     this.boardChanged.next(this.boards.slice())
   }
 
-  addTask(){
-
+  addTask(id: number, name: string, status: string) {
+    const newTask = new ColumnTaskModel('test1', 'status');
+    this.boards[id].columns[status].tasks.push(newTask);
+    this.boardChanged.next(this.boards.slice());
   }
 }
