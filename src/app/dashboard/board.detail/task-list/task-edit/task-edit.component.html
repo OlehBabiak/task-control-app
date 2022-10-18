@@ -1,24 +1,24 @@
 <ng-container *ngIf="display$ | async as display">
-  <section [class.open]="display === 'open'">
-    <form (ngSubmit)='onSubmit()' #taskForm="ngForm">
+  <section [class.open]="display === 'openTask'">
+    <form (ngSubmit)='onSubmit(taskForm)' #taskForm="ngForm">
       <div class='close' (click)='onClose()'>X</div>
       <div>
         <input
           type='text'
           id='name'
           name='name'
-          placeholder='Enter board name'
+          placeholder='Enter task name'
           ngModel
           #name="ngModel"
         >
       </div>
-      <div>
+      <div *ngIf='false'>
         <textarea
           id='description'
           name='description'
           rows='6'
           ngModel
-          placeholder='Description'
+          placeholder='Task description'
           #description="ngModel"
         >
     </textarea>

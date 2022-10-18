@@ -4,7 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import * as path from "path";
 
 const routes: Routes = [
-  {path: '', redirectTo: '/recipes', pathMatch: "full"},
+  {path: '', redirectTo: '/home', pathMatch: "full"},
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard-routing/dashboard-routing.module')

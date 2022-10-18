@@ -65,15 +65,16 @@ export class BoardService {
 
   addBoardColumn(id: number, columnName) {
     console.log(id, columnName.column)
-    const mewColumn = new BoardColumnModel(columnName.column)
+    const mewColumn = new BoardColumnModel(columnName.column, [])
     this.boards[id].columns.push(mewColumn);
     this.boardChanged.next(this.boards.slice())
   }
 
   addTask(id: number, name: string, status: string) {
-    const newTask = new ColumnTaskModel('test1', 'status');
-    this.boards[id].columns[status].tasks.push(newTask);
-    this.boardChanged.next(this.boards.slice());
+    console.log(this.boards[id].columns.find(col => col.name === status))
+    const newTask = new ColumnTaskModel(name, status);
+    this.boards[id].columns.find(col => col.name === status).tasks.push(newTask)
+    // this.boardChanged.next(this.boards.slice());
   }
 
   editTask(){

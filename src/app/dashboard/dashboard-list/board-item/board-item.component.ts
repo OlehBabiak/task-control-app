@@ -46,7 +46,7 @@ export class BoardItemComponent implements OnInit {
   onDoChanges(icon: string, $event) {
     $event.stopPropagation()
     if (icon === this.boardIcons[0]) {
-      this.modalService.open(this.index)
+      this.modalService.open(this.index, 'open')
     } else {
       this.boardService.deleteBoard(this.index)
     }

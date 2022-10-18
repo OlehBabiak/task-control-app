@@ -1,18 +1,19 @@
 <ng-container *ngIf="display$ | async as display">
   <section [class.open]="display === 'open'">
-    <form (ngSubmit)='onSubmit()' #form="ngForm">
-      <div class='close' (click)='onClose()'>X</div>
-      <div>
-        <input
-          type='text'
-          id='name'
-          name='name'
-          placeholder='Enter board name'
-          ngModel
-          #name="ngModel"
-        >
-      </div>
-      <div>
+    <div>
+      <form (ngSubmit)='onSubmit()' #form="ngForm">
+        <div class='close' (click)='onClose()'>X</div>
+        <div>
+          <input
+            type='text'
+            id='name'
+            name='name'
+            placeholder='Enter board name'
+            ngModel
+            #name="ngModel"
+          >
+        </div>
+        <div>
         <textarea
           id='description'
           name='description'
@@ -22,9 +23,12 @@
           #description="ngModel"
         >
     </textarea>
-      </div>
-      <button class="button btn-primary" type='submit'>{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
-    </form>
+        </div>
+        <button
+          class="button btn-primary" type='submit'
+        >{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
+      </form>
+    </div>
   </section>
 </ng-container>
 

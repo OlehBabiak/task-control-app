@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BoardModel} from "../board-model";
 import {BoardService} from "../../services/board.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
@@ -11,7 +11,7 @@ import {ModalService} from "../../services/modal.service";
 })
 export class BoardDetailComponent implements OnInit {
   boardDetail: BoardModel;
-  id: number
+  id: number;
 
   constructor(
     private boardService: BoardService,
@@ -34,6 +34,6 @@ export class BoardDetailComponent implements OnInit {
   }
 
   onAddTask() {
-    this.modalService.open(null)
+    this.modalService.open(null,'openTask')
   }
 }

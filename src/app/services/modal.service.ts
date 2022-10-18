@@ -10,19 +10,19 @@ export class ModalService {
   constructor() {
   }
 
-  private display: BehaviorSubject<'open' | 'close'> =
+  private display: BehaviorSubject<'open' | 'close' | 'openTask' | 'closeTask'> =
     new BehaviorSubject('close');
 
-  watch(): Observable<'open' | 'close'> {
+  watch(): Observable<'open' | 'close' | 'openTask' | 'closeTask'> {
     return this.display.asObservable();
   }
 
-  open(index: number | null) {
+  open(index: number | null, openValue) {
     this.boardIndex = index;
-    this.display.next('open');
+    this.display.next(openValue);
   }
 
-  close() {
-    this.display.next('close');
+  close(closeValue) {
+    this.display.next(closeValue);
   }
 }

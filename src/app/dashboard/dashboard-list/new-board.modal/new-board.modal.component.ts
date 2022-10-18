@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class NewBoardModalComponent implements OnInit {
   @ViewChild('form', {static: false}) boardForm: NgForm;
-  display$: Observable<'open' | 'close'>;
+  display$: Observable<'open' | 'close' | 'openTask' | 'closeTask'>;
   submitted = false;
   editMode = this.modalService.boardIndex;
 
@@ -23,6 +23,7 @@ export class NewBoardModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('first modal')
     this.display$ = this.modalService.watch();
   }
 
@@ -33,10 +34,10 @@ export class NewBoardModalComponent implements OnInit {
     }else{
       this.boardService.editBoard(this.modalService.boardIndex, this.boardForm.value)
     }
-    this.modalService.close();
+    this.modalService.close('close');
   }
 
   onClose() {
-    this.modalService.close();
+    this.modalService.close('close');
   }
 }
