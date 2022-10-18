@@ -75,4 +75,8 @@ export class BoardService {
     this.boards[id].columns[status].tasks.push(newTask);
     this.boardChanged.next(this.boards.slice());
   }
+
+  editTask(){
+
+  }
 }

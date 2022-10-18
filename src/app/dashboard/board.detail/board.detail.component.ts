@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BoardModel} from "../board-model";
 import {BoardService} from "../../services/board.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ModalService} from "../../services/modal.service";
 
 @Component({
   selector: 'app-board.detail',
@@ -16,6 +17,7 @@ export class BoardDetailComponent implements OnInit {
     private boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute,
+    private modalService: ModalService
     ) {
   }
 
@@ -32,6 +34,6 @@ export class BoardDetailComponent implements OnInit {
   }
 
   onAddTask() {
-
+    this.modalService.open(null)
   }
 }

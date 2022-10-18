@@ -1,0 +1,49 @@
+section {
+  visibility: hidden;
+  opacity: 0;
+
+  &.open {
+    visibility: inherit;
+    opacity: 1;
+  }
+
+  display: block;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.2);
+  transition: opacity 250ms ease-in;
+
+  form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    height: 250px;
+    width: 400px;
+
+    background: white;
+    padding: 30px;
+
+    border-radius: 8px;
+
+    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+    .close{
+      position: absolute;
+      top: 10px;
+      right: 15px;
+    }
+    input, textarea{
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+    }
+  }
+}
