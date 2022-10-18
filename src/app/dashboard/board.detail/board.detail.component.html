@@ -11,7 +11,7 @@
       </div>
       <app-task-list [tasks]='column.tasks'></app-task-list>
       <div>
-        <button class='button btn-primary'>+ Add task</button>
+        <button class='button btn-primary' (click)='onAddTask()'>+ Add task</button>
       </div>
     </div>
     <button

@@ -1,25 +1,29 @@
 <ng-container *ngIf="display$ | async as display">
   <section [class.open]="display === 'open'">
     <form (ngSubmit)='onSubmit()' #form="ngForm">
-      <label for='name'>Name</label>
-      <input
-        type='text'
-        id='name'
-        name='name'
-        placeholder='Enter board name'
-        ngModel
-        #name="ngModel"
-      >
-      <label for='description'>Description</label>
-      <textarea
-        id='description'
-        name='description'
-        rows='6'
-        ngModel
-        #description="ngModel"
-      >
+      <div class='close' (click)='onClose()'>X</div>
+      <div>
+        <input
+          type='text'
+          id='name'
+          name='name'
+          placeholder='Enter board name'
+          ngModel
+          #name="ngModel"
+        >
+      </div>
+      <div>
+        <textarea
+          id='description'
+          name='description'
+          rows='6'
+          ngModel
+          placeholder='Description'
+          #description="ngModel"
+        >
     </textarea>
-      <button class="close" type='submit'>{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
+      </div>
+      <button class="button btn-primary" type='submit'>{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
     </form>
   </section>
 </ng-container>

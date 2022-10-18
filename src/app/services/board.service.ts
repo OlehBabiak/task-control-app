@@ -69,4 +69,8 @@ export class BoardService {
     this.boards[id].columns.push(mewColumn);
     this.boardChanged.next(this.boards.slice())
   }
+
+  addTask(){
+
+  }
 }

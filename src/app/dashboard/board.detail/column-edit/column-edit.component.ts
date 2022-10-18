@@ -9,10 +9,13 @@ import {BoardService} from "../../../services/board.service";
   styleUrls: ['./column-edit.component.scss']
 })
 export class ColumnEditComponent implements OnInit {
-  @ViewChild('form', {static: false}) addColumnForm: NgForm;
   id: number;
 
-  constructor(private route: ActivatedRoute, private boardService: BoardService, private router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private boardService: BoardService,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -22,8 +25,8 @@ export class ColumnEditComponent implements OnInit {
       })
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
     this.router.navigate(['../'], {relativeTo: this.route})
-    this.boardService.addBoardColumn(this.id, this.addColumnForm.value)
+    this.boardService.addBoardColumn(this.id, form.value)
   }
 }

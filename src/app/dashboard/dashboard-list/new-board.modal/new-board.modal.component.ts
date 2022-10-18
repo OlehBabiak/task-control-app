@@ -13,7 +13,6 @@ import {Router} from "@angular/router";
 export class NewBoardModalComponent implements OnInit {
   @ViewChild('form', {static: false}) boardForm: NgForm;
   display$: Observable<'open' | 'close'>;
-  columns = ['Todo', 'In progress', 'Done'];
   submitted = false;
   editMode = this.modalService.boardIndex;
 
@@ -34,6 +33,10 @@ export class NewBoardModalComponent implements OnInit {
     }else{
       this.boardService.editBoard(this.modalService.boardIndex, this.boardForm.value)
     }
+    this.modalService.close();
+  }
+
+  onClose() {
     this.modalService.close();
   }
 }

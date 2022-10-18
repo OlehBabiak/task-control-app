@@ -18,35 +18,32 @@ section {
   background: rgba(0, 0, 0, 0.2);
   transition: opacity 250ms ease-in;
 
-  > div {
+  form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    height: 200px;
-    width: 300px;
+    height: 250px;
+    width: 400px;
 
     background: white;
-    padding: 64px;
+    padding: 30px;
 
     border-radius: 8px;
 
     box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  button.close {
-    background: none;
-    color: inherit;
-    border: none;
-    font: inherit;
-    cursor: pointer;
-    outline: none;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    padding: 16px;
+    .close{
+      position: absolute;
+      top: 10px;
+      right: 15px;
+    }
+    input, textarea{
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+    }
   }
 }
