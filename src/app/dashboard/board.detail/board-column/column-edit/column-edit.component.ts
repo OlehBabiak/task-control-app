@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {BoardService} from "../../../services/board.service";
+import {BoardService} from "../../../../services/board.service";
 
 @Component({
   selector: 'app-column-edit',

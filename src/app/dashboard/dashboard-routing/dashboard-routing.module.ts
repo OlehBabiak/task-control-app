@@ -5,7 +5,7 @@ import {DashboardComponent} from "../dashboard.component";
 import {BoardEditComponent} from "../board-edit/board-edit.component";
 import {BoardDetailComponent} from "../board.detail/board.detail.component";
 import {NewBoardModalComponent} from "../dashboard-list/new-board.modal/new-board.modal.component";
-import {ColumnEditComponent} from "../board.detail/column-edit/column-edit.component";
+import {ColumnEditComponent} from "../board.detail/board-column/column-edit/column-edit.component";
 import {TaskEditComponent} from "../board.detail/task-list/task-edit/task-edit.component";
 
 const routes: Routes = [

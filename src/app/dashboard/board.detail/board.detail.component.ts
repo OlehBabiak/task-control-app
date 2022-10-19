@@ -31,8 +31,4 @@ export class BoardDetailComponent implements OnInit {
   onNewColumn() {
     this.router.navigate(['new'], {relativeTo: this.route})
   }
-
-  onAddTask() {
-    this.modalService.open(null,'openTask')
-  }
 }
