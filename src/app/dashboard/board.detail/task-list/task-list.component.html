@@ -1,4 +1,4 @@
 <div class='tasks' *ngFor='let task of tasks; let index = index'>
-  <app-task [task]='task'></app-task>
+  <app-task [task]='task' [columnName]='name' [index]='index'></app-task>
 </div>
 

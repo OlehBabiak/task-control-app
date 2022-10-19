@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BoardModel} from "../../board-model";
 import {ColumnTaskModel} from "../../../shared/column.task-model";
 
 @Component({

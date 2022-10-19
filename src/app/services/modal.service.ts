@@ -10,7 +10,11 @@ export class ModalService {
   constructor() {
   }
 
-  private display: BehaviorSubject<'open' | 'close' | 'openTask' | 'closeTask'> =
+  private display: BehaviorSubject<
+    'open' |
+    'close' |
+    'openTask' |
+    'closeTask'> =
     new BehaviorSubject('close');
 
   watch(): Observable<'open' | 'close' | 'openTask' | 'closeTask'> {
