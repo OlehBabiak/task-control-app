@@ -69,13 +69,13 @@ export class BoardService {
     this.boardChanged.next(this.boards.slice())
   }
 
-  addTask(id: number, name: string, status: string) {
-    const newTask = new ColumnTaskModel(name, status);
+  addTask(id: number, form: ColumnTaskModel, status: string) {
+    const newTask = new ColumnTaskModel(form.name, status);
     this.boards[id].columns.find(col => col.name === status).tasks.push(newTask)
     this.boardChanged.next(this.boards.slice());
   }
 
-  editTask(){
+  updateTask(){
 
   }
 

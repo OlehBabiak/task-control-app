@@ -1,29 +1,37 @@
 <ng-container *ngIf="display$ | async as display">
   <section [class.open]="display === 'openTask'">
-    <form (ngSubmit)='onSubmit(taskForm)' #taskForm="ngForm">
+    <form [formGroup]='taskForm' (ngSubmit)='onSubmit()'>
       <div class='close' (click)='onClose()'>X</div>
       <div>
         <input
           type='text'
           id='name'
-          name='name'
+          formControlName='name'
           placeholder='Enter task name'
-          ngModel
-          #name="ngModel"
         >
       </div>
       <div *ngIf='modalService.boardIndex !== null'>
         <textarea
           id='description'
-          name='description'
+          formControlName='description'
           rows='6'
-          ngModel
           placeholder='Task description'
-          #description="ngModel"
         >
-    </textarea>
+        </textarea>
+        <div formArrayName = 'comments'>
+          <h3>Your comments</h3>
+          <div *ngFor="let hobbyControl of controls; let i = index" [formControlName]='i'>
+            <input
+              type='text'
+              formControlName= 'comment'
+            >
+          </div>
+          <button class='button btn-primary' (click)='onAddComment()'>Add comment</button>
+        </div>
       </div>
-      <button class="button btn-primary" type='submit'>{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
+      <button
+        class="button btn-primary" type='submit'
+      >{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
     </form>
   </section>
 </ng-container>

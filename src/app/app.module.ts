@@ -11,15 +11,17 @@ import {BoardItemComponent} from './dashboard/dashboard-list/board-item/board-it
 import {BoardEditComponent} from './dashboard/board-edit/board-edit.component';
 import {BoardDetailComponent} from './dashboard/board.detail/board.detail.component';
 import {NewBoardModalComponent} from './dashboard/dashboard-list/new-board.modal/new-board.modal.component';
-import {FormsModule} from "@angular/forms";
-import { TruncatePipe } from './pipes/truncate.pipe';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TruncatePipe} from './pipes/truncate.pipe';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
-import { TaskListComponent } from './dashboard/board.detail/task-list/task-list.component';
-import { ColumnEditComponent } from './dashboard/board.detail/board-column/column-edit/column-edit.component';
-import { TaskComponent } from './dashboard/board.detail/task-list/task/task.component';
-import { TaskEditComponent } from './dashboard/board.detail/task-list/task-edit/task-edit.component';
-import { BoardColumnItemComponent } from './dashboard/board.detail/board-column/board-column-item/board-column-item.component';
+import {TaskListComponent} from './dashboard/board.detail/task-list/task-list.component';
+import {ColumnEditComponent} from './dashboard/board.detail/board-column/column-edit/column-edit.component';
+import {TaskComponent} from './dashboard/board.detail/task-list/task/task.component';
+import {TaskEditComponent} from './dashboard/board.detail/task-list/task-edit/task-edit.component';
+import {
+  BoardColumnItemComponent
+} from './dashboard/board.detail/board-column/board-column-item/board-column-item.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +42,12 @@ import { BoardColumnItemComponent } from './dashboard/board.detail/board-column/
     BoardColumnItemComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    FormsModule,
     BrowserAnimationsModule,
-    MatIconModule
+    BrowserModule,
+    FormsModule,
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

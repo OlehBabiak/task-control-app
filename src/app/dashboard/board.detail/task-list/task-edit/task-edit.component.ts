@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {ModalService} from "../../../../services/modal.service";
-import {NgForm} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, NgForm} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {BoardService} from "../../../../services/board.service";
 
@@ -14,8 +14,8 @@ export class TaskEditComponent implements OnInit {
   display$: Observable<'open' | 'close' | 'openTask' | 'closeTask'>;
   editMode = this.modalService.boardIndex
   status: string
-  id: number;
-  qq = true
+  boardId: number;
+  taskForm: FormGroup
 
   constructor(
     public modalService: ModalService,
@@ -25,21 +25,43 @@ export class TaskEditComponent implements OnInit {
   ) {
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.route.params
       .subscribe((params: Params) => {
+        console.log('status ', params)
         this.status = params.id
       })
     this.route.parent.params
       .subscribe((params: Params) => {
-        this.id = +params.id
+        console.log('id ', +params.id)
+        this.boardId = +params.id
       })
+    console.log("route: ", this.route)
     this.display$ = this.modalService.watch();
+    this.initForm()
   }
 
-  onSubmit(form:NgForm) {
+  private initForm() {
 
-    this.boardService.addTask(this.id, form.value.name, this.status)
+    if (this.editMode !== null) {
+      const board = this.boardService.getBoard(this.boardId);
+      // taskName = board.columns.find(column => column.name === this.status)
+    }
+
+    this.taskForm = new FormGroup({
+      'name': new FormControl(null),
+      'description': new FormControl(null),
+      'comments': new FormArray([])
+    })
+  }
+
+  onSubmit() {
+    if (this.editMode === null){
+      this.boardService.addTask(this.boardId, this.taskForm.value, this.status)
+    }else{
+      this.boardService.updateTask()
+    }
+
     this.modalService.close('closeTask');
     this.router.navigate(['../'], {relativeTo: this.route})
   }
@@ -47,5 +69,16 @@ export class TaskEditComponent implements OnInit {
   onClose() {
     this.modalService.close('closeTask');
     this.router.navigate(['../'], {relativeTo: this.route})
+  }
+
+  onAddComment() {
+    const formGroup = new FormGroup({
+      'comment': new FormControl(null),
+    });
+    (<FormArray>this.taskForm.get('comments')).push(formGroup)
+  }
+
+  get controls() {
+    return (this.taskForm.get('comments') as FormArray).controls;
   }
 }
