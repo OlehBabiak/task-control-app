@@ -22,7 +22,6 @@ export class BoardDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.boardDetail)
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.boardDetail = this.boardService.getBoard(this.id)

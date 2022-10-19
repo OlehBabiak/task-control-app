@@ -26,7 +26,7 @@ export class ColumnEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.router.navigate(['../'], {relativeTo: this.route})
     this.boardService.addBoardColumn(this.id, form.value)
+    this.router.navigate(['../'], {relativeTo: this.route})
   }
 }

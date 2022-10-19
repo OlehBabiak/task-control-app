@@ -48,7 +48,7 @@ export class BoardService {
   }
 
   createBoard(board: BoardModel) {
-    const newBoard = new BoardModel(board.name, board.description);
+    const newBoard = new BoardModel(board.name, board.description, new Date, []);
     this.boards.push(newBoard);
     this.boardChanged.next(this.boards.slice())
   }
@@ -64,14 +64,14 @@ export class BoardService {
   }
 
   addBoardColumn(id: number, columnName) {
-    console.log(id, columnName.column)
     const mewColumn = new BoardColumnModel(columnName.column, [])
+    console.log(this.boards)
+    console.log(id, columnName.column)
     this.boards[id].columns.push(mewColumn);
     this.boardChanged.next(this.boards.slice())
   }
 
   addTask(id: number, name: string, status: string) {
-    console.log(this.boards[id].columns.find(col => col.name === status))
     const newTask = new ColumnTaskModel(name, status);
     this.boards[id].columns.find(col => col.name === status).tasks.push(newTask)
     // this.boardChanged.next(this.boards.slice());
