@@ -36,18 +36,12 @@ export class TaskEditComponent implements OnInit {
         console.log('id ', +params.id)
         this.boardId = +params.id
       })
-    console.log("route: ", this.route)
+    console.log(this.route)
     this.display$ = this.modalService.watch();
     this.initForm()
   }
 
   private initForm() {
-
-    if (this.editMode !== null) {
-      const board = this.boardService.getBoard(this.boardId);
-      // taskName = board.columns.find(column => column.name === this.status)
-    }
-
     this.taskForm = new FormGroup({
       'name': new FormControl(null),
       'description': new FormControl(null),
@@ -55,23 +49,8 @@ export class TaskEditComponent implements OnInit {
     })
   }
 
-  onSubmit() {
-    if (this.editMode === null){
-      this.boardService.addTask(this.boardId, this.taskForm.value, this.status)
-    }else{
-      this.boardService.updateTask()
-    }
-
-    this.modalService.close('closeTask');
-    this.router.navigate(['../'], {relativeTo: this.route})
-  }
-
-  onClose() {
-    this.modalService.close('closeTask');
-    this.router.navigate(['../'], {relativeTo: this.route})
-  }
-
   onAddComment() {
+    console.log('comm added')
     const formGroup = new FormGroup({
       'comment': new FormControl(null),
     });
@@ -81,4 +60,36 @@ export class TaskEditComponent implements OnInit {
   get controls() {
     return (this.taskForm.get('comments') as FormArray).controls;
   }
+
+  onDeleteIngredient(index: number) {
+    (<FormArray>this.taskForm.get('comments')).removeAt(index)
+  }
+
+  onDeleteIngredients() {
+    (<FormArray>this.taskForm.get('comments')).clear()
+  }
+
+  onSubmit() {
+    if (this.editMode === null) {
+      this.boardService.addTask(this.boardId, this.taskForm.value, this.status)
+      this.router.navigate(['../'], {relativeTo: this.route})
+    } else {
+      this.boardService.updateTask()
+      this.router.navigate(['../../'], {relativeTo: this.route})
+    }
+
+    this.modalService.close('closeTask');
+  }
+
+  onClose() {
+    this.modalService.close('closeTask');
+    if (this.editMode === null) {
+      this.router.navigate(['../'], {relativeTo: this.route})
+    } else {
+      this.router.navigate(['../../'], {relativeTo: this.route})
+    }
+  }
+
 }
+
+

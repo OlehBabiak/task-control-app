@@ -18,15 +18,35 @@
           placeholder='Task description'
         >
         </textarea>
-        <div formArrayName = 'comments'>
+        <div formArrayName='comments'>
           <h3>Your comments</h3>
-          <div *ngFor="let hobbyControl of controls; let i = index" [formControlName]='i'>
-            <input
-              type='text'
-              formControlName= 'comment'
-            >
+          <div *ngFor="let hobbyControl of controls; let i = index" [formGroupName]='i'>
+            <div class='comment-block'>
+              <input
+                type='text'
+                formControlName='comment'
+              >
+              <button
+                style='height: 22px; align-self: self-end; margin-left: 5px'
+                class='btn btn-danger'
+                type='button'
+                (click)='onDeleteIngredient(i)'
+              >X
+              </button>
+            </div>
           </div>
-          <button class='button btn-primary' (click)='onAddComment()'>Add comment</button>
+          <button
+            type='button'
+            class='button btn-success'
+            (click)='onAddComment()'
+          >Add comment
+          </button>
+          <button
+            type='button'
+            class='button btn-danger'
+            (click)='onDeleteIngredients()'
+          >Delete All
+          </button>
         </div>
       </div>
       <button

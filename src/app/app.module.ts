@@ -22,6 +22,7 @@ import {TaskEditComponent} from './dashboard/board.detail/task-list/task-edit/ta
 import {
   BoardColumnItemComponent
 } from './dashboard/board.detail/board-column/board-column-item/board-column-item.component';
+import { AuthComponent } from './auth/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {
     ColumnEditComponent,
     TaskComponent,
     TaskEditComponent,
-    BoardColumnItemComponent
+    BoardColumnItemComponent,
+    AuthComponent
   ],
   imports: [
     AppRoutingModule,

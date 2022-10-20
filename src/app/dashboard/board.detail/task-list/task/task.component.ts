@@ -21,7 +21,7 @@ export class TaskComponent implements OnInit {
   }
 
   onShowDetail() {
-    this.router.navigate([this.columnName, this.index], {relativeTo: this.route})
+    this.router.navigate([`${this.columnName}/${this.index}`], {relativeTo: this.route})
     this.modalService.open(this.index,'openTask')
   }
 }
