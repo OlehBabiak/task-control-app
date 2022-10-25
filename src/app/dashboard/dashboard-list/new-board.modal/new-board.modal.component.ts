@@ -1,9 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalService} from "../../../services/modal.service";
 import {Observable} from "rxjs";
 import {NgForm} from "@angular/forms";
 import {BoardService} from "../../../services/board.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {DataStorageService} from "../../../shared/data-storage/data-storage.service";
 
 @Component({
   selector: 'app-new-board-modal',
@@ -19,20 +20,23 @@ export class NewBoardModalComponent implements OnInit {
   constructor(
     public modalService: ModalService,
     private boardService: BoardService,
-    private router: Router
+    private dataStorage: DataStorageService,
+    private route: ActivatedRoute, private router: Router,
   ) {}
 
   ngOnInit() {
-    console.log('first modal')
     this.display$ = this.modalService.watch();
   }
 
   onSubmit() {
     this.submitted = true
     if(this.modalService.boardIndex === null){
-      this.boardService.createBoard(this.boardForm.value)
+      this.dataStorage.storeBoard(this.boardForm.value)
+      this.router.navigate(['dashboard'], {relativeTo: this.route.parent})
+      // this.boardService.createBoard(this.boardForm.value)
     }else{
-      this.boardService.editBoard(this.modalService.boardIndex, this.boardForm.value)
+      this.dataStorage.updateBoard(this.modalService.boardIndex.toString(), this.boardForm.value)
+      this.router.navigate(['dashboard'], {relativeTo: this.route.parent})
     }
     this.modalService.close('close');
   }
@@ -40,4 +44,5 @@ export class NewBoardModalComponent implements OnInit {
   onClose() {
     this.modalService.close('close');
   }
+
 }

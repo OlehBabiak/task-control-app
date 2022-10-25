@@ -3,9 +3,8 @@
     <p>Create new board</p>
   </div>
   <app-board-item
-    *ngFor='let boardEl of boards; let index = index'
+    *ngFor='let boardEl of boards'
     [board]="boardEl"
-    [index]='index'
   ></app-board-item>
 </div>
 

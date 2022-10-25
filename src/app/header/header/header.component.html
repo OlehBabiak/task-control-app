@@ -13,15 +13,15 @@
           <li><a (click)="collapsed = !collapsed" routerLinkActive='active' routerLink='/dashboard'>Dashboard</a></li>
           <li><a (click)="collapsed = !collapsed" routerLinkActive='active' routerLink='/archive'>Archive</a></li>
           <li *ngIf='!isUserAuth'><a
-            routerLinkActive='active' style='cursor: pointer' (click)='onLogin()' routerLink='/auth'
+            routerLinkActive='active' style='cursor: pointer'  routerLink='/auth'
           >Authenticate</a></li>
         </ul>
       </div>
 
-      <div class='navbar-nav navbar-right'>
+      <div class='navbar-nav navbar-right' *ngIf='isUserAuth'>
         <ul>
-          <li *ngIf='isUserAuth'><a>OB</a></li>
-          <li *ngIf='isUserAuth'><a style='cursor: pointer' (click)='onLogout()'>Logout</a></li>
+          <li><a>OB</a></li>
+          <li><a style='cursor: pointer' (click)='onLogout()'>Logout</a></li>
         </ul>
       </div>
     </div>

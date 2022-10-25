@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BoardModel} from "../board-model";
+import {BoardModel} from "../../shared/board-model";
 import {BoardService} from "../../services/board.service";
 import {ModalService} from "../../services/modal.service";
 import {Subscription} from "rxjs";
+import {DataStorageService} from "../../shared/data-storage/data-storage.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard-list',
@@ -13,16 +15,24 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   boards: BoardModel[]
   private subscription: Subscription
 
-  constructor(private boardService: BoardService, private modalService: ModalService) {
+  constructor(
+    private dataStorage: DataStorageService,
+    private boardService: BoardService,
+    private modalService: ModalService,
+    private routes: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
+    this.routes.data.subscribe(({boards}) => {
+      this.boards = boards
+      console.log('res: ', boards)
+    })
     this.subscription = this.boardService
       .boardChanged
       .subscribe((value: BoardModel[]) => {
         this.boards = value;
       })
-    this.boards = this.boardService.getBoards()
   }
 
 

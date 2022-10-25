@@ -19,10 +19,10 @@ import {TaskListComponent} from './dashboard/board.detail/task-list/task-list.co
 import {ColumnEditComponent} from './dashboard/board.detail/board-column/column-edit/column-edit.component';
 import {TaskComponent} from './dashboard/board.detail/task-list/task/task.component';
 import {TaskEditComponent} from './dashboard/board.detail/task-list/task-edit/task-edit.component';
-import {
-  BoardColumnItemComponent
-} from './dashboard/board.detail/board-column/board-column-item/board-column-item.component';
+import {BoardColumnItemComponent} from './dashboard/board.detail/board-column/board-column-item/board-column-item.component';
 import { AuthComponent } from './auth/auth/auth.component';
+import {LoadingSpinnerComponent} from "./shared/loading-spinner/loading-spinner.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { AuthComponent } from './auth/auth/auth.component';
     TaskComponent,
     TaskEditComponent,
     BoardColumnItemComponent,
-    AuthComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     AppRoutingModule,
@@ -49,7 +50,8 @@ import { AuthComponent } from './auth/auth/auth.component';
     BrowserModule,
     FormsModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

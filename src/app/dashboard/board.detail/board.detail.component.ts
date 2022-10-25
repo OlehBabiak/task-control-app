@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {BoardModel} from "../board-model";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {BoardModel} from "../../shared/board-model";
 import {BoardService} from "../../services/board.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ModalService} from "../../services/modal.service";
+import {DataStorageService} from "../../shared/data-storage/data-storage.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-board.detail',
@@ -11,24 +13,33 @@ import {ModalService} from "../../services/modal.service";
 })
 export class BoardDetailComponent implements OnInit {
   boardDetail: BoardModel;
-  id: number;
+  private subscription: Subscription
+  boardId: string
 
   constructor(
     private boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute,
-    private modalService: ModalService
+    private dataStorage: DataStorageService,
     ) {
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.boardDetail = this.boardService.getBoard(this.id)
+      this.boardId = params['id'];
     })
+
+    this.route.data.subscribe(({data}) => {
+      console.log('data: ', data)
+      this.boardDetail = data
+      this.boardService.editBoard(data)
+    })
+
   }
 
   onNewColumn() {
     this.router.navigate(['new'], {relativeTo: this.route})
   }
+
+
 }
