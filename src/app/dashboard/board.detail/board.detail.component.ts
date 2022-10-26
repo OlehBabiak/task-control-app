@@ -11,10 +11,10 @@ import {Subscription} from "rxjs";
   templateUrl: './board.detail.component.html',
   styleUrls: ['./board.detail.component.scss']
 })
-export class BoardDetailComponent implements OnInit {
+export class BoardDetailComponent implements OnInit, OnDestroy {
   boardDetail: BoardModel;
   private subscription: Subscription
-  boardId: string
+  // boardId: string
 
   constructor(
     private boardService: BoardService,
@@ -25,16 +25,19 @@ export class BoardDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.boardId = params['id'];
-    })
+    // this.route.params.subscribe((params: Params) => {
+    //   this.boardId = params['id'];
+    // })
 
     this.route.data.subscribe(({data}) => {
-      console.log('data: ', data)
       this.boardDetail = data
-      this.boardService.editBoard(data)
     })
 
+    this.subscription = this.boardService
+      .boardChanged
+      .subscribe((value: BoardModel) => {
+        this.boardDetail = value
+      })
   }
 
   onNewColumn() {
@@ -42,4 +45,7 @@ export class BoardDetailComponent implements OnInit {
   }
 
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
 }

@@ -29,7 +29,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
       console.log('res: ', boards)
     })
     this.subscription = this.boardService
-      .boardChanged
+      .boardsChanged
       .subscribe((value: BoardModel[]) => {
         this.boards = value;
       })

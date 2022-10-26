@@ -11,11 +11,11 @@ import {BoardResolver} from "../../services/board.resolver";
 const routes: Routes = [
   {path: '', component: DashboardComponent, resolve: {boards: BoardsResolver}},
   {path: ':id', component: BoardDetailComponent, resolve: {data: BoardResolver},
-    // children: [
-    //   {path: 'new', component: ColumnEditComponent},
-    //   {path: ':id', component: TaskEditComponent},
-    //   {path: ':id/:id', component: TaskEditComponent}
-    // ]
+    children: [
+      {path: 'new', component: ColumnEditComponent},
+      // {path: ':id', component: TaskEditComponent},
+      // {path: ':id/:id', component: TaskEditComponent}
+    ]
   },
 ]
 

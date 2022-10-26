@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ColumnTaskModel} from "../../../../shared/column.task-model";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModalService} from "../../../../services/modal.service";
+import {BoardColumnModel} from "../../../../shared/board.column-model";
 
 @Component({
   selector: 'app-task',
@@ -10,18 +11,15 @@ import {ModalService} from "../../../../services/modal.service";
 })
 export class TaskComponent implements OnInit {
   @Input() task: ColumnTaskModel;
-  @Input() index: number;
-  @Input() columnName: string
+  @Input() column: BoardColumnModel
 
   constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService) {
   }
 
   ngOnInit(): void {
-
   }
 
   onShowDetail() {
-    this.router.navigate([`${this.columnName}/${this.index}`], {relativeTo: this.route})
-    // this.modalService.open(this.index,'openTask')
+    this.modalService.open(this.column.boardID,'openTask', this.column, this.task)
   }
 }

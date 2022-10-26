@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ColumnTaskModel} from "../../../shared/column.task-model";
+import {BoardColumnModel} from "../../../shared/board.column-model";
 
 @Component({
   selector: 'app-task-list',
@@ -8,12 +9,13 @@ import {ColumnTaskModel} from "../../../shared/column.task-model";
 })
 export class TaskListComponent implements OnInit {
   @Input() tasks: ColumnTaskModel[];
-  @Input() name: string
+  @Input() column: BoardColumnModel
 
   constructor() {
   }
 
   ngOnInit(): void {
+
   }
 
 }

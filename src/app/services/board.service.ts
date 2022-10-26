@@ -10,9 +10,11 @@ import {DataStorageService} from "../shared/data-storage/data-storage.service";
   providedIn: 'root'
 })
 export class BoardService {
-  boardChanged = new Subject<BoardModel[]>()
+  boardsChanged = new Subject<BoardModel[]>();
+  boardChanged = new Subject<BoardModel>()
 
-  private boards: BoardModel[] = []
+  private boards: BoardModel[] = [];
+  private activeBoard: BoardModel;
 
   // private boards: BoardModel[] = [
   //   new BoardModel("Test board 1", "Test 1 description", new Date(11 / 5 / 2022), []),
@@ -43,51 +45,30 @@ export class BoardService {
   }
 
   setBoards(boards: BoardModel[]) {
+
     this.boards = boards
-    this.boardChanged.next(this.boards.slice())
+    this.boardsChanged.next(this.boards.slice())
   }
 
   getBoards() {
     return this.boards.slice()
   }
 
-  getBoard(id: string) {
-    return this.boards.find(board => board._id == id)
-
+  setBoard(board: BoardModel) {
+    console.log(board)
+    this.activeBoard = board
+    return this.boardChanged.next(this.activeBoard)
   }
 
-  // createBoard(board: BoardModel) {
-  //
-  //   const newBoard = new BoardModel('', board.name, board.description, new Date, new Date, []);
-  //   this.boards.push(newBoard);
-  //   this.boardChanged.next(this.boards.slice())
-  // }
 
-  editBoard(newBoard: BoardModel) {
-    let boardValue = this.boards.find(board => board._id === newBoard._id);
-    boardValue = newBoard
-    this.boardChanged.next(this.boards.slice())
+  addTask(id: string, form: ColumnTaskModel, status: string) {
+    // const newTask = new ColumnTaskModel(form.name, status);
+    // this.boards[id].columns.find(col => col.name === status).tasks.push(newTask)
+    // this.boardsChanged.next(this.boards.slice());
   }
 
-  // deleteBoard(id: number) {
-  //   this.boards.splice(id, 1);
-  //   this.boardChanged.next(this.boards.slice())
-  // }
-
-  // addBoardColumn(id: number, columnName) {
-  //   const mewColumn = new BoardColumnModel(columnName.column, [])
-  //   this.boards[id].columns.push(mewColumn);
-  //   this.boardChanged.next(this.boards.slice())
-  // }
-
-  addTask(id: number, form: ColumnTaskModel, status: string) {
-    const newTask = new ColumnTaskModel(form.name, status);
-    this.boards[id].columns.find(col => col.name === status).tasks.push(newTask)
-    this.boardChanged.next(this.boards.slice());
-  }
-
-  updateTask() {
-
+  updateTask(task) {
+    console.log(task)
   }
 
   deleteTask() {

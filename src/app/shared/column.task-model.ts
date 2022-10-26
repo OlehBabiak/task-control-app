@@ -2,10 +2,11 @@ import {TaskCommentModel} from "./task.comment-model";
 
 export class ColumnTaskModel {
   constructor(
+    public boardID: string,
     public name: string,
     public status: string,
-    public creationDate?: Date,
     public description?: string,
+    public _id?: string,
     public comments?: TaskCommentModel[],
     ) {
   }

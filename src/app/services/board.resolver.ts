@@ -20,12 +20,6 @@ export class BoardResolver implements Resolve<BoardModel> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BoardModel> | Promise<BoardModel> | BoardModel {
     const boardId = route.params['id']
-    const board = this.boardService.getBoard(boardId)
-    if (!board) {
-      console.log('not board in state ', board)
       return this.dataStorage.getBoardById(boardId)
-    }
-    console.log('board in state' , board)
-    return board
   }
 }

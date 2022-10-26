@@ -4,6 +4,8 @@ import {ModalService} from "../../../../services/modal.service";
 import {FormArray, FormControl, FormGroup, NgForm} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {BoardService} from "../../../../services/board.service";
+import {DataStorageService} from "../../../../shared/data-storage/data-storage.service";
+import {ColumnTaskModel} from "../../../../shared/column.task-model";
 
 @Component({
   selector: 'app-task-edit',
@@ -14,29 +16,24 @@ export class TaskEditComponent implements OnInit {
   display$: Observable<'open' | 'close' | 'openTask' | 'closeTask'>;
   editMode = this.modalService.boardIndex
   status: string
-  boardId: number;
+  boardId: string;
   taskForm: FormGroup
 
   constructor(
     public modalService: ModalService,
     private route: ActivatedRoute,
     private boardService: BoardService,
+    private dataStorage: DataStorageService,
     private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.route.params
-      .subscribe((params: Params) => {
-        console.log('status ', params)
-        this.status = params.id
-      })
-    this.route.parent.params
-      .subscribe((params: Params) => {
-        console.log('id ', +params.id)
-        this.boardId = +params.id
-      })
-    console.log(this.route)
+    if (this.modalService.column) {
+      this.status = this.modalService.column.name;
+      this.boardId = this.modalService.column.boardID
+    }
+
     this.display$ = this.modalService.watch();
     this.initForm()
   }
@@ -70,24 +67,20 @@ export class TaskEditComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.editMode === null) {
-      this.boardService.addTask(this.boardId, this.taskForm.value, this.status)
-      this.router.navigate(['../'], {relativeTo: this.route})
+    if (this.modalService.boardIndex === null) {
+      const {boardID, name} = this.modalService.column
+      const newTask = new ColumnTaskModel(boardID, this.taskForm.value.name, name)
+      this.dataStorage.createTask(newTask)
     } else {
-      this.boardService.updateTask()
-      this.router.navigate(['../../'], {relativeTo: this.route})
+      const {status, _id, boardID} = this.modalService.task
+      const updatedTask = new ColumnTaskModel(boardID, this.taskForm.value.name, status, this.taskForm.value.description, _id, this.taskForm.value.comments)
+      this.dataStorage.updateTask(updatedTask)
     }
-
     this.modalService.close('closeTask');
   }
 
   onClose() {
     this.modalService.close('closeTask');
-    if (this.editMode === null) {
-      this.router.navigate(['../'], {relativeTo: this.route})
-    } else {
-      this.router.navigate(['../../'], {relativeTo: this.route})
-    }
   }
 
 }

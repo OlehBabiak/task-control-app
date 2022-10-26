@@ -45,8 +45,23 @@ export class DataStorageService {
 
   createColumn(id: String, column: BoardColumnModel) {
     const body = {'boardID': id, ...column}
-    console.log(body)
-    this.http.post<BoardModel[]>('http://localhost:8080/api/columns', body)
-      .subscribe(res => this.boardService.setBoards(res))
+    this.http.post<BoardModel>('http://localhost:8080/api/columns', body)
+      .subscribe(res => {
+        this.boardService.setBoard(res)
+      })
+  }
+
+  createTask(task: ColumnTaskModel){
+    this.http.post<BoardModel>('http://localhost:8080/api/tasks', task)
+      .subscribe(res => {
+        this.boardService.setBoard(res)
+      })
+  }
+
+  updateTask(task: ColumnTaskModel) {
+    this.http.put<BoardModel>('http://localhost:8080/api/tasks', task)
+      .subscribe(res => {
+        this.boardService.setBoard(res)
+      })
   }
 }

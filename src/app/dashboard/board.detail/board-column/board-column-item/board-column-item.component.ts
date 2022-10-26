@@ -17,6 +17,6 @@ export class BoardColumnItemComponent implements OnInit {
   }
 
   onAddTask() {
-    this.modalService.open(null,'openTask')
+    this.modalService.open(null,'openTask', this.column)
   }
 }

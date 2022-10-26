@@ -1,8 +1,8 @@
 <div class='column-header'>
   <h3>{{ column.name }}</h3>
 </div>
-<app-task-list [tasks]='column.tasks' [name]='column.name'></app-task-list>
+<app-task-list [tasks]='column.tasks' [column]='column'></app-task-list>
 <div>
-  <button class='button btn-primary' [routerLink]="[column.name]" (click)='onAddTask()'>+ Add task</button>
+  <button class='button btn-primary' (click)='onAddTask()'>+ Add task</button>
 </div>
 
