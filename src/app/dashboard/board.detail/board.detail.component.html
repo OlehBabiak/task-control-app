@@ -4,7 +4,7 @@
     <p>{{ boardDetail.description }}</p>
   </div>
   <div class='container'>
-    <div class='column' *ngFor='let column of boardDetail.columns; let index = index'>
+    <div cdkDropListGroup class='column' *ngFor='let column of boardDetail.columns; let index = index'>
       <app-board-column-item [column]='column'></app-board-column-item>
     </div>
 

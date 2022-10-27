@@ -30,7 +30,6 @@ export class ModalService {
     this.task = task;
     this.boardIndex = index;
     this.display.next(openValue);
-    console.log(column, task)
   }
 
   close(closeValue) {

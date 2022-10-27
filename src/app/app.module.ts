@@ -23,6 +23,7 @@ import {BoardColumnItemComponent} from './dashboard/board.detail/board-column/bo
 import { AuthComponent } from './auth/auth/auth.component';
 import {LoadingSpinnerComponent} from "./shared/loading-spinner/loading-spinner.component";
 import {HttpClientModule} from "@angular/common/http";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {HttpClientModule} from "@angular/common/http";
     FormsModule,
     MatIconModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

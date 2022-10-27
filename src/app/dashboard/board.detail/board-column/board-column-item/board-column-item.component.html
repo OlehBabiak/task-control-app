@@ -1,8 +1,12 @@
-<div class='column-header'>
-  <h3>{{ column.name }}</h3>
-</div>
-<app-task-list [tasks]='column.tasks' [column]='column'></app-task-list>
 <div>
-  <button class='button btn-primary' (click)='onAddTask()'>+ Add task</button>
+  <div class='column-header'>
+    <h3>{{ column.name }}</h3>
+  </div>
+  <div>
+    <app-task-list [tasks]='column.tasks' [column]='column'></app-task-list>
+  </div>
+  <div>
+    <button class='button btn-primary' (click)='onAddTask()'>+ Add task</button>
+  </div>
 </div>
 
