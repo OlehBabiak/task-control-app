@@ -5,6 +5,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ModalService} from "../../services/modal.service";
 import {DataStorageService} from "../../shared/data-storage/data-storage.service";
 import {Subscription} from "rxjs";
+import {BoardColumnModel} from "../../shared/board.column-model";
 
 @Component({
   selector: 'app-board.detail',
@@ -13,13 +14,14 @@ import {Subscription} from "rxjs";
 })
 export class BoardDetailComponent implements OnInit, OnDestroy {
   boardDetail: BoardModel;
-  private subscription: Subscription
+  private subscription: Subscription;
 
   constructor(
     private boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute,
     private dataStorage: DataStorageService,
+    private modalService: ModalService
     ) {
   }
 
@@ -40,7 +42,12 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
   }
 
 
+
   ngOnDestroy() {
     this.subscription.unsubscribe()
+  }
+
+  onAddTask(column: BoardColumnModel) {
+    this.modalService.open(null, 'openTask', column)
   }
 }
