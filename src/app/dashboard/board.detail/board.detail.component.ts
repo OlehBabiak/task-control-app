@@ -14,7 +14,6 @@ import {Subscription} from "rxjs";
 export class BoardDetailComponent implements OnInit, OnDestroy {
   boardDetail: BoardModel;
   private subscription: Subscription
-  // boardId: string
 
   constructor(
     private boardService: BoardService,
@@ -25,10 +24,6 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe((params: Params) => {
-    //   this.boardId = params['id'];
-    // })
-
     this.route.data.subscribe(({data}) => {
       this.boardDetail = data
     })
