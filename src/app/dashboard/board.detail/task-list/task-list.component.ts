@@ -11,23 +11,15 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
 export class TaskListComponent implements OnInit {
   @Input() tasks: ColumnTaskModel[];
   @Input() column: BoardColumnModel
-  columnTasksArr: ColumnTaskModel[]
+  columnTasksArr: ColumnTaskModel[] = []
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.columnTasksArr = this.createTaskArr(this.column.tasks)
+    this.columnTasksArr = this.column.tasks
   }
 
-  private createTaskArr (arr) {
-    return arr.reduce((newArr:string[], cur: ColumnTaskModel): any => {
-      if(cur.name){
-        newArr.push(cur.name);
-      }
-      return newArr;
-    }, [])
-  }
 
   drop(event: CdkDragDrop<any, any>) {
     console.log(event.previousContainer, event.container)
