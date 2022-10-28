@@ -33,7 +33,6 @@ export class NewBoardModalComponent implements OnInit {
     if(this.modalService.boardIndex === null){
       this.dataStorage.storeBoard(this.boardForm.value)
       this.router.navigate(['dashboard'], {relativeTo: this.route.parent})
-      // this.boardService.createBoard(this.boardForm.value)
     }else{
       this.dataStorage.updateBoard(this.modalService.boardIndex.toString(), this.boardForm.value)
       this.router.navigate(['dashboard'], {relativeTo: this.route.parent})

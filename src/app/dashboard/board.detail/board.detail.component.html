@@ -5,6 +5,7 @@
   </div>
 
   <div cdkDropListGroup class='container'>
+    <p *ngIf='boardDetail.columns.length < 1'>Please, add new column</p>
     <div class='column' *ngFor='let column of boardDetail.columns; let index = index'>
       <div class='column-header'>
         <h3>{{ column.name }}</h3>

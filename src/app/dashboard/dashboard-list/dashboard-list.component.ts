@@ -5,6 +5,7 @@ import {ModalService} from "../../services/modal.service";
 import {Subscription} from "rxjs";
 import {DataStorageService} from "../../shared/data-storage/data-storage.service";
 import {ActivatedRoute} from "@angular/router";
+import {ErrorModel} from "../../shared/errors/error-model";
 
 @Component({
   selector: 'app-dashboard-list',
@@ -14,6 +15,8 @@ import {ActivatedRoute} from "@angular/router";
 export class DashboardListComponent implements OnInit, OnDestroy {
   boards: BoardModel[]
   private subscription: Subscription
+  private errorSubscription: Subscription
+  error: ErrorModel
 
   constructor(
     private dataStorage: DataStorageService,
@@ -24,13 +27,19 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.routes.data.subscribe(({boards}) => {
-      this.boards = boards
+    this.routes.data.subscribe({
+      next: ({boards}) =>  this.boards = boards,
+      error: (error) => console.log(error)
     })
     this.subscription = this.boardService
       .boardsChanged
       .subscribe((value: BoardModel[]) => {
         this.boards = value;
+      })
+    this.errorSubscription = this.dataStorage
+      .errorSubj
+      .subscribe( resp => {
+        this.error = new ErrorModel(resp.status, resp.error.message)
       })
   }
 
@@ -41,5 +50,6 @@ export class DashboardListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe()
+    this.errorSubscription.unsubscribe()
   }
 }

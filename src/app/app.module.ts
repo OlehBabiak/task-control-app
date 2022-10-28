@@ -23,6 +23,7 @@ import { AuthComponent } from './auth/auth/auth.component';
 import {LoadingSpinnerComponent} from "./shared/loading-spinner/loading-spinner.component";
 import {HttpClientModule} from "@angular/common/http";
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import { ErrorPageComponent } from './shared/errors/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     TaskComponent,
     TaskEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ErrorPageComponent
   ],
   imports: [
     AppRoutingModule,

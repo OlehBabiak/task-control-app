@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {BoardService} from "../../services/board.service";
 import {BoardModel} from "../board-model";
-import {map, pipe, tap} from "rxjs";
-import {BoardColumnModel} from "../board.column-model";
+import {Subject, tap} from "rxjs";
+
 import {ColumnTaskModel} from "../column.task-model";
-import {ajax} from "rxjs/internal/ajax/ajax";
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +15,18 @@ export class DataStorageService {
   constructor(private http: HttpClient, private boardService: BoardService) {
   }
 
-  url = 'http://localhost:8080/api/board'
+  errorSubj = new Subject<HttpErrorResponse>()
 
   storeBoard(board: BoardModel) {
-    // this.http.post<BoardModel[]>('http://localhost:8080/api/board', board)
-    //   .subscribe(res => this.boardService.setBoards(res))
-    ajax({
-      url: this.url,
-      method: 'Post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: board
-    })
-      .pipe(
-        map(value => value.response)
-      )
-      .subscribe((res: any) => this.boardService.setBoards(res))
+    this.http
+      .post<BoardModel[]>('http://localhost:8080/api/board',
+        board)
+      .subscribe({
+        next: (res: BoardModel[]) => this.boardService.setBoards(res),
+        error: (error) => this.errorSubj = error
+      })
   }
+
 
   deleteBoard(id: String) {
     this.http.delete<BoardModel[]>(`http://localhost:8080/api/board/${id}`)
@@ -50,12 +44,9 @@ export class DataStorageService {
 
   getBoards() {
     return this.http.get<BoardModel[]>('http://localhost:8080/api/board')
-      .pipe(
-        tap(boards => {
-
-          this.boardService.setBoards(boards)
-        })
-      )
+      .subscribe({
+        error: (error) => this.errorSubj.next(error)
+      })
   }
 
   createColumn(id: String, name: string) {
