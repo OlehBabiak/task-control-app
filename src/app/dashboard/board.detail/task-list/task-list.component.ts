@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ColumnTaskModel} from "../../../shared/column.task-model";
 import {BoardColumnModel} from "../../../shared/board.column-model";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {DataStorageService} from "../../../shared/data-storage/data-storage.service";
 
 @Component({
   selector: 'app-task-list',
@@ -11,18 +12,27 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
 export class TaskListComponent implements OnInit {
   @Input() tasks: ColumnTaskModel[];
   @Input() column: BoardColumnModel
-  columnTasksArr: ColumnTaskModel[] = []
+  columnTasksArr: ColumnTaskModel[]
 
-  constructor() {
+  constructor(private dataStorage: DataStorageService) {
   }
 
   ngOnInit(): void {
-    this.columnTasksArr = this.column.tasks
+    this.columnTasksArr = this.tasks
+    console.log(this.columnTasksArr)
   }
 
+  private createTaskArr(arr) {
+    return arr.reduce((newArr: string[], cur: ColumnTaskModel): any => {
+      if (cur.name) {
+        newArr.push(cur.name);
+      }
+      return newArr;
+    }, [])
+  }
 
   drop(event: CdkDragDrop<any, any>) {
-    console.log(event.previousContainer, event.container)
+    console.log(event)
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -32,6 +42,9 @@ export class TaskListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+      const dragEl: ColumnTaskModel = event.item.data;
+      dragEl.status = event.container.element.nativeElement.classList[1]
+      this.dataStorage.updateTask(dragEl)
     }
   }
 }

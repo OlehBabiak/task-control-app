@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {BoardService} from "../../../../services/board.service";
 import {DataStorageService} from "../../../../shared/data-storage/data-storage.service";
+import {} from 'rxjs'
 
 @Component({
   selector: 'app-column-edit',
@@ -27,8 +28,16 @@ export class ColumnEditComponent implements OnInit {
       })
   }
 
+  private transformColumnName(value: string) {
+    return value.split(' ').map(value =>
+      value.charAt(0).toUpperCase() + value.slice(1)
+    ).join('')
+  }
+
   onSubmit(form: NgForm) {
-    this.dataStorage.createColumn(this.id, form.value)
+    const colName = this.transformColumnName(form.value.name)
+    console.log(colName)
+    this.dataStorage.createColumn(this.id, colName)
     this.router.navigate(['../'], {relativeTo: this.route})
   }
 }

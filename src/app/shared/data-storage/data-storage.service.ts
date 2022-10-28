@@ -43,8 +43,8 @@ export class DataStorageService {
       )
   }
 
-  createColumn(id: String, column: BoardColumnModel) {
-    const body = {'boardID': id, ...column}
+  createColumn(id: String, name: string) {
+    const body = {'boardID': id, 'name': name}
     this.http.post<BoardModel>('http://localhost:8080/api/columns', body)
       .subscribe(res => {
         this.boardService.setBoard(res)
