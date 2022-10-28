@@ -16,7 +16,6 @@ export class BoardService {
   }
 
   setBoards(boards: BoardModel[]) {
-
     this.boards = boards
     this.boardsChanged.next(this.boards.slice())
   }

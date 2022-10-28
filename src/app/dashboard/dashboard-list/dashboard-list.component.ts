@@ -26,7 +26,6 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routes.data.subscribe(({boards}) => {
       this.boards = boards
-      console.log('res: ', boards)
     })
     this.subscription = this.boardService
       .boardsChanged
