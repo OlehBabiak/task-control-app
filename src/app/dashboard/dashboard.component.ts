@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ModalService} from "../services/modal.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: ModalService,) { }
 
   ngOnInit(): void {
+  }
+
+  onModalOpen() {
+    this.modalService.open(null, 'open')
   }
 
 }

@@ -16,7 +16,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   boards: BoardModel[]
   private subscription: Subscription
   private errorSubscription: Subscription
-  error: ErrorModel
+  error: ErrorModel | null
 
   constructor(
     private dataStorage: DataStorageService,
@@ -29,8 +29,8 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routes.data.subscribe({
       next: ({boards}) =>  this.boards = boards,
-      error: (error) => console.log(error)
     })
+
     this.subscription = this.boardService
       .boardsChanged
       .subscribe((value: BoardModel[]) => {
@@ -44,12 +44,14 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   }
 
 
-  onModalOpen() {
-    this.modalService.open(null, 'open')
-  }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe()
     this.errorSubscription.unsubscribe()
+  }
+
+  onErrorHide(event: null) {
+    this.error = event
   }
 }

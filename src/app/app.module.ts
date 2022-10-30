@@ -19,12 +19,11 @@ import {TaskListComponent} from './dashboard/board.detail/task-list/task-list.co
 import {ColumnEditComponent} from './dashboard/board.detail/board-column/column-edit/column-edit.component';
 import {TaskComponent} from './dashboard/board.detail/task-list/task/task.component';
 import {TaskEditComponent} from './dashboard/board.detail/task-list/task-edit/task-edit.component';
-import { AuthComponent } from './auth/auth/auth.component';
+import { AuthComponent } from './auth/auth.component';
 import {LoadingSpinnerComponent} from "./shared/loading-spinner/loading-spinner.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { ErrorPageComponent } from './shared/errors/error-page/error-page.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +54,9 @@ import { ErrorPageComponent } from './shared/errors/error-page/error-page.compon
     HttpClientModule,
     DragDropModule
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

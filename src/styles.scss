@@ -35,6 +35,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 4px;
 }
 
+.button[disabled] {
+  cursor: not-allowed;
+  opacity: .65;
+  box-shadow: none;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #337ab7;
@@ -52,3 +58,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: #5cb85c;
   border-color: #4cae4c
 }
+
+

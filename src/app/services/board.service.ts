@@ -25,7 +25,6 @@ export class BoardService {
   }
 
   setBoard(board: BoardModel) {
-    console.log(board)
     this.activeBoard = board
     return this.boardChanged.next(this.activeBoard)
   }

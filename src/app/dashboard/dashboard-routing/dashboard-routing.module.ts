@@ -4,7 +4,6 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "../dashboard.component";
 import {BoardDetailComponent} from "../board.detail/board.detail.component";
 import {ColumnEditComponent} from "../board.detail/board-column/column-edit/column-edit.component";
-import {TaskEditComponent} from "../board.detail/task-list/task-edit/task-edit.component";
 import {BoardsResolver} from "../../services/boards.resolver";
 import {BoardResolver} from "../../services/board.resolver";
 

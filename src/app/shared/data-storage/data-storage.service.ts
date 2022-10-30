@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {BoardService} from "../../services/board.service";
 import {BoardModel} from "../board-model";
-import {Subject, tap} from "rxjs";
+import {pipe, Subject, tap, throwError} from "rxjs";
 
 import {ColumnTaskModel} from "../column.task-model";
+import {catchError} from "rxjs/operators";
 
 
 @Injectable({
@@ -23,7 +24,7 @@ export class DataStorageService {
         board)
       .subscribe({
         next: (res: BoardModel[]) => this.boardService.setBoards(res),
-        error: (error) => this.errorSubj = error
+        error: (error) => this.errorSubj.next(error)
       })
   }
 
@@ -44,9 +45,6 @@ export class DataStorageService {
 
   getBoards() {
     return this.http.get<BoardModel[]>('http://localhost:8080/api/board')
-      .subscribe({
-        error: (error) => this.errorSubj.next(error)
-      })
   }
 
   createColumn(id: String, name: string) {

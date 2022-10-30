@@ -1,12 +1,8 @@
 <div>
-  <button class='button btn-success' (click)='onModalOpen()'>
-    <p>Create new board</p>
-  </button>
-
-  <p *ngIf='boards.length < 1'>Please, add new board</p>
+   <p *ngIf='boards.length < 1'>Please, add new board</p>
 
   <div class='error-wrapper' *ngIf='error'>
-    <app-error-page [error]='error'></app-error-page>
+    <app-error-page (newItemEvent) = 'onErrorHide($event)' [error]='error'></app-error-page>
   </div>
 
   <div class='item-list-block' *ngIf='boards.length >= 1'>
