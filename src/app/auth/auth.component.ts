@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthResponseData, AuthService} from "../shared/auth.service";
+import {AuthService} from "../shared/auth.service";
+import {AuthResponseData} from "./interfaces/auth-response-data"
 import {Observable} from "rxjs";
 
 @Component({

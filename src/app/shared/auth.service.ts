@@ -5,15 +5,7 @@ import {BehaviorSubject, throwError} from "rxjs"
 import {AuthModel} from "../auth/auth.model";
 import {User} from "../auth/user.model";
 import {Router} from "@angular/router";
-
-export interface AuthResponseData {
-  jwt_token: string
-  refresh_token: string
-  id: string,
-  email: string,
-  expiresIn: string,
-  expiresInRefresh: string
-}
+import {AuthResponseData} from "../auth/interfaces/auth-response-data"
 
 @Injectable({
   providedIn: 'root'
