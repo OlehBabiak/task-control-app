@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./home/home.component";
-import * as path from "path";
 import {AuthComponent} from "./auth/auth.component";
+import {ArchiveComponent} from "./archive/archive.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: "full"},
@@ -11,7 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard-routing/dashboard-routing.module')
       .then(module => module.DashboardRoutingModule),
   },
-  // {path: 'archive'},
+  {path: 'archive',
+    component: ArchiveComponent,
+    canActivate: [AuthGuard],
+  },
   {path: 'home', component: HomeComponent},
   {path: 'auth', component: AuthComponent}
 ];
