@@ -24,6 +24,9 @@ import {LoadingSpinnerComponent} from "./shared/loading-spinner/loading-spinner.
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { ErrorPageComponent } from './shared/errors/error-page/error-page.component';
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import { ArchiveComponent } from './archive/archive.component';
+import { UsernameTransformPipe } from './pipes/username-transform.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +45,9 @@ import { ErrorPageComponent } from './shared/errors/error-page/error-page.compon
     TaskEditComponent,
     AuthComponent,
     LoadingSpinnerComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ArchiveComponent,
+    UsernameTransformPipe
   ],
   imports: [
     AppRoutingModule,
@@ -55,7 +60,7 @@ import { ErrorPageComponent } from './shared/errors/error-page/error-page.compon
     DragDropModule
   ],
   providers: [
-
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
