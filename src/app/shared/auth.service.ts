@@ -66,6 +66,7 @@ export class AuthService {
     if (!userData) {
       return
     }
+
     const loadedUserFromLS = new User(
       userData.email,
       userData.id,
@@ -89,8 +90,9 @@ export class AuthService {
     refreshToken: string,
     expiresIn: number,
     refreshExpiresIn: number) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
-    const refreshExpirationDate = new Date(new Date().getTime() + refreshExpiresIn * 1000)
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 60000)
+    const refreshExpirationDate = new Date(new Date().getTime() + refreshExpiresIn * 60000)
+    console.log('expirationDate: ', expirationDate)
     const user = new User(
       email,
       userId,
@@ -100,7 +102,7 @@ export class AuthService {
       refreshExpirationDate
     );
     this.user.next(user);
-    this.autoLogout(refreshExpiresIn * 1000)
+    this.autoLogout(refreshExpiresIn * 60000)
     localStorage.setItem('userData', JSON.stringify(user))
   }
 
