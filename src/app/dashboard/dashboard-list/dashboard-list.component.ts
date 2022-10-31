@@ -38,8 +38,8 @@ export class DashboardListComponent implements OnInit, OnDestroy {
       })
     this.errorSubscription = this.dataStorage
       .errorSubj
-      .subscribe( resp => {
-        this.error = new ErrorModel(resp.status, resp.error.message)
+      .subscribe( err => {
+        this.error = err
       })
   }
 

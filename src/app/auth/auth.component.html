@@ -2,11 +2,9 @@
 
 <!--    <div class='alert alert-danger' *ngIf='error'>-->
 <!--      <p>{{ error }}</p>-->
+<!--      <button class='button btn-danger' (click)='closeAlert()'>OK</button>-->
 <!--    </div>-->
-<!--    <div class='alert alert-success' *ngIf='userCreateMessage'>-->
-<!--      <p>{{ userCreateMessage }}</p>-->
-<!--      <button class='btn btn-success' (click)='closeAlert()'>OK</button>-->
-<!--    </div>-->
+    <app-error-page *ngIf='error' (newItemEvent) = 'onErrorHide($event)' [error]='error'></app-error-page>
     <div *ngIf='isLoading' style='text-align: center'>
       <app-loading-spinner></app-loading-spinner>
     </div>

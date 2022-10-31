@@ -6,6 +6,8 @@ import {AuthModel} from "../auth/auth.model";
 import {User} from "../auth/user.model";
 import {Router} from "@angular/router";
 import {AuthResponseData} from "../auth/interfaces/auth-response-data"
+import {ErrorModel} from "./errors/error-model";
+import {ErrorService} from "./errors/error.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +17,19 @@ export class AuthService {
   user = new BehaviorSubject<User>(null)
   private tokenExpirationTimer: any
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private errorService: ErrorService) {
   }
 
 
   register(body: AuthModel) {
     return this.http.post<AuthResponseData>('http://localhost:8080/api/auth/register', body)
-      .pipe(catchError(this.handleError))
+      .pipe(catchError(this.errorService.handleError))
   }
 
   login(body: AuthModel) {
     return this.http.post<AuthResponseData>('http://localhost:8080/api/auth/login', body)
       .pipe(
-        catchError(this.handleError),
+        catchError(this.errorService.handleError),
         tap(
           ({email, id, jwt_token, refresh_token, expiresIn, expiresInRefresh}) => {
             this.handleAuth(email, id, jwt_token, refresh_token, +expiresIn, +expiresInRefresh)
@@ -102,13 +104,4 @@ export class AuthService {
     localStorage.setItem('userData', JSON.stringify(user))
   }
 
-  private handleError(errorRes: HttpErrorResponse) {
-    const {error, message} = errorRes;
-    let errorMessage = 'Unknown error occurred!';
-    if (!error || !message) {
-      return throwError(() => errorMessage);
-    }
-    errorMessage = error.message
-    return throwError(() => errorMessage);
-  }
 }

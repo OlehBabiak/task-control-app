@@ -5,6 +5,7 @@ import {NgForm} from "@angular/forms";
 import {BoardService} from "../../../services/board.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataStorageService} from "../../../shared/data-storage/data-storage.service";
+import {BoardModel} from "../../../shared/board-model";
 
 @Component({
   selector: 'app-new-board-modal',
@@ -31,10 +32,24 @@ export class NewBoardModalComponent implements OnInit {
   onSubmit() {
     this.submitted = true
     if(this.modalService.boardIndex === null){
-      this.dataStorage.storeBoard(this.boardForm.value)
+      this.dataStorage
+        .storeBoard(this.boardForm.value)
+        .subscribe({
+          next: (res: BoardModel[]) => this.boardService.setBoards(res),
+          error: (err) => {
+            this.dataStorage.errorSubj.next(err)
+          }
+        })
+
       this.router.navigate(['dashboard'], {relativeTo: this.route.parent})
     }else{
       this.dataStorage.updateBoard(this.modalService.boardIndex.toString(), this.boardForm.value)
+        .subscribe({
+          next: (res: BoardModel[]) => this.boardService.setBoards(res),
+          error: (err) => {
+            this.dataStorage.errorSubj.next(err)
+          }
+        })
       this.router.navigate(['dashboard'], {relativeTo: this.route.parent})
     }
     this.modalService.close('close');

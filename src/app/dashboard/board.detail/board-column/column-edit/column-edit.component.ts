@@ -4,6 +4,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {BoardService} from "../../../../services/board.service";
 import {DataStorageService} from "../../../../shared/data-storage/data-storage.service";
 import {} from 'rxjs'
+import {BoardModel} from "../../../../shared/board-model";
 
 @Component({
   selector: 'app-column-edit',
@@ -36,8 +37,13 @@ export class ColumnEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const colName = this.transformColumnName(form.value.name)
-    console.log(colName)
     this.dataStorage.createColumn(this.id, colName)
+      .subscribe({
+        next: (res: BoardModel) => this.boardService.setBoard(res),
+        error: (err) => {
+          this.dataStorage.errorSubj.next(err)
+        }
+      })
     this.router.navigate(['../'], {relativeTo: this.route})
   }
 }

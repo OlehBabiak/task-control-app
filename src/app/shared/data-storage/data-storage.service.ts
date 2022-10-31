@@ -6,6 +6,8 @@ import {pipe, Subject, tap, throwError} from "rxjs";
 
 import {ColumnTaskModel} from "../column.task-model";
 import {catchError} from "rxjs/operators";
+import {ErrorService} from "../errors/error.service";
+import {ErrorModel} from "../errors/error-model";
 
 
 @Injectable({
@@ -13,30 +15,33 @@ import {catchError} from "rxjs/operators";
 })
 export class DataStorageService {
 
-  constructor(private http: HttpClient, private boardService: BoardService) {
+  constructor(private http: HttpClient, private boardService: BoardService, private errorService: ErrorService) {
   }
 
-  errorSubj = new Subject<HttpErrorResponse>()
+  errorSubj = new Subject<ErrorModel>()
 
   storeBoard(board: BoardModel) {
-    this.http
+    return this.http
       .post<BoardModel[]>('http://localhost:8080/api/board',
         board)
-      .subscribe({
-        next: (res: BoardModel[]) => this.boardService.setBoards(res),
-        error: (error) => this.errorSubj.next(error)
-      })
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
   }
 
 
   deleteBoard(id: String) {
-    this.http.delete<BoardModel[]>(`http://localhost:8080/api/board/${id}`)
-      .subscribe(res => this.boardService.setBoards(res))
+    return this.http.delete<BoardModel[]>(`http://localhost:8080/api/board/${id}`)
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
   }
 
   updateBoard(id: String, board: BoardModel) {
-    this.http.put<BoardModel[]>(`http://localhost:8080/api/board/${id}`, board)
-      .subscribe(res => this.boardService.setBoards(res))
+    return this.http.put<BoardModel[]>(`http://localhost:8080/api/board/${id}`, board)
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
   }
 
   getBoardById(id: String) {
@@ -45,27 +50,30 @@ export class DataStorageService {
 
   getBoards() {
     return this.http.get<BoardModel[]>('http://localhost:8080/api/board')
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
   }
 
   createColumn(id: String, name: string) {
     const body = {'boardID': id, 'name': name}
-    this.http.post<BoardModel>('http://localhost:8080/api/columns', body)
-      .subscribe(res => {
-        this.boardService.setBoard(res)
-      })
+    return this.http.post<BoardModel>('http://localhost:8080/api/columns', body)
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
   }
 
   createTask(task: ColumnTaskModel) {
-    this.http.post<BoardModel>('http://localhost:8080/api/tasks', task)
-      .subscribe(res => {
-        this.boardService.setBoard(res)
-      })
+    return this.http.post<BoardModel>('http://localhost:8080/api/tasks', task)
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
   }
 
   updateTask(task: ColumnTaskModel) {
-    this.http.put<BoardModel>('http://localhost:8080/api/tasks', task)
-      .subscribe(res => {
-        this.boardService.setBoard(res)
-      })
+    return this.http.put<BoardModel>('http://localhost:8080/api/tasks', task)
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
   }
 }

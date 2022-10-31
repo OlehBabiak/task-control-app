@@ -6,6 +6,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {BoardService} from "../../../../services/board.service";
 import {DataStorageService} from "../../../../shared/data-storage/data-storage.service";
 import {ColumnTaskModel} from "../../../../shared/column.task-model";
+import {BoardModel} from "../../../../shared/board-model";
 
 @Component({
   selector: 'app-task-edit',
@@ -71,10 +72,22 @@ export class TaskEditComponent implements OnInit {
       const {boardID, name} = this.modalService.column
       const newTask = new ColumnTaskModel(boardID, this.taskForm.value.name, name)
       this.dataStorage.createTask(newTask)
+        .subscribe({
+          next: (res: BoardModel) => this.boardService.setBoard(res),
+          error: (err) => {
+            this.dataStorage.errorSubj.next(err)
+          }
+        })
     } else {
       const {status, _id, boardID} = this.modalService.task
       const updatedTask = new ColumnTaskModel(boardID, this.taskForm.value.name, status, this.taskForm.value.description, _id, this.taskForm.value.comments)
       this.dataStorage.updateTask(updatedTask)
+        .subscribe({
+          next: (res: BoardModel) => this.boardService.setBoard(res),
+          error: (err) => {
+            this.dataStorage.errorSubj.next(err)
+          }
+        })
     }
     this.modalService.close('closeTask');
   }

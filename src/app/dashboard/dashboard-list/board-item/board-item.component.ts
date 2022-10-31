@@ -49,6 +49,12 @@ export class BoardItemComponent implements OnInit {
       this.modalService.open(this.board._id, 'open')
     } else {
       this.dataStorage.deleteBoard(this.board._id)
+        .subscribe({
+          next: (res: BoardModel[]) => this.boardService.setBoards(res),
+          error: (err) => {
+            this.dataStorage.errorSubj.next(err)
+          }
+        })
     }
   }
 
