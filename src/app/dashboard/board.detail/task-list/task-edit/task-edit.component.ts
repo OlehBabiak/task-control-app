@@ -48,7 +48,6 @@ export class TaskEditComponent implements OnInit {
   }
 
   onAddComment() {
-    console.log('comm added')
     const formGroup = new FormGroup({
       'comment': new FormControl(null),
     });
