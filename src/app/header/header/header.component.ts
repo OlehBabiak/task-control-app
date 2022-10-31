@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit, OnDestroy {
   collapsed: boolean = true;
   isUserAuth: boolean = false
+  user: string
   private userSub: Subscription;
 
   constructor(
@@ -19,6 +20,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.userSub = this.authService.user.subscribe(user => {
+      this.user = user.email
+      this.isUserAuth = !!user;
+    })
   }
 
   onLogout() {
