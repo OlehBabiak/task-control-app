@@ -6,7 +6,6 @@ import {AuthModel} from "../auth/auth.model";
 import {User} from "../auth/user.model";
 import {Router} from "@angular/router";
 import {AuthResponseData} from "../auth/interfaces/auth-response-data"
-import {ErrorModel} from "./errors/error-model";
 import {ErrorService} from "./errors/error.service";
 
 @Injectable({
@@ -92,7 +91,6 @@ export class AuthService {
     refreshExpiresIn: number) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 60000)
     const refreshExpirationDate = new Date(new Date().getTime() + refreshExpiresIn * 60000)
-    console.log('expirationDate: ', expirationDate)
     const user = new User(
       email,
       userId,
