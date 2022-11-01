@@ -1,1 +1,12 @@
-<p>archive works!</p>
+<div>
+  <div *ngFor='let task of tasks'>
+    <h3>{{ task.name }}</h3>
+    <p>{{ task.description }}</p>
+    <p>{{ task.status }}</p>
+    <p>Task created: {{ task.createdAt | date }}</p>
+    <p>Task updated: {{ task.updatedAt | date }}</p>
+    <ul *ngFor='let comment of task.comments'>
+      <li>{{ comment.comment }}</li>
+    </ul>
+  </div>
+</div>
