@@ -8,6 +8,7 @@ import {ColumnTaskModel} from "../column.task-model";
 import {catchError} from "rxjs/operators";
 import {ErrorService} from "../errors/error.service";
 import {ErrorModel} from "../errors/error-model";
+import {Params} from "@angular/router";
 
 
 @Injectable({
@@ -72,6 +73,13 @@ export class DataStorageService {
 
   updateTask(task: ColumnTaskModel) {
     return this.http.put<BoardModel>('http://localhost:8080/api/tasks', task)
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
+  }
+
+  getArchiveTask(params: string) {
+    return this.http.get<ColumnTaskModel[]>(`http://localhost:8080/api/tasks/${params}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
