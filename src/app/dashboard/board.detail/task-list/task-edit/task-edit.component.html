@@ -18,6 +18,16 @@
           placeholder='Task description'
         >
         </textarea>
+        <div>
+          <mat-checkbox
+            formControlName = 'archive'
+            [indeterminate] = 'true'
+            ngModel = 'false'
+            color='primary'
+            (change)="changeStatus($event.checked)"
+          >Archive
+          </mat-checkbox>
+        </div>
         <div formArrayName='comments'>
           <h3>Your comments</h3>
           <div *ngFor="let hobbyControl of controls; let i = index" [formGroupName]='i'>

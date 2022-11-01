@@ -1,7 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
+import {Observable, Subscription} from "rxjs";
 import {ModalService} from "../../../../services/modal.service";
-import {FormArray, FormControl, FormGroup, NgForm} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {BoardService} from "../../../../services/board.service";
 import {DataStorageService} from "../../../../shared/data-storage/data-storage.service";
@@ -13,45 +22,74 @@ import {BoardModel} from "../../../../shared/board-model";
   templateUrl: './task-edit.component.html',
   styleUrls: ['./task-edit.component.scss']
 })
-export class TaskEditComponent implements OnInit {
+export class TaskEditComponent implements OnInit, OnDestroy {
   display$: Observable<'open' | 'close' | 'openTask' | 'closeTask'>;
   editMode = this.modalService.boardIndex
   status: string
   boardId: string;
   taskForm: FormGroup
+  task: ColumnTaskModel
+  private subscription: Subscription;
+
 
   constructor(
     public modalService: ModalService,
     private route: ActivatedRoute,
     private boardService: BoardService,
     private dataStorage: DataStorageService,
-    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    if (this.modalService.column) {
-      this.status = this.modalService.column.name;
-      this.boardId = this.modalService.column.boardID
-    }
-
     this.display$ = this.modalService.watch();
     this.initForm()
   }
 
   private initForm() {
+    let name = '';
+    let desc = '';
+    let checkBox = '';
+    let comments = new FormArray([]);
+
     this.taskForm = new FormGroup({
       'name': new FormControl(null),
+      'archive': new FormControl(null),
       'description': new FormControl(null),
-      'comments': new FormArray([])
+      'comments': comments
     })
+
+    this.subscription = this.modalService.taskSubj
+      .subscribe((value: ColumnTaskModel) => {
+        this.task = value
+        if (value) {
+          name = value.name;
+          desc = value.description;
+          checkBox = this.task.status
+          if (value.comments) {
+            for (const comment of value.comments) {
+              comments.push(
+                new FormGroup({
+                  "comment": new FormControl(comment.comment)
+                })
+              )
+            }
+          }
+          console.log(name, desc, checkBox)
+          this.taskForm = new FormGroup({
+            'name': new FormControl(name, Validators.required),
+            'archive': new FormControl(this.task.status),
+            'description': new FormControl(desc),
+            'comments': comments
+          })
+        }
+      })
   }
 
   onAddComment() {
-    const formGroup = new FormGroup({
-      'comment': new FormControl(null),
+    const formControl = new FormGroup({
+      'comment': new FormControl(null, [Validators.required, Validators.minLength(5)]),
     });
-    (<FormArray>this.taskForm.get('comments')).push(formGroup)
+    (<FormArray>this.taskForm.get('comments')).push(formControl)
   }
 
   get controls() {
@@ -78,8 +116,9 @@ export class TaskEditComponent implements OnInit {
           }
         })
     } else {
-      const {status, _id, boardID} = this.modalService.task
-      const updatedTask = new ColumnTaskModel(boardID, this.taskForm.value.name, status, this.taskForm.value.description, _id, this.taskForm.value.comments)
+      const {status, _id, boardID} = this.task
+      const taskStatus = this.task.status !== 'archive' ? status : this.task.status;
+      const updatedTask = new ColumnTaskModel(boardID, this.taskForm.value.name, taskStatus, this.taskForm.value.description, _id, this.taskForm.value.comments)
       this.dataStorage.updateTask(updatedTask)
         .subscribe({
           next: (res: BoardModel) => this.boardService.setBoard(res),
@@ -89,12 +128,25 @@ export class TaskEditComponent implements OnInit {
         })
     }
     this.modalService.close('closeTask');
+    (<FormArray>this.taskForm.get('comments')).clear()
   }
 
   onClose() {
     this.modalService.close('closeTask');
+    (<FormArray>this.taskForm.get('comments')).clear()
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
+
+  changeStatus(checked: Boolean) {
+    if (checked) {
+      this.task.status = 'archive'
+    } else {
+      return
+    }
+  }
 }
 
 

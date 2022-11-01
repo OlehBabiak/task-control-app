@@ -3,6 +3,8 @@ import {ColumnTaskModel} from "../../../shared/column.task-model";
 import {BoardColumnModel} from "../../../shared/board.column-model";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {DataStorageService} from "../../../shared/data-storage/data-storage.service";
+import {BoardModel} from "../../../shared/board-model";
+import {BoardService} from "../../../services/board.service";
 
 @Component({
   selector: 'app-task-list',
@@ -14,12 +16,11 @@ export class TaskListComponent implements OnInit {
   @Input() column: BoardColumnModel
   columnTasksArr: ColumnTaskModel[]
 
-  constructor(private dataStorage: DataStorageService) {
+  constructor(private dataStorage: DataStorageService,  private boardService: BoardService,) {
   }
 
   ngOnInit(): void {
     this.columnTasksArr = this.tasks
-    console.log(this.columnTasksArr)
   }
 
   private createTaskArr(arr) {
@@ -32,7 +33,6 @@ export class TaskListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<any, any>) {
-    console.log(event)
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -44,7 +44,14 @@ export class TaskListComponent implements OnInit {
       );
       const dragEl: ColumnTaskModel = event.item.data;
       dragEl.status = event.container.element.nativeElement.classList[1]
-      this.dataStorage.updateTask(dragEl)
+      const updatedTask = new ColumnTaskModel(dragEl.boardID, dragEl.name, dragEl.status, dragEl.description, dragEl._id, dragEl.comments)
+      this.dataStorage.updateTask(updatedTask)
+        .subscribe({
+          next: (res: BoardModel) => this.boardService.setBoard(res),
+          error: (err) => {
+            this.dataStorage.errorSubj.next(err)
+          }
+        })
     }
   }
 }
