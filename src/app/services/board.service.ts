@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BoardModel} from "../shared/board-model";
 import {Subject} from "rxjs";
+import {ColumnTaskModel} from "../shared/column.task-model";
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,10 @@ import {Subject} from "rxjs";
 export class BoardService {
   boardsChanged = new Subject<BoardModel[]>();
   boardChanged = new Subject<BoardModel>()
+  tasksChanged = new Subject<ColumnTaskModel[]>()
 
   private boards: BoardModel[] = [];
+  private archiveTask: ColumnTaskModel[] = [];
   private activeBoard: BoardModel;
 
   constructor() {
@@ -27,5 +30,10 @@ export class BoardService {
   setBoard(board: BoardModel) {
     this.activeBoard = board
     return this.boardChanged.next(this.activeBoard)
+  }
+
+  setTask(tasks: ColumnTaskModel[]) {
+    this.archiveTask = tasks
+    return this.tasksChanged.next(this.archiveTask)
   }
 }
