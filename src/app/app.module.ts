@@ -27,6 +27,7 @@ import { ErrorPageComponent } from './shared/errors/error-page/error-page.compon
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { ArchiveComponent } from './archive/archive.component';
 import { UsernameTransformPipe } from './pipes/username-transform.pipe';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,16 +50,17 @@ import { UsernameTransformPipe } from './pipes/username-transform.pipe';
     ArchiveComponent,
     UsernameTransformPipe
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    DragDropModule
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        DragDropModule,
+        MatCheckboxModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
