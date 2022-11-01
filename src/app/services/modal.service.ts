@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {BoardColumnModel} from "../shared/board.column-model";
 import {ColumnTaskModel} from "../shared/column.task-model";
+import {BoardModel} from "../shared/board-model";
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,13 @@ import {ColumnTaskModel} from "../shared/column.task-model";
 export class ModalService {
   boardIndex: string | null = null;
   column: BoardColumnModel;
-  task: ColumnTaskModel
+
+  taskSubj = new Subject<ColumnTaskModel>()
 
   constructor() {
   }
 
-  private display: BehaviorSubject<
-    'open' |
+  private display: BehaviorSubject<'open' |
     'close' |
     'openTask' |
     'closeTask'> =
@@ -27,7 +28,7 @@ export class ModalService {
 
   open(index: string | null, openValue, column?: BoardColumnModel, task?: ColumnTaskModel) {
     this.column = column;
-    this.task = task;
+    this.taskSubj.next(task)
     this.boardIndex = index;
     this.display.next(openValue);
   }
