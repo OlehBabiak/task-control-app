@@ -22,13 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         const modifiedReq = request
           .clone({headers: new HttpHeaders({'Authorization': user.token})})
-        return next.handle(modifiedReq).pipe(
-          tap(event => {
-            if (event.type === HttpEventType.Response){
-              console.log('interceptor event: ', event.body)
-            }
-          })
-        );
+        return next.handle(modifiedReq)
       }));
 
   }
