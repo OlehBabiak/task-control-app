@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {BoardService} from "../../services/board.service";
 import {BoardModel} from "../board-model";
-import {pipe, Subject, tap, throwError} from "rxjs";
+import {Subject} from "rxjs";
 
 import {ColumnTaskModel} from "../column.task-model";
 import {catchError} from "rxjs/operators";
