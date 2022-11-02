@@ -12,19 +12,22 @@ export class BoardService {
   tasksChanged = new Subject<ColumnTaskModel[]>()
 
   private boards: BoardModel[] = [];
+  private filtered: BoardModel[] = []
   private archiveTask: ColumnTaskModel[] = [];
   private activeBoard: BoardModel;
 
   constructor() {
   }
 
+  filterBoards(value: string){
+    this.filtered = this.boards.filter(board => board.name.search(value) !== -1)
+    console.log(this.boards)
+    this.boardsChanged.next(this.filtered.slice())
+  }
+
   setBoards(boards: BoardModel[]) {
     this.boards = boards
     this.boardsChanged.next(this.boards.slice())
-  }
-
-  getBoards() {
-    return this.boards.slice()
   }
 
   setBoard(board: BoardModel) {
