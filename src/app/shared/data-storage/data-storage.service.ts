@@ -47,6 +47,7 @@ export class DataStorageService {
 
   getBoardById(id: String) {
     return this.http.get<BoardModel>(`http://localhost:8080/api/board/${id}`)
+
   }
 
   getBoards() {
@@ -80,6 +81,13 @@ export class DataStorageService {
 
   getArchiveTask(params: string) {
     return this.http.get<ColumnTaskModel[]>(`http://localhost:8080/api/tasks/${params}`)
+      .pipe(
+        catchError(this.errorService.handleError)
+      )
+  }
+
+  getTaskById(id: string) {
+    return this.http.get<ColumnTaskModel>(`http://localhost:8080/api/tasks/${id}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
