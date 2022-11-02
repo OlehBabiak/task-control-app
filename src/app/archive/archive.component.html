@@ -1,5 +1,5 @@
 <div>
-  <div *ngFor='let task of tasks'>
+  <div *ngFor='let task of tasks; let index = index'>
     <h3>{{ task.name }}</h3>
     <p>{{ task.description }}</p>
     <p>{{ task.status }}</p>
@@ -8,5 +8,8 @@
     <ul *ngFor='let comment of task.comments'>
       <li>{{ comment.comment }}</li>
     </ul>
+    <button class='button btn-primary' (click)='onDetailShow(task._id)'>Go to detail</button>
   </div>
 </div>
+
+

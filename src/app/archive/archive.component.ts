@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataStorageService} from "../shared/data-storage/data-storage.service";
-import {ActivatedRoute,UrlSegment} from "@angular/router";
+import {ActivatedRoute, Params, Router, UrlSegment} from "@angular/router";
 import {BoardService} from "../services/board.service";
 import {ColumnTaskModel} from "../shared/column.task-model";
 import {Subscription} from "rxjs";
@@ -12,24 +12,19 @@ import {Subscription} from "rxjs";
 })
 export class ArchiveComponent implements OnInit, OnDestroy {
 
-  urlSegment: string
   tasks: ColumnTaskModel[]
   private subscription: Subscription
 
   constructor(
     private dataStorage: DataStorageService,
     private boardService: BoardService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.route.url
-      .subscribe((url: UrlSegment[]) => {
-        this.urlSegment = url[0].path
-      })
-
-    this.dataStorage.getArchiveTask(this.urlSegment)
+    this.dataStorage.getArchiveTask('archive')
       .subscribe({
         next: (res: ColumnTaskModel[]) => this.boardService.setTask(res),
         error: (err) => {
@@ -40,12 +35,15 @@ export class ArchiveComponent implements OnInit, OnDestroy {
     this.subscription = this.boardService
       .tasksChanged
       .subscribe((tasks: ColumnTaskModel[]) => {
-        console.log(tasks)
         this.tasks = tasks
       })
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe()
+  }
+
+  onDetailShow(index: string) {
+    this.router.navigate([index], {relativeTo: this.route})
   }
 }
