@@ -84,4 +84,12 @@ body {
   border-color: #4cae4c
 }
 
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.help-block {
+  color: red
+}
+
 

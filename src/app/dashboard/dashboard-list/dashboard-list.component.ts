@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BoardModel} from "../../shared/board-model";
 import {BoardService} from "../../services/board.service";
 import {ModalService} from "../../services/modal.service";
-import {Subscription} from "rxjs";
+import {map, Observable, Subscribable, Subscription} from "rxjs";
 import {DataStorageService} from "../../shared/data-storage/data-storage.service";
 import {ActivatedRoute} from "@angular/router";
 import {ErrorModel} from "../../shared/errors/error-model";
@@ -14,7 +14,7 @@ import {ErrorModel} from "../../shared/errors/error-model";
 })
 export class DashboardListComponent implements OnInit, OnDestroy {
   boards: BoardModel[]
-  private subscription: Subscription
+  subscription: Subscription
   private errorSubscription: Subscription
   error: ErrorModel | null
 
@@ -31,27 +31,36 @@ export class DashboardListComponent implements OnInit, OnDestroy {
       next: ({boards}) =>  this.boards = boards,
     })
 
+    this.dataStorage.getBoards().subscribe({
+      next: (res: BoardModel[]) => this.boardService.setBoards(res),
+      error: (err) => {
+        this.dataStorage.errorSubj.next(err)
+      }
+    })
+
     this.subscription = this.boardService
       .boardsChanged
-      .subscribe((value: BoardModel[]) => {
+      .subscribe((value: any) => {
         this.boards = value;
       })
+
     this.errorSubscription = this.dataStorage
       .errorSubj
-      .subscribe( err => {
+      .subscribe(err => {
         this.error = err
       })
   }
 
-
-
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe()
-    this.errorSubscription.unsubscribe()
-  }
-
   onErrorHide(event: null) {
     this.error = event
+  }
+
+  ngOnDestroy() {
+    if (this.errorSubscription) {
+      this.errorSubscription.unsubscribe()
+    }
+    if (this.subscription) {
+      this.subscription.unsubscribe()
+    }
   }
 }

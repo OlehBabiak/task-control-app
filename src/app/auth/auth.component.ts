@@ -4,6 +4,7 @@ import {AuthService} from "../shared/auth.service";
 import {AuthResponseData} from "./interfaces/auth-response-data"
 import {Observable} from "rxjs";
 import {ErrorModel} from "../shared/errors/error-model";
+import {CustomValidators} from "../validators/custom-validators";
 
 @Component({
   selector: 'app-auth',
@@ -18,12 +19,18 @@ export class AuthComponent implements OnInit {
   error: ErrorModel | null = null;
   userCreateMessage: string = null
 
+
   constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
+
     this.signupForm = new FormGroup({
-      "email": new FormControl(null, [Validators.required, Validators.email]),
+      "email": new FormControl(null,
+        [
+          Validators.required,
+          CustomValidators.forbiddenEmails,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$')]),
       "password": new FormControl(null, [Validators.required, Validators.minLength(6)])
     })
   }

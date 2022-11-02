@@ -49,10 +49,10 @@ export class TaskEditComponent implements OnInit, OnDestroy {
     let name = '';
     let desc = '';
     let checkBox = '';
-    let comments = new FormArray([]);
+    let comments = new FormArray([], Validators.required);
 
     this.taskForm = new FormGroup({
-      'name': new FormControl(null),
+      'name': new FormControl(null, [Validators.required, Validators.minLength(5)]),
       'archive': new FormControl(null),
       'description': new FormControl(null),
       'comments': comments
@@ -76,7 +76,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
           }
           console.log(name, desc, checkBox)
           this.taskForm = new FormGroup({
-            'name': new FormControl(name, Validators.required),
+            'name': new FormControl(name, [Validators.required, Validators.minLength(5)]),
             'archive': new FormControl(this.task.status),
             'description': new FormControl(desc),
             'comments': comments

@@ -1,52 +1,79 @@
 <div class="container">
 
-    <div class='alert alert-success' *ngIf='userCreateMessage'>
-      <p>{{ userCreateMessage }}</p>
-      <button class='button btn-success' (click)='closeAlert()'>OK</button>
-    </div>
-    <app-error-page *ngIf='error' (newItemEvent) = 'onErrorHide($event)' [error]='error'></app-error-page>
-    <div *ngIf='isLoading' style='text-align: center'>
-      <app-loading-spinner></app-loading-spinner>
-    </div>
-    <form [formGroup]='signupForm' (ngSubmit)='onSubmit()' *ngIf='!isLoading'>
-      <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input
-          type="email"
-          id="email"
-          class="form-control"
-          formControlName='email'
-          placeholder='Enter your email'
-        />
+  <div class='alert alert-success' *ngIf='userCreateMessage'>
+    <p>{{ userCreateMessage }}</p>
+    <button class='button btn-success' (click)='closeAlert()'>OK</button>
+  </div>
+  <app-error-page *ngIf='error' (newItemEvent)='onErrorHide($event)' [error]='error'></app-error-page>
+  <div *ngIf='isLoading' style='text-align: center'>
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <form [formGroup]='signupForm' (ngSubmit)='onSubmit()' *ngIf='!isLoading'>
+    <div class="form-group">
+      <label for="email">E-Mail</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        formControlName='email'
+        placeholder='Enter your email'
+      />
+      <span
+        class='help-block'
+        *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"
+      >
         <span
           class='help-block'
-          *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"
-        >Email is not valid</span>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          formControlName='password'
-          placeholder='Enter your password'
-          autocomplete="on"
-        />
+          *ngIf="signupForm.get('email').errors?.['emailIsForbidden']"
+        >This email is forbidden!
+        </span>
         <span
           class='help-block'
-          *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"
-        >Password is not valid</span>
-      </div>
-      <div>
-        <button
-          class="button btn-primary" type='submit' [disabled]='!signupForm.valid'
-        >{{ isLoginMode ? 'Login' : 'Sign Up' }}</button>
-        |
-        <button class="button btn-primary" (click)='onSwitchMode()' type='button'>Switch
-          to {{ isLoginMode ? 'Sign Up' : 'Login' }}</button>
-      </div>
-    </form>
+          *ngIf="signupForm.get('email').errors['required']"
+        > This field is required!
+             </span>
+        <span
+          class='help-block'
+          *ngIf="signupForm.get('email').errors['pattern']"
+        > This email is not valid!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        formControlName='password'
+        placeholder='Enter your password'
+        autocomplete="on"
+      />
+      <span
+        class='help-block'
+        *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"
+      >
+            <span
+              class='help-block'
+              *ngIf="signupForm.get('password').errors['required']"
+            > This field is required!
+             </span>
+             <span
+               class='help-block'
+               *ngIf="signupForm.get('password').errors['minlength']"
+             > Password should have 6 characters minimum!
+             </span>
+      </span>
+    </div>
+    <div>
+      <button
+        class="button btn-primary" type='submit' [disabled]='!signupForm.valid'
+      >{{ isLoginMode ? 'Login' : 'Sign Up' }}</button>
+      |
+      <button class="button btn-primary" (click)='onSwitchMode()' type='button'>Switch
+        to {{ isLoginMode ? 'Sign Up' : 'Login' }}</button>
+    </div>
+  </form>
 
 </div>
 

@@ -9,6 +9,20 @@
           formControlName='name'
           placeholder='Enter task name'
         >
+        <span *ngIf="!taskForm.get('name').valid && taskForm.get('name').touched">
+                <span
+                  class='help-block'
+                  *ngIf="taskForm.get('name').errors?.['required']"
+                >
+                  This field is required!
+                </span>
+                <span
+                  class='help-block'
+                  *ngIf="taskForm.get('name').errors?.['minlength']"
+                >
+                  Name should have 5 characters minimum!
+                </span>
+              </span>
       </div>
       <div *ngIf='modalService.boardIndex !== null'>
         <textarea
@@ -20,9 +34,9 @@
         </textarea>
         <div>
           <mat-checkbox
-            formControlName = 'archive'
-            [indeterminate] = 'true'
-            ngModel = 'false'
+            formControlName='archive'
+            [indeterminate]='true'
+            ngModel='false'
             color='primary'
             (change)="changeStatus($event.checked)"
           >Archive
@@ -37,13 +51,31 @@
                 formControlName='comment'
               >
               <button
-                style='height: 22px; align-self: self-end; margin-left: 5px'
-                class='btn btn-danger'
+                style='margin-left: 5px'
+                class='button btn-danger'
                 type='button'
                 (click)='onDeleteIngredient(i)'
               >X
               </button>
             </div>
+            <span
+              class='help-block'
+              *ngIf="
+                !taskForm.get('comments')['controls']['0'].get('comment').valid &&
+                taskForm.get('comments')['controls']['0'].get('comment').touched">
+                <span
+                  class='help-block'
+                  *ngIf="taskForm.get('comments')['controls']['0'].get('comment').errors?.['required']"
+                >
+                  This field is required!
+                </span>
+                <span
+                  class='help-block'
+                  *ngIf="taskForm.get('comments')['controls']['0'].get('comment').errors?.['minlength']"
+                >
+                  Comment should have 5 characters minimum!
+                </span>
+              </span>
           </div>
           <button
             type='button'

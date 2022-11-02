@@ -10,8 +10,14 @@
             name='name'
             placeholder='Enter board name'
             ngModel
+            required
+            minlength='4'
             #name="ngModel"
           >
+          <span *ngIf='name.invalid && (name.dirty || name.touched)'>
+            <span class='help-block' *ngIf="name.errors?.['required']">Name is required!</span>
+            <span class='help-block' *ngIf="name.errors?.['minlength']">Name must be at least 4 characters long</span>
+          </span>
         </div>
         <div>
         <textarea
@@ -20,12 +26,18 @@
           rows='6'
           ngModel
           placeholder='Description'
+          required
+          minlength='8'
           #description="ngModel"
         >
-    </textarea>
+        </textarea>
+          <span *ngIf='description.invalid && (name.dirty || name.touched)'>
+            <span class='help-block' *ngIf="description.errors?.['required']">Description is required!</span>
+            <span class='help-block' *ngIf="description.errors?.['minlength']">Description must be at least  characters long</span>
+          </span>
         </div>
         <button
-          class="button btn-primary" type='submit'
+          class="button btn-primary" type='submit' [disabled]='!form.valid'
         >{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
       </form>
     </div>
