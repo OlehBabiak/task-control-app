@@ -28,6 +28,7 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { ArchiveComponent } from './archive/archive.component';
 import { UsernameTransformPipe } from './pipes/username-transform.pipe';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { ArchiveTaskDetailComponent } from './archive/archive-task-detail/archive-task-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     LoadingSpinnerComponent,
     ErrorPageComponent,
     ArchiveComponent,
-    UsernameTransformPipe
+    UsernameTransformPipe,
+    ArchiveTaskDetailComponent
   ],
     imports: [
         AppRoutingModule,
