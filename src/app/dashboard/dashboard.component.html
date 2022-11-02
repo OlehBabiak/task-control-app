@@ -1,5 +1,23 @@
-<button class='button btn-success' (click)='onModalOpen()'>
-  <p>Create new board</p>
-</button>
+<div class='selects'>
+  <button class='button btn-success' (click)='onModalOpen()'>
+    <p>Create new board</p>
+  </button>
 
-<app-dashboard-list></app-dashboard-list>
+  <div class='select'>
+    <form [formGroup]='sortForm'>
+      <label for='sort'>Sort by: </label>
+      <select formControlName='sort' id='sort' (change)='sortValueChange($event)'>
+        <option *ngFor='let sortValue of sortValues' [value]='sortValue'>{{ sortValue }}</option>
+      </select>
+    </form>
+  </div>
+
+  <div class='select'>
+      <label for='filter'>Filter by: </label>
+      <input type="text" name='filter' id="filter" (input)='filterChange($event)'>
+  </div>
+</div>
+
+<p>{{ filter }}</p>
+<p>{{ sort }}</p>
+<app-dashboard-list [filter]='filter'></app-dashboard-list>
