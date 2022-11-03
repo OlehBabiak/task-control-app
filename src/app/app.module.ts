@@ -27,6 +27,7 @@ import {ArchiveComponent} from './archive/archive.component';
 import {UsernameTransformPipe} from './pipes/username-transform.pipe';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {ArchiveTaskDetailComponent} from './archive/archive-task-detail/archive-task-detail.component';
+import { FooterComponent } from './footer/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {ArchiveTaskDetailComponent} from './archive/archive-task-detail/archive-
     ErrorPageComponent,
     ArchiveComponent,
     UsernameTransformPipe,
-    ArchiveTaskDetailComponent
+    ArchiveTaskDetailComponent,
+    FooterComponent
   ],
   imports: [
     AppRoutingModule,

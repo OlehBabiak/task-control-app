@@ -1,9 +1,31 @@
-.create{
-  padding: 10px 15px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+.home-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 114px;
+  background-color: #f5f3f3;
+  height: 100%;
+
+  .content-wrapper {
+    width: 40%;
+    padding: 30px 60px;
+    background-color: #d5d3d3;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    .text-wrapper p {
+      color: #777;
+      font-size: 20px;
+      text-align: center;
+      line-height: 40px;
+    }
+
+    .image-wrapper {
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 15rem;
+      }
+    }
+  }
 }

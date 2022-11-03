@@ -1,0 +1,13 @@
+footer {
+  background-color: #f8f8f8;
+  border: 1px solid #e7e7e7;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content {
+    color: #777;
+    font-size: 16px;
+  }
+}
