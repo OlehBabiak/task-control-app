@@ -4,12 +4,10 @@
   </button>
 
   <div class='select'>
-    <form [formGroup]='sortForm'>
       <label for='sort'>Sort by: </label>
-      <select formControlName='sort' id='sort' (change)='sortValueChange($event)'>
+      <select name='sort' id='sort' (change)='sortValueChange($event)'>
         <option *ngFor='let sortValue of sortValues' [value]='sortValue'>{{ sortValue }}</option>
       </select>
-    </form>
   </div>
 
   <div class='select'>

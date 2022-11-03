@@ -9,8 +9,6 @@ import {BoardService} from "../services/board.service";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  sortForm: FormGroup;
-  filterForm: FormGroup;
   sortValues: string[] = ['ASC Name', 'DESC Name', 'ASC Create date', 'DSC Create Date'];
   filter: string = '';
   sort: string = ''
@@ -19,12 +17,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filterForm = new FormGroup({
-      'filter': new FormControl(null)
-    })
-    this.sortForm = new FormGroup({
-      'sort': new FormControl(null)
-    })
+
   }
 
   onModalOpen() {
@@ -32,16 +25,10 @@ export class DashboardComponent implements OnInit {
   }
 
   sortValueChange(e) {
-    console.log(e.target.value)
-    this.sortForm = new FormGroup({
-      'sort': new FormControl(e.target.value)
-    })
-    this.sort = this.sortForm.get('sort').value
+    this.boardService.sortBoards(e.target.value)
   }
 
   filterChange(e) {
     this.boardService.filterBoards(e.target.value)
-    console.log('dfsdfsdf')
-    console.log(e.target.value)
   }
 }

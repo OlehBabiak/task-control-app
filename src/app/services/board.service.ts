@@ -19,10 +19,62 @@ export class BoardService {
   constructor() {
   }
 
-  filterBoards(value: string){
+  filterBoards(value: string) {
     this.filtered = this.boards.filter(board => board.name.search(value) !== -1)
-    console.log(this.boards)
     this.boardsChanged.next(this.filtered.slice())
+  }
+
+  sortBoards(value: string) {
+    switch (value) {
+      case 'ASC Name':
+        this.filtered = this.boards.sort((a: BoardModel, b: BoardModel) => {
+          if(a.name > b.name) {
+            return 1
+          }
+          if(a.name < b.name) {
+            return -1
+          }
+          return 0
+        })
+         this.boardsChanged.next(this.filtered.slice())
+        break;
+      case 'DESC Name':
+        this.filtered = this.boards.sort((a: BoardModel, b: BoardModel) => {
+          if(b.name > a.name) {
+            return 1
+          }
+          if(b.name < a.name) {
+            return -1
+          }
+          return 0
+        })
+         this.boardsChanged.next(this.filtered.slice())
+        break;
+      case 'ASC Create date':
+        this.filtered = this.boards.sort((a: BoardModel, b: BoardModel) => {
+          if(a.createdAt > b.createdAt) {
+            return 1
+          }
+          if(a.createdAt < b.createdAt) {
+            return -1
+          }
+          return 0
+        })
+         this.boardsChanged.next(this.filtered.slice())
+        break;
+      case 'DSC Create Date':
+        this.filtered = this.boards.sort((a: BoardModel, b: BoardModel) => {
+          if(b.createdAt > a.createdAt) {
+            return 1
+          }
+          if(b.createdAt < a.createdAt) {
+            return -1
+          }
+          return 0
+        })
+         this.boardsChanged.next(this.filtered.slice())
+        break;
+    }
   }
 
   setBoards(boards: BoardModel[]) {
