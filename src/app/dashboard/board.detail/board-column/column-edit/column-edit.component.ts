@@ -1,9 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {BoardService} from "../../../../services/board.service";
 import {DataStorageService} from "../../../../shared/data-storage/data-storage.service";
-import {} from 'rxjs'
 import {BoardModel} from "../../../../shared/board-model";
 
 @Component({

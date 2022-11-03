@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {BoardColumnModel} from "../shared/board.column-model";
 import {ColumnTaskModel} from "../shared/column.task-model";
-import {BoardModel} from "../shared/board-model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +11,6 @@ export class ModalService {
   column: BoardColumnModel;
 
   taskSubj = new Subject<ColumnTaskModel>()
-
-  constructor() {
-  }
 
   private display: BehaviorSubject<'open' |
     'close' |

@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ModalService} from "../services/modal.service";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {BoardService} from "../services/board.service";
 
 @Component({
@@ -8,16 +7,12 @@ import {BoardService} from "../services/board.service";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   sortValues: string[] = ['ASC Name', 'DESC Name', 'ASC Create date', 'DSC Create Date'];
   filter: string = '';
   sort: string = ''
 
   constructor(private modalService: ModalService, private boardService: BoardService) {
-  }
-
-  ngOnInit(): void {
-
   }
 
   onModalOpen() {

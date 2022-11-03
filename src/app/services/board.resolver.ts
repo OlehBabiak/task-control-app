@@ -7,7 +7,6 @@ import {
 import {Observable} from 'rxjs';
 import {BoardModel} from "../shared/board-model";
 import {DataStorageService} from "../shared/data-storage/data-storage.service";
-import {BoardService} from "./board.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +14,11 @@ import {BoardService} from "./board.service";
 export class BoardResolver implements Resolve<BoardModel> {
   id: string
 
-  constructor(private dataStorage: DataStorageService, private boardService: BoardService) {
+  constructor(private dataStorage: DataStorageService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BoardModel> | Promise<BoardModel> | BoardModel {
     const boardId = route.params['id']
-      return this.dataStorage.getBoardById(boardId)
+    return this.dataStorage.getBoardById(boardId)
   }
 }

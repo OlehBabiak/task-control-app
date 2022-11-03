@@ -20,6 +20,6 @@ export class TaskComponent implements OnInit {
   }
 
   onShowDetail() {
-    this.modalService.open(this.column.boardID,'openTask', this.column, this.task)
+    this.modalService.open(this.column.boardID, 'openTask', this.column, this.task)
   }
 }

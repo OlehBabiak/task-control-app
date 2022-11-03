@@ -1,7 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BoardModel} from "../../shared/board-model";
 import {BoardService} from "../../services/board.service";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModalService} from "../../services/modal.service";
 import {DataStorageService} from "../../shared/data-storage/data-storage.service";
 import {Subscription} from "rxjs";
@@ -22,7 +22,7 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private dataStorage: DataStorageService,
     private modalService: ModalService
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -40,7 +40,6 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
   onNewColumn() {
     this.router.navigate(['new'], {relativeTo: this.route})
   }
-
 
 
   ngOnDestroy() {

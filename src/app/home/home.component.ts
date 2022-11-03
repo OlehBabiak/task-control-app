@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {ModalService} from "../services/modal.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +7,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private modalService: ModalService) { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

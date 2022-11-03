@@ -1,8 +1,6 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {find, Subscription} from "rxjs";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Params} from "@angular/router";
 import {ColumnTaskModel} from "../../shared/column.task-model";
-import {BoardService} from "../../services/board.service";
 import {DataStorageService} from "../../shared/data-storage/data-storage.service";
 
 @Component({

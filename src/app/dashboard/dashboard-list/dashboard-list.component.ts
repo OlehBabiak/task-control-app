@@ -28,7 +28,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routes.data.subscribe({
-      next: ({boards}) =>  this.boards = boards,
+      next: ({boards}) => this.boards = boards,
     })
 
     this.dataStorage.getBoards().subscribe({

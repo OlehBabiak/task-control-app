@@ -4,15 +4,15 @@
   </button>
 
   <div class='select'>
-      <label for='sort'>Sort by: </label>
-      <select name='sort' id='sort' (change)='sortValueChange($event)'>
-        <option *ngFor='let sortValue of sortValues' [value]='sortValue'>{{ sortValue }}</option>
-      </select>
+    <label for='sort'>Sort by: </label>
+    <select name='sort' id='sort' (change)='sortValueChange($event)'>
+      <option *ngFor='let sortValue of sortValues' [value]='sortValue'>{{ sortValue }}</option>
+    </select>
   </div>
 
   <div class='select'>
-      <label for='filter'>Filter by: </label>
-      <input type="text" name='filter' id="filter" (input)='filterChange($event)'>
+    <label for='filter'>Filter by: </label>
+    <input type="text" name='filter' id="filter" (input)='filterChange($event)'>
   </div>
 </div>
 

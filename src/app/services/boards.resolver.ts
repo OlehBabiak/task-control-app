@@ -1,23 +1,16 @@
 import {Injectable} from '@angular/core';
-import {
-  Router, Resolve,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot, ActivatedRoute, Params
-} from '@angular/router';
-import {map, Observable, Subscription} from 'rxjs';
+import {Resolve, RouterStateSnapshot, ActivatedRouteSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
 import {DataStorageService} from "../shared/data-storage/data-storage.service";
 import {BoardModel} from "../shared/board-model";
-import {BoardService} from "./board.service";
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoardsResolver implements Resolve<BoardModel[]> {
 
-  constructor(private dataStorage: DataStorageService, private boardService: BoardService) {
+  constructor(private dataStorage: DataStorageService) {
   }
-
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<BoardModel[]> | Promise<BoardModel[]> | BoardModel[]{

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpEventType, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {exhaustMap, Observable, take, tap} from 'rxjs';
+import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {exhaustMap, Observable, take} from 'rxjs';
 import {AuthService} from "../shared/auth.service";
 
 @Injectable()

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalService} from "../../../services/modal.service";
 import {Observable} from "rxjs";
 import {NgForm} from "@angular/forms";
@@ -23,7 +23,8 @@ export class NewBoardModalComponent implements OnInit {
     private boardService: BoardService,
     private dataStorage: DataStorageService,
     private route: ActivatedRoute, private router: Router,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.display$ = this.modalService.watch();
@@ -31,7 +32,7 @@ export class NewBoardModalComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true
-    if(this.modalService.boardIndex === null){
+    if (this.modalService.boardIndex === null) {
       this.dataStorage
         .storeBoard(this.boardForm.value)
         .subscribe({
@@ -42,7 +43,7 @@ export class NewBoardModalComponent implements OnInit {
         })
 
       this.router.navigate(['dashboard'], {relativeTo: this.route.parent})
-    }else{
+    } else {
       this.dataStorage.updateBoard(this.modalService.boardIndex.toString(), this.boardForm.value)
         .subscribe({
           next: (res: BoardModel[]) => this.boardService.setBoards(res),

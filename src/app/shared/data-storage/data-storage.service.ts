@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {BoardService} from "../../services/board.service";
 import {BoardModel} from "../board-model";
 import {Subject} from "rxjs";
@@ -8,8 +8,6 @@ import {ColumnTaskModel} from "../column.task-model";
 import {catchError} from "rxjs/operators";
 import {ErrorService} from "../errors/error.service";
 import {ErrorModel} from "../errors/error-model";
-import {Params} from "@angular/router";
-
 
 @Injectable({
   providedIn: 'root'
@@ -28,34 +26,33 @@ export class DataStorageService {
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
-
+  };
 
   deleteBoard(id: String) {
     return this.http.delete<BoardModel[]>(`http://localhost:8080/api/board/${id}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
+  };
 
   updateBoard(id: String, board: BoardModel) {
     return this.http.put<BoardModel[]>(`http://localhost:8080/api/board/${id}`, board)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
+  };
 
   getBoardById(id: String) {
     return this.http.get<BoardModel>(`http://localhost:8080/api/board/${id}`)
 
-  }
+  };
 
   getBoards() {
     return this.http.get<BoardModel[]>('http://localhost:8080/api/board')
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
+  };
 
   createColumn(id: String, name: string) {
     const body = {'boardID': id, 'name': name}
@@ -63,33 +60,33 @@ export class DataStorageService {
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
+  };
 
   createTask(task: ColumnTaskModel) {
     return this.http.post<BoardModel>('http://localhost:8080/api/tasks', task)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
+  };
 
   updateTask(task: ColumnTaskModel) {
     return this.http.put<BoardModel>('http://localhost:8080/api/tasks', task)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
+  };
 
   getArchiveTask(params: string) {
     return this.http.get<ColumnTaskModel[]>(`http://localhost:8080/api/tasks/${params}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
+  };
 
   getTaskById(id: string) {
     return this.http.get<ColumnTaskModel>(`http://localhost:8080/api/tasks/${id}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  }
+  };
 }

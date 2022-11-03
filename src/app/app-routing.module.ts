@@ -6,11 +6,13 @@ import {AuthComponent} from "./auth/auth.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: "full"},
-  {path: 'dashboard',
+  {
+    path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard-routing/dashboard-routing.module')
       .then(module => module.DashboardRoutingModule),
   },
-  {path: 'archive',
+  {
+    path: 'archive',
     loadChildren: () => import('./archive/archive-routing/archive-routing.module')
       .then(module => module.ArchiveRoutingModule)
   },

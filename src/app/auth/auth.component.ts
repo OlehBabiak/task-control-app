@@ -18,6 +18,7 @@ export class AuthComponent implements OnInit {
   isLoading = false;
   error: ErrorModel | null = null;
   userCreateMessage: string = null
+  pattern: string = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$'
 
 
   constructor(private authService: AuthService) {
@@ -30,7 +31,7 @@ export class AuthComponent implements OnInit {
         [
           Validators.required,
           CustomValidators.forbiddenEmails,
-          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$')]),
+          Validators.pattern(this.pattern)]),
       "password": new FormControl(null, [Validators.required, Validators.minLength(6)])
     })
   }

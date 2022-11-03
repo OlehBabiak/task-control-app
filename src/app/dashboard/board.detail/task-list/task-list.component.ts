@@ -16,20 +16,11 @@ export class TaskListComponent implements OnInit {
   @Input() column: BoardColumnModel
   columnTasksArr: ColumnTaskModel[]
 
-  constructor(private dataStorage: DataStorageService,  private boardService: BoardService,) {
+  constructor(private dataStorage: DataStorageService, private boardService: BoardService,) {
   }
 
   ngOnInit(): void {
     this.columnTasksArr = this.tasks
-  }
-
-  private createTaskArr(arr) {
-    return arr.reduce((newArr: string[], cur: ColumnTaskModel): any => {
-      if (cur.name) {
-        newArr.push(cur.name);
-      }
-      return newArr;
-    }, [])
   }
 
   drop(event: CdkDragDrop<any, any>) {

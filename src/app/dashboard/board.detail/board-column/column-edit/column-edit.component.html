@@ -12,7 +12,9 @@
       >
       <span *ngIf='column.invalid && (column.dirty || column.touched)'>
             <span class='help-block' *ngIf="column.errors?.['required']">Name is required!</span>
-            <span class='help-block' *ngIf="column.errors?.['minlength']">Name must be at least 5 characters long!</span>
+            <span
+              class='help-block' *ngIf="column.errors?.['minlength']"
+            >Name must be at least 5 characters long!</span>
           </span>
     </div>
     <div>

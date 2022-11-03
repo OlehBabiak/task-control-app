@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {BoardModel} from "../../../shared/board-model";
 import {BoardService} from "../../../services/board.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -10,7 +10,7 @@ import {DataStorageService} from "../../../shared/data-storage/data-storage.serv
   templateUrl: './board-item.component.html',
   styleUrls: ['./board-item.component.scss']
 })
-export class BoardItemComponent implements OnInit {
+export class BoardItemComponent {
   @Input() board: BoardModel;
   descriptionLimitLength: string = '20';
   spanText: string = 'see more...'
@@ -23,11 +23,7 @@ export class BoardItemComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: ModalService,
     private dataStorage: DataStorageService
-    ) {
-  }
-
-  ngOnInit(): void {
-
+  ) {
   }
 
   onShowMoreContent($event) {

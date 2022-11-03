@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {AuthService} from "../../shared/auth.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -15,13 +14,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
 
   constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+    private authService: AuthService
+  ) {
+  }
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(user => {
-      if(user) {
+      if (user) {
         this.user = user.email
 
       }
