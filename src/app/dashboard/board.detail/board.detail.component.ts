@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BoardModel} from "../../shared/board-model";
-import {BoardService} from "../../services/board.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ModalService} from "../../services/modal.service";
-import {DataStorageService} from "../../shared/data-storage/data-storage.service";
-import {Subscription} from "rxjs";
-import {BoardColumnModel} from "../../shared/board.column-model";
+import {BoardModel} from '../../shared/board-model';
+import {BoardService} from '../../services/board.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalService} from '../../services/modal.service';
+import {DataStorageService} from '../../shared/data-storage/data-storage.service';
+import {Subscription} from 'rxjs';
+import {BoardColumnModel} from '../../shared/board.column-model';
 
 @Component({
   selector: 'app-board.detail',

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ErrorModel} from "../error-model";
+import {ErrorModel} from '../error-model';
 
 @Component({
   selector: 'app-error-page',

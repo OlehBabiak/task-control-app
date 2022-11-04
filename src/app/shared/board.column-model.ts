@@ -1,4 +1,4 @@
-import {ColumnTaskModel} from "./column.task-model";
+import {ColumnTaskModel} from './column.task-model';
 
 export class BoardColumnModel {
   constructor(

@@ -1,27 +1,27 @@
-<div class='col-edit-wrapper'>
-  <form (ngSubmit)='onSubmit(form)' #form="ngForm">
+<div class="col-edit-wrapper">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div>
       <input
-        type='text'
-        placeholder='Add column name...'
-        name='name'
+        type="text"
+        placeholder="Add column name..."
+        name="name"
         ngModel
         required
-        minlength='5'
+        minlength="5"
         #column="ngModel"
       >
-      <span *ngIf='column.invalid && (column.dirty || column.touched)'>
-            <span class='help-block' *ngIf="column.errors?.['required']">Name is required!</span>
+      <span *ngIf="column.invalid && (column.dirty || column.touched)">
+            <span class="help-block" *ngIf="column.errors?.['required']">Name is required!</span>
             <span
-              class='help-block' *ngIf="column.errors?.['minlength']"
+              class="help-block" *ngIf="column.errors?.['minlength']"
             >Name must be at least 5 characters long!</span>
           </span>
     </div>
     <div>
       <button
-        class='button btn-primary'
-        type='submit'
-        [disabled]='!form.valid'
+        class="button btn-primary"
+        type="submit"
+        [disabled]="!form.valid"
       >Save
       </button>
     </div>

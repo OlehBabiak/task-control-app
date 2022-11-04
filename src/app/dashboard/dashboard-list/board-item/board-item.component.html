@@ -1,21 +1,21 @@
 <div
-  style='cursor: pointer'
-  class='list-group-item'
+  style="cursor: pointer"
+  class="list-group-item"
   [ngClass]="{'big-view': fullMode}"
-  [routerLink]='board._id'
-  routerLinkActive='active'
+  [routerLink]="board._id"
+  routerLinkActive="active"
 >
-  <div class='icons'>
+  <div class="icons">
     <div>
       <h4>{{ board.name }}</h4>
-      <div class='pull-left' style='cursor: default'>
+      <div class="pull-left" style="cursor: default">
         <p>
           {{ board.description | limitTo: descriptionLimitLength}}
           <b
-            (click)='onShowMoreContent($event)'
-            style='cursor: pointer'
+            (click)="onShowMoreContent($event)"
+            style="cursor: pointer"
           >
-            {{ board.description.length > 20 ? spanText : ''}}
+            {{ board.description.length > 20 ? spanText : ""}}
           </b>
         </p>
         <p>{{ board.createdAt | date }}</p>
@@ -23,10 +23,10 @@
     </div>
     <div>
       <mat-icon
-        *ngFor='let icon of boardIcons'
+        *ngFor="let icon of boardIcons"
         aria-hidden="true"
         aria-label="{{icon}} icon"
-        (click)='onDoChanges(icon, $event)'
+        (click)="onDoChanges(icon, $event)"
       >{{ icon }}
       </mat-icon>
     </div>

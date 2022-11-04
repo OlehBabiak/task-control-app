@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {BoardService} from "../../services/board.service";
-import {BoardModel} from "../board-model";
-import {Subject} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {BoardService} from '../../services/board.service';
+import {BoardModel} from '../board-model';
+import {Subject} from 'rxjs';
 
-import {ColumnTaskModel} from "../column.task-model";
-import {catchError} from "rxjs/operators";
-import {ErrorService} from "../errors/error.service";
-import {ErrorModel} from "../errors/error-model";
+import {ColumnTaskModel} from '../column.task-model';
+import {catchError} from 'rxjs/operators';
+import {ErrorService} from '../errors/error.service';
+import {ErrorModel} from '../errors/error-model';
+import {API, API_PATH_BOARD, API_PATH_COLUMN, API_PATH_TASK} from '../../constants/constants'
 
 @Injectable({
   providedIn: 'root'
@@ -21,72 +22,72 @@ export class DataStorageService {
 
   storeBoard(board: BoardModel) {
     return this.http
-      .post<BoardModel[]>('http://localhost:8080/api/board',
+      .post<BoardModel[]>(`${API}/${API_PATH_BOARD}`,
         board)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 
   deleteBoard(id: String) {
-    return this.http.delete<BoardModel[]>(`http://localhost:8080/api/board/${id}`)
+    return this.http.delete<BoardModel[]>(`${API}/${API_PATH_BOARD}/${id}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 
   updateBoard(id: String, board: BoardModel) {
-    return this.http.put<BoardModel[]>(`http://localhost:8080/api/board/${id}`, board)
+    return this.http.put<BoardModel[]>(`${API}/${API_PATH_BOARD}/${id}`, board)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 
   getBoardById(id: String) {
-    return this.http.get<BoardModel>(`http://localhost:8080/api/board/${id}`)
+    return this.http.get<BoardModel>(`${API}/${API_PATH_BOARD}/${id}`)
 
-  };
+  }
 
   getBoards() {
-    return this.http.get<BoardModel[]>('http://localhost:8080/api/board')
+    return this.http.get<BoardModel[]>(`${API}/${API_PATH_BOARD}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 
   createColumn(id: String, name: string) {
     const body = {'boardID': id, 'name': name}
-    return this.http.post<BoardModel>('http://localhost:8080/api/columns', body)
+    return this.http.post<BoardModel>(`${API}/${API_PATH_COLUMN}`, body)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 
   createTask(task: ColumnTaskModel) {
-    return this.http.post<BoardModel>('http://localhost:8080/api/tasks', task)
+    return this.http.post<BoardModel>(`${API}/${API_PATH_TASK}`, task)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 
   updateTask(task: ColumnTaskModel) {
-    return this.http.put<BoardModel>('http://localhost:8080/api/tasks', task)
+    return this.http.put<BoardModel>(`${API}/${API_PATH_TASK}`, task)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 
   getArchiveTask(params: string) {
-    return this.http.get<ColumnTaskModel[]>(`http://localhost:8080/api/tasks/${params}`)
+    return this.http.get<ColumnTaskModel[]>(`${API}/${API_PATH_TASK}/${params}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 
   getTaskById(id: string) {
-    return this.http.get<ColumnTaskModel>(`http://localhost:8080/api/tasks/${id}`)
+    return this.http.get<ColumnTaskModel>(`${API}/${API_PATH_TASK}/${id}`)
       .pipe(
         catchError(this.errorService.handleError)
       )
-  };
+  }
 }

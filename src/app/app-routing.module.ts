@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from "./home/home.component";
-import {AuthComponent} from "./auth/auth.component";
+import {HomeComponent} from './home/home.component';
+import {AuthComponent} from './auth/auth.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: "full"},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard-routing/dashboard-routing.module')

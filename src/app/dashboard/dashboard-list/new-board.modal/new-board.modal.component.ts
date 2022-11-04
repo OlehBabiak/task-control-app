@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ModalService} from "../../../services/modal.service";
-import {Observable} from "rxjs";
-import {NgForm} from "@angular/forms";
-import {BoardService} from "../../../services/board.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {DataStorageService} from "../../../shared/data-storage/data-storage.service";
-import {BoardModel} from "../../../shared/board-model";
+import {ModalService} from '../../../services/modal.service';
+import {Observable} from 'rxjs';
+import {NgForm} from '@angular/forms';
+import {BoardService} from '../../../services/board.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
+import {BoardModel} from '../../../shared/board-model';
 
 @Component({
   selector: 'app-new-board-modal',

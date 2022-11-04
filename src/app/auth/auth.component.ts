@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../shared/auth.service";
-import {AuthResponseData} from "./interfaces/auth-response-data"
-import {Observable} from "rxjs";
-import {ErrorModel} from "../shared/errors/error-model";
-import {CustomValidators} from "../validators/custom-validators";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../shared/auth.service';
+import {AuthResponseData} from './interfaces/auth-response-data'
+import {Observable} from 'rxjs';
+import {ErrorModel} from '../shared/errors/error-model';
+import {CustomValidators} from '../validators/custom-validators';
 
 @Component({
   selector: 'app-auth',
@@ -27,12 +27,12 @@ export class AuthComponent implements OnInit {
   ngOnInit() {
 
     this.signupForm = new FormGroup({
-      "email": new FormControl(null,
+      'email': new FormControl(null,
         [
           Validators.required,
           CustomValidators.forbiddenEmails,
           Validators.pattern(this.pattern)]),
-      "password": new FormControl(null, [Validators.required, Validators.minLength(6)])
+      'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
     })
   }
 

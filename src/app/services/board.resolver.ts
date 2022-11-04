@@ -5,8 +5,8 @@ import {
   ActivatedRouteSnapshot,
 } from '@angular/router';
 import {Observable} from 'rxjs';
-import {BoardModel} from "../shared/board-model";
-import {DataStorageService} from "../shared/data-storage/data-storage.service";
+import {BoardModel} from '../shared/board-model';
+import {DataStorageService} from '../shared/data-storage/data-storage.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,44 +1,44 @@
 <ng-container *ngIf="display$ | async as display">
   <section [class.open]="display === 'open'">
     <div>
-      <form (ngSubmit)='onSubmit()' #form="ngForm">
-        <div class='close' (click)='onClose()'>X</div>
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="close" (click)="onClose()">X</div>
         <div>
           <input
-            type='text'
-            id='name'
-            name='name'
-            placeholder='Enter board name'
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter board name"
             ngModel
             required
-            minlength='4'
+            minlength="4"
             #name="ngModel"
           >
-          <span *ngIf='name.invalid && (name.dirty || name.touched)'>
-            <span class='help-block' *ngIf="name.errors?.['required']">Name is required!</span>
-            <span class='help-block' *ngIf="name.errors?.['minlength']">Name must be at least 4 characters long</span>
+          <span *ngIf="name.invalid && (name.dirty || name.touched)">
+            <span class="help-block" *ngIf="name.errors?.['required']">Name is required!</span>
+            <span class="help-block" *ngIf="name.errors?.['minlength']">Name must be at least 4 characters long</span>
           </span>
         </div>
         <div>
         <textarea
-          id='description'
-          name='description'
-          rows='6'
+          id="description"
+          name="description"
+          rows="6"
           ngModel
-          placeholder='Description'
+          placeholder="Description"
           required
-          minlength='8'
+          minlength="8"
           #description="ngModel"
         >
         </textarea>
-          <span *ngIf='description.invalid && (name.dirty || name.touched)'>
-            <span class='help-block' *ngIf="description.errors?.['required']">Description is required!</span>
-            <span class='help-block' *ngIf="description.errors?.['minlength']">Description must be at least  characters long</span>
+          <span *ngIf="description.invalid && (name.dirty || name.touched)">
+            <span class="help-block" *ngIf="description.errors?.['required']">Description is required!</span>
+            <span class="help-block" *ngIf="description.errors?.['minlength']">Description must be at least  characters long</span>
           </span>
         </div>
         <button
-          class="button btn-primary" type='submit' [disabled]='!form.valid'
-        >{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
+          class="button btn-primary" type="submit" [disabled]="!form.valid"
+        >{{ modalService.boardIndex === null ? "Create" : "Update"}}</button>
       </form>
     </div>
   </section>

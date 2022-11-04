@@ -1,28 +1,28 @@
 <div>
-  <div class='board-header'>
+  <div class="board-header">
     <h2>Board name: {{ boardDetail.name }}</h2>
     <h4>Board description:</h4>
     <p>{{ boardDetail.description }}</p>
   </div>
 
-  <div cdkDropListGroup class='container'>
-    <p *ngIf='boardDetail.columns.length < 1'>Please, add new column</p>
-    <div class='column' *ngFor='let column of boardDetail.columns; let index = index'>
-      <div class='column-header'>
+  <div cdkDropListGroup class="container">
+    <p *ngIf="boardDetail.columns.length < 1">Please, add new column</p>
+    <div class="column" *ngFor="let column of boardDetail.columns; let index = index">
+      <div class="column-header">
         <h3>{{ column.name }}</h3>
       </div>
-      <div class='task-list'>
-        <app-task-list [tasks]='column.tasks' [column]='column'></app-task-list>
+      <div class="task-list">
+        <app-task-list [tasks]="column.tasks" [column]="column"></app-task-list>
       </div>
       <div>
-        <button class='button btn-primary' (click)='onAddTask(column)'>+ Add task</button>
+        <button class="button btn-primary" (click)="onAddTask(column)">+ Add task</button>
       </div>
     </div>
 
     <button
-      (click)='onNewColumn()'
-      style='max-height: 45px'
-      class='button btn-primary'
+      (click)="onNewColumn()"
+      style="max-height: 45px"
+      class="button btn-primary"
     >+ Add column
     </button>
     <router-outlet></router-outlet>

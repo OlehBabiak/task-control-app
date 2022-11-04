@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {ColumnTaskModel} from "../../shared/column.task-model";
-import {DataStorageService} from "../../shared/data-storage/data-storage.service";
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ColumnTaskModel} from '../../shared/column.task-model';
+import {DataStorageService} from '../../shared/data-storage/data-storage.service';
 
 @Component({
   selector: 'app-archive-task-detail',

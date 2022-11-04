@@ -9,7 +9,7 @@ import {HomeComponent} from './home/home.component';
 import {BoardItemComponent} from './dashboard/dashboard-list/board-item/board-item.component';
 import {BoardDetailComponent} from './dashboard/board.detail/board.detail.component';
 import {NewBoardModalComponent} from './dashboard/dashboard-list/new-board.modal/new-board.modal.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TruncatePipe} from './pipes/truncate.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
@@ -18,14 +18,14 @@ import {ColumnEditComponent} from './dashboard/board.detail/board-column/column-
 import {TaskComponent} from './dashboard/board.detail/task-list/task/task.component';
 import {TaskEditComponent} from './dashboard/board.detail/task-list/task-edit/task-edit.component';
 import {AuthComponent} from './auth/auth.component';
-import {LoadingSpinnerComponent} from "./shared/loading-spinner/loading-spinner.component";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {DragDropModule} from "@angular/cdk/drag-drop";
+import {LoadingSpinnerComponent} from './shared/loading-spinner/loading-spinner.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ErrorPageComponent} from './shared/errors/error-page/error-page.component';
-import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {ArchiveComponent} from './archive/archive.component';
 import {UsernameTransformPipe} from './pipes/username-transform.pipe';
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ArchiveTaskDetailComponent} from './archive/archive-task-detail/archive-task-detail.component';
 import { FooterComponent } from './footer/footer/footer.component';
 

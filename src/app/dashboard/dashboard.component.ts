@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {ModalService} from "../services/modal.service";
-import {BoardService} from "../services/board.service";
+import {ModalService} from '../services/modal.service';
+import {BoardService} from '../services/board.service';
 
 @Component({
   selector: 'app-dashboard',

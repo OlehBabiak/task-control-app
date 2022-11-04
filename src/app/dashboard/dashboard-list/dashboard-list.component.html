@@ -1,11 +1,11 @@
 <div>
-  <p *ngIf='boards.length < 1'>Please, add new board</p>
-  <div class='error-wrapper' *ngIf='error'>
-    <app-error-page (newItemEvent)='onErrorHide($event)' [error]='error'></app-error-page>
+  <p *ngIf="boards.length < 1">Please, add new board</p>
+  <div class="error-wrapper" *ngIf="error">
+    <app-error-page (newItemEvent)="onErrorHide($event)" [error]="error"></app-error-page>
   </div>
-  <div class='item-list-block' *ngIf='boards.length >= 1'>
+  <div class="item-list-block" *ngIf="boards.length >= 1">
     <app-board-item
-      *ngFor='let boardEl of boards'
+      *ngFor="let boardEl of boards"
       [board]="boardEl"
     ></app-board-item>
   </div>

@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BoardModel} from "../../shared/board-model";
-import {BoardService} from "../../services/board.service";
-import {ModalService} from "../../services/modal.service";
-import {Subscription} from "rxjs";
-import {DataStorageService} from "../../shared/data-storage/data-storage.service";
-import {ActivatedRoute} from "@angular/router";
-import {ErrorModel} from "../../shared/errors/error-model";
+import {BoardModel} from '../../shared/board-model';
+import {BoardService} from '../../services/board.service';
+import {ModalService} from '../../services/modal.service';
+import {Subscription} from 'rxjs';
+import {DataStorageService} from '../../shared/data-storage/data-storage.service';
+import {ActivatedRoute} from '@angular/router';
+import {ErrorModel} from '../../shared/errors/error-model';
 
 @Component({
   selector: 'app-dashboard-list',

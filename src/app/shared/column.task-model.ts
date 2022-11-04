@@ -1,4 +1,4 @@
-import {TaskCommentModel} from "./task.comment-model";
+import {TaskCommentModel} from './task.comment-model';
 
 export class ColumnTaskModel {
   constructor(

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpErrorResponse} from "@angular/common/http";
-import {ErrorModel} from "./error-model";
-import {throwError} from "rxjs";
+import {HttpErrorResponse} from '@angular/common/http';
+import {ErrorModel} from './error-model';
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ErrorService {
     if (!error || !message) {
       return throwError(() => err);
     }
-    if (typeof error === "string") {
+    if (typeof error === 'string') {
       err.errorCode = errorRes.status;
       err.errorMessage = errorRes.message
       return throwError(() => err);

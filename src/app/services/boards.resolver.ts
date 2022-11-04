@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Resolve, RouterStateSnapshot, ActivatedRouteSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
-import {DataStorageService} from "../shared/data-storage/data-storage.service";
-import {BoardModel} from "../shared/board-model";
+import {DataStorageService} from '../shared/data-storage/data-storage.service';
+import {BoardModel} from '../shared/board-model';
 
 @Injectable({
   providedIn: 'root'

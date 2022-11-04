@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BoardModel} from "../shared/board-model";
-import {Subject} from "rxjs";
-import {ColumnTaskModel} from "../shared/column.task-model";
+import {BoardModel} from '../shared/board-model';
+import {Subject} from 'rxjs';
+import {ColumnTaskModel} from '../shared/column.task-model';
 
 @Injectable({
   providedIn: 'root'

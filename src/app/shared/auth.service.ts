@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {catchError, tap} from "rxjs/operators";
-import {BehaviorSubject} from "rxjs"
-import {AuthModel} from "../auth/auth.model";
-import {User} from "../auth/user.model";
-import {Router} from "@angular/router";
-import {AuthResponseData} from "../auth/interfaces/auth-response-data"
-import {ErrorService} from "./errors/error.service";
+import {HttpClient} from '@angular/common/http';
+import {catchError, tap} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs'
+import {AuthModel} from '../auth/auth.model';
+import {User} from '../auth/user.model';
+import {Router} from '@angular/router';
+import {AuthResponseData} from '../auth/interfaces/auth-response-data'
+import {ErrorService} from './errors/error.service';
+import {API, API_PATH_AUTH, PATH_LOGIN, PATH_REGISTER, PATH_HOME} from '../constants/constants'
 
 @Injectable({
   providedIn: 'root'
@@ -22,19 +23,19 @@ export class AuthService {
 
 
   register(body: AuthModel) {
-    return this.http.post<AuthResponseData>('http://localhost:8080/api/auth/register', body)
+    return this.http.post<AuthResponseData>(`${API}/${API_PATH_AUTH}/${PATH_REGISTER}`, body)
       .pipe(catchError(this.errorService.handleError))
   }
 
   login(body: AuthModel) {
-    return this.http.post<AuthResponseData>('http://localhost:8080/api/auth/login', body)
+    return this.http.post<AuthResponseData>(`${API}/${API_PATH_AUTH}/${PATH_LOGIN}`, body)
       .pipe(
         catchError(this.errorService.handleError),
         tap(
           // в next передаємо дані з AuthResponseData
           ({email, id, jwt_token, refresh_token, expiresIn, expiresInRefresh}) => {
             this.handleAuth(email, id, jwt_token, refresh_token, +expiresIn, +expiresInRefresh)
-            this.router.navigate(["./home"])
+            this.router.navigate([`./${PATH_HOME}`])
           }
         ))
   }
@@ -42,7 +43,7 @@ export class AuthService {
   logout() {
     //видаляєм юзера з локал сторедж, якщо токен не закінчився очищуєм Timeout через який відбудеться autoLogout
     this.user.next(null);
-    this.router.navigate(["./auth"]);
+    this.router.navigate(['./auth']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -65,7 +66,7 @@ export class AuthService {
       _refresh_token: string
       _tokenExpirationDate: string;
       _refreshTokenExpirationDate: string
-    } = JSON.parse(localStorage.getItem("userData"));
+    } = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
       return
     }

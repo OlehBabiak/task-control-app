@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {ColumnTaskModel} from "../../../../shared/column.task-model";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ModalService} from "../../../../services/modal.service";
-import {BoardColumnModel} from "../../../../shared/board.column-model";
+import {ColumnTaskModel} from '../../../../shared/column.task-model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalService} from '../../../../services/modal.service';
+import {BoardColumnModel} from '../../../../shared/board.column-model';
 
 @Component({
   selector: 'app-task',

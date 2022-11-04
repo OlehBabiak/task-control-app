@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForm} from "@angular/forms";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {BoardService} from "../../../../services/board.service";
-import {DataStorageService} from "../../../../shared/data-storage/data-storage.service";
-import {BoardModel} from "../../../../shared/board-model";
+import {NgForm} from '@angular/forms';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {BoardService} from '../../../../services/board.service';
+import {DataStorageService} from '../../../../shared/data-storage/data-storage.service';
+import {BoardModel} from '../../../../shared/board-model';
 
 @Component({
   selector: 'app-column-edit',

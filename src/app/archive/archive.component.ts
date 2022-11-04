@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataStorageService} from "../shared/data-storage/data-storage.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {BoardService} from "../services/board.service";
-import {ColumnTaskModel} from "../shared/column.task-model";
-import {Subscription} from "rxjs";
+import {DataStorageService} from '../shared/data-storage/data-storage.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BoardService} from '../services/board.service';
+import {ColumnTaskModel} from '../shared/column.task-model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-archive',

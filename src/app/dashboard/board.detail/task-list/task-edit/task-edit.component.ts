@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
-import {ModalService} from "../../../../services/modal.service";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
-import {BoardService} from "../../../../services/board.service";
-import {DataStorageService} from "../../../../shared/data-storage/data-storage.service";
-import {ColumnTaskModel} from "../../../../shared/column.task-model";
-import {BoardModel} from "../../../../shared/board-model";
+import {Observable, Subscription} from 'rxjs';
+import {ModalService} from '../../../../services/modal.service';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {BoardService} from '../../../../services/board.service';
+import {DataStorageService} from '../../../../shared/data-storage/data-storage.service';
+import {ColumnTaskModel} from '../../../../shared/column.task-model';
+import {BoardModel} from '../../../../shared/board-model';
 
 @Component({
   selector: 'app-task-edit',
@@ -60,7 +60,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
             for (const comment of value.comments) {
               comments.push(
                 new FormGroup({
-                  "comment": new FormControl(comment.comment)
+                  'comment': new FormControl(comment.comment)
                 })
               )
             }

@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ColumnTaskModel} from "../../../shared/column.task-model";
-import {BoardColumnModel} from "../../../shared/board.column-model";
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
-import {DataStorageService} from "../../../shared/data-storage/data-storage.service";
-import {BoardModel} from "../../../shared/board-model";
-import {BoardService} from "../../../services/board.service";
+import {ColumnTaskModel} from '../../../shared/column.task-model';
+import {BoardColumnModel} from '../../../shared/board.column-model';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
+import {BoardModel} from '../../../shared/board-model';
+import {BoardService} from '../../../services/board.service';
 
 @Component({
   selector: 'app-task-list',

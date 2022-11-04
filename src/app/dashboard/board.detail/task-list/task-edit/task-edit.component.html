@@ -1,77 +1,77 @@
 <ng-container *ngIf="display$ | async as display">
   <section [class.open]="display === 'openTask'">
-    <form [formGroup]='taskForm' (ngSubmit)='onSubmit()'>
-      <div class='close' (click)='onClose()'>X</div>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="close" (click)="onClose()">X</div>
       <div>
         <input
-          type='text'
-          id='name'
-          formControlName='name'
-          placeholder='Enter task name'
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="Enter task name"
         >
         <span *ngIf="!taskForm.get('name').valid && taskForm.get('name').touched">
                 <span
-                  class='help-block'
+                  class="help-block"
                   *ngIf="taskForm.get('name').errors?.['required']"
                 >
                   This field is required!
                 </span>
                 <span
-                  class='help-block'
+                  class="help-block"
                   *ngIf="taskForm.get('name').errors?.['minlength']"
                 >
                   Name should have 5 characters minimum!
                 </span>
               </span>
       </div>
-      <div *ngIf='modalService.boardIndex !== null'>
+      <div *ngIf="modalService.boardIndex !== null">
         <textarea
-          id='description'
-          formControlName='description'
-          rows='6'
-          placeholder='Task description'
+          id="description"
+          formControlName="description"
+          rows="6"
+          placeholder="Task description"
         >
         </textarea>
         <div>
           <mat-checkbox
-            formControlName='archive'
-            [indeterminate]='true'
-            ngModel='false'
-            color='primary'
+            formControlName="archive"
+            [indeterminate]="true"
+            ngModel="false"
+            color="primary"
             (change)="changeStatus($event.checked)"
           >Archive
           </mat-checkbox>
         </div>
-        <div formArrayName='comments'>
+        <div formArrayName="comments">
           <h3>Your comments</h3>
-          <div *ngFor="let hobbyControl of controls; let i = index" [formGroupName]='i'>
-            <div class='comment-block'>
+          <div *ngFor="let hobbyControl of controls; let i = index" [formGroupName]="i">
+            <div class="comment-block">
               <input
-                type='text'
-                formControlName='comment'
+                type="text"
+                formControlName="comment"
               >
               <button
-                style='margin-left: 5px'
-                class='button btn-danger'
-                type='button'
-                (click)='onDeleteIngredient(i)'
+                style="margin-left: 5px"
+                class="button btn-danger"
+                type="button"
+                (click)="onDeleteIngredient(i)"
               >X
               </button>
             </div>
             <span
-              class='help-block'
+              class="help-block"
               *ngIf="
                 !taskForm.get('comments')['controls']['0'].get('comment').valid &&
                 taskForm.get('comments')['controls']['0'].get('comment').touched"
             >
                 <span
-                  class='help-block'
+                  class="help-block"
                   *ngIf="taskForm.get('comments')['controls']['0'].get('comment').errors?.['required']"
                 >
                   This field is required!
                 </span>
                 <span
-                  class='help-block'
+                  class="help-block"
                   *ngIf="taskForm.get('comments')['controls']['0'].get('comment').errors?.['minlength']"
                 >
                   Comment should have 5 characters minimum!
@@ -80,24 +80,24 @@
           </div>
           <button
             [disabled]="!taskForm.get('comments')['controls']['0'].get('comment').valid"
-            type='button'
-            class='button btn-success'
-            (click)='onAddComment()'
+            type="button"
+            class="button btn-success"
+            (click)="onAddComment()"
           >Add comment
           </button>
           <button
             *ngIf="taskForm.get('comments')['controls'].length > 0"
-            type='button'
-            class='button btn-danger'
-            (click)='onDeleteIngredients()'
+            type="button"
+            class="button btn-danger"
+            (click)="onDeleteIngredients()"
           >Delete All
           </button>
         </div>
       </div>
       <button
-        [disabled]='!taskForm.valid'
-        class="button btn-primary" type='submit'
-      >{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
+        [disabled]="!taskForm.valid"
+        class="button btn-primary" type="submit"
+      >{{ modalService.boardIndex === null ? "Create" : "Update"}}</button>
     </form>
   </section>
 </ng-container>
