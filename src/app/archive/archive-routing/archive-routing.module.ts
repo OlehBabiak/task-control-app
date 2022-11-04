@@ -6,7 +6,8 @@ import {ArchiveComponent} from "../archive.component";
 import {AuthGuard} from "../../auth/auth.guard";
 
 const routes: Routes = [
-  {path: '',
+  {
+    path: '',
     component: ArchiveComponent,
     canActivate: [AuthGuard]
   },
