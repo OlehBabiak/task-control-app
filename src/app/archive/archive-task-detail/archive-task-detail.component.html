@@ -1,1 +1,32 @@
-<p>archive-task-detail works!</p>
+<div class='wrapper'>
+  <div *ngIf='isLoading' style='text-align: center'>
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div class='content-wrapper' *ngIf='!isLoading'>
+    <h2>Task name: {{ task.name }}</h2>
+    <h3>Description</h3>
+    <div class='scroll'>
+      <p *ngIf='task.description; else noDescription'>{{ task.description }}</p>
+    </div>
+    <ng-template #noDescription>
+      <p>No description</p>
+    </ng-template>
+    <h3>Comments</h3>
+    <div class='scroll'>
+      <p *ngIf='task.comments.length === 0'>No comments</p>
+      <ul *ngFor='let comment of task.comments; let i = index'>
+        <li [ngClass]='{odd: i % 2 === 0}'>{{i + 1}}. {{ comment.comment }}</li>
+      </ul>
+    </div>
+    <div class='bottom-section'>
+      <div><h4>Created at:</h4>
+        <p>{{ task.createdAt | date }}</p>
+        <h4>Updated at:</h4>
+        <p>{{ task.updatedAt | date }}</p>
+      </div>
+      <div class='btn-wrapper'>
+        <button (click)='onGoBack()' class='button btn-primary'>Go back</button>
+      </div>
+    </div>
+  </div>
+</div>

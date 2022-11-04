@@ -1,6 +1,9 @@
 <div class='archive-title'>
   <h2>Archive tasks</h2>
 </div>
+<div *ngIf='isLoading' style='text-align: center'>
+  <app-loading-spinner></app-loading-spinner>
+</div>
 <div class='archive-page'>
   <div class='archive-block-wrapper' *ngFor='let task of tasks; let index = index'>
     <header>
@@ -8,13 +11,16 @@
     </header>
     <main>
       <h3>Description:</h3>
-      <p>{{ task.description }}</p>
+      <p *ngIf='task.description; else noDescription'>{{ task.description }}</p>
+      <ng-template #noDescription>
+        <p>No description</p>
+      </ng-template>
       <h3>Status:</h3>
       <p>{{ task.status }}</p>
       <h3>Comments:</h3>
       <p *ngIf='task.comments.length === 0'>No comments</p>
       <ul *ngFor='let comment of task.comments; let i = index'>
-        <li [ngClass]='{odd: i % 2 === 0}'>{{ comment.comment }}</li>
+        <li [ngClass]='{odd: i % 2 === 0}'>{{i+1}}. {{ comment.comment }}</li>
       </ul>
     </main>
     <footer>

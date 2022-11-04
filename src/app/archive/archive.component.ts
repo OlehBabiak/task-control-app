@@ -13,6 +13,7 @@ import {Subscription} from "rxjs";
 export class ArchiveComponent implements OnInit, OnDestroy {
 
   tasks: ColumnTaskModel[]
+  isLoading = false;
   private subscription: Subscription
 
   constructor(
@@ -24,10 +25,15 @@ export class ArchiveComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoading = true
     this.dataStorage.getArchiveTask('archive')
       .subscribe({
-        next: (res: ColumnTaskModel[]) => this.boardService.setTask(res),
+        next: (res: ColumnTaskModel[]) => {
+          this.isLoading = false;
+          this.boardService.setTask(res)
+        },
         error: (err) => {
+          this.isLoading = false;
           this.dataStorage.errorSubj.next(err)
         }
       })
