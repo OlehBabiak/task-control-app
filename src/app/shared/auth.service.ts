@@ -13,8 +13,9 @@ import {ErrorService} from "./errors/error.service";
 })
 export class AuthService {
 
-  user = new BehaviorSubject<User>(null)
-  private tokenExpirationTimer: any
+  user = new BehaviorSubject<User>(null);
+  private millisecondsInMinute = 60000;
+  private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router, private errorService: ErrorService) {
   }
@@ -30,6 +31,7 @@ export class AuthService {
       .pipe(
         catchError(this.errorService.handleError),
         tap(
+          // в next передаємо дані з AuthResponseData
           ({email, id, jwt_token, refresh_token, expiresIn, expiresInRefresh}) => {
             this.handleAuth(email, id, jwt_token, refresh_token, +expiresIn, +expiresInRefresh)
             this.router.navigate(["./home"])
@@ -38,6 +40,7 @@ export class AuthService {
   }
 
   logout() {
+    //видаляєм юзера з локал сторедж, якщо токен не закінчився очищуєм Timeout через який відбудеться autoLogout
     this.user.next(null);
     this.router.navigate(["./auth"]);
     localStorage.removeItem('userData');
@@ -48,6 +51,7 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
+    //expirationDuration - закінчення часу токена
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration)
@@ -75,6 +79,7 @@ export class AuthService {
       new Date(userData._refreshTokenExpirationDate)
     );
     //Перевіряємо чи наш токен ще активний, якщо так то активуємо юзера
+    //expirationTime -
     if (loadedUserFromLS.token) {
       const expirationTime = new Date(userData._refreshTokenExpirationDate).getTime() - new Date().getTime()
       this.autoLogout(expirationTime)
@@ -89,8 +94,10 @@ export class AuthService {
     refreshToken: string,
     expiresIn: number,
     refreshExpiresIn: number) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 60000)
-    const refreshExpirationDate = new Date(new Date().getTime() + refreshExpiresIn * 60000)
+    //час закінченні токену
+    const expirationDate = new Date(new Date().getTime() + expiresIn * this.millisecondsInMinute)
+    //час закінчення рефреш токену
+    const refreshExpirationDate = new Date(new Date().getTime() + refreshExpiresIn * this.millisecondsInMinute)
     const user = new User(
       email,
       userId,
@@ -100,7 +107,8 @@ export class AuthService {
       refreshExpirationDate
     );
     this.user.next(user);
-    this.autoLogout(refreshExpiresIn * 60000)
+    //розлоговуємось
+    this.autoLogout(refreshExpiresIn * this.millisecondsInMinute)
     localStorage.setItem('userData', JSON.stringify(user))
   }
 
