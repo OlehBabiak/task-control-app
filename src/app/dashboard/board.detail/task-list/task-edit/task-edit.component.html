@@ -79,12 +79,14 @@
               </span>
           </div>
           <button
+            [disabled]="!taskForm.get('comments')['controls']['0'].get('comment').valid"
             type='button'
             class='button btn-success'
             (click)='onAddComment()'
           >Add comment
           </button>
           <button
+            *ngIf="taskForm.get('comments')['controls'].length > 0"
             type='button'
             class='button btn-danger'
             (click)='onDeleteIngredients()'
@@ -93,6 +95,7 @@
         </div>
       </div>
       <button
+        [disabled]='!taskForm.valid'
         class="button btn-primary" type='submit'
       >{{ modalService.boardIndex === null ? 'Create' : 'Update'}}</button>
     </form>

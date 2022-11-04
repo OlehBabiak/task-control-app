@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ColumnTaskModel} from "../../../../shared/column.task-model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ModalService} from "../../../../services/modal.service";
@@ -9,14 +9,11 @@ import {BoardColumnModel} from "../../../../shared/board.column-model";
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   @Input() task: ColumnTaskModel;
   @Input() column: BoardColumnModel
 
   constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService) {
-  }
-
-  ngOnInit(): void {
   }
 
   onShowDetail() {
