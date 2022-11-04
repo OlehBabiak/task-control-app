@@ -1,3 +1,8 @@
+.active a {
+  color: #555!important;
+  font-weight: 500;
+}
+
 .navbar-default {
   background-color: #f8f8f8;
   border: 1px solid #e7e7e7;
@@ -79,7 +84,7 @@
   }
 
   @media (max-width: 768px) {
-    .navbar-collapse{
+    .navbar-collapse {
       border-color: #e7e7e7;
       position: absolute;
       top: 52px;
