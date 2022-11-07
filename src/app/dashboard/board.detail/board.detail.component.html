@@ -18,13 +18,15 @@
         <button class="button btn-primary" (click)="onAddTask(column)">+ Add task</button>
       </div>
     </div>
-
     <button
       (click)="onNewColumn()"
       style="max-height: 45px"
       class="button btn-primary"
     >+ Add column
     </button>
+    <div class="error-wrapper" *ngIf="error">
+      <app-error-page (newItemEvent)="onErrorHide($event)" [error]="error"></app-error-page>
+    </div>
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -6,6 +6,7 @@ import {ModalService} from '../../services/modal.service';
 import {DataStorageService} from '../../shared/data-storage/data-storage.service';
 import {Subscription} from 'rxjs';
 import {BoardColumnModel} from '../../shared/board.column-model';
+import {ErrorModel} from "../../shared/errors/error-model";
 
 @Component({
   selector: 'app-board.detail',
@@ -15,6 +16,8 @@ import {BoardColumnModel} from '../../shared/board.column-model';
 export class BoardDetailComponent implements OnInit, OnDestroy {
   boardDetail: BoardModel;
   private subscription: Subscription;
+  private errorSubscription: Subscription
+  error: ErrorModel | null
 
   constructor(
     private boardService: BoardService,
@@ -35,6 +38,12 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
       .subscribe((value: BoardModel) => {
         this.boardDetail = value
       })
+
+    this.errorSubscription = this.dataStorage
+      .errorSubj
+      .subscribe(err => {
+        this.error = err
+      })
   }
 
   onNewColumn() {
@@ -43,10 +52,19 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    if (this.errorSubscription) {
+      this.errorSubscription.unsubscribe()
+    }
+    if (this.subscription) {
+      this.subscription.unsubscribe()
+    }
   }
 
   onAddTask(column: BoardColumnModel) {
     this.modalService.open(null, 'openTask', column)
+  }
+
+  onErrorHide(event: null) {
+    this.error = event
   }
 }

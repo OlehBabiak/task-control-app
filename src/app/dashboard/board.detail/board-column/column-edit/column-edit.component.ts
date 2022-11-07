@@ -4,6 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {BoardService} from '../../../../services/board.service';
 import {DataStorageService} from '../../../../shared/data-storage/data-storage.service';
 import {BoardModel} from '../../../../shared/board-model';
+import {ErrorModel} from "../../../../shared/errors/error-model";
 
 @Component({
   selector: 'app-column-edit',
@@ -12,6 +13,7 @@ import {BoardModel} from '../../../../shared/board-model';
 })
 export class ColumnEditComponent implements OnInit {
   id: string;
+  error: ErrorModel | null
 
   constructor(
     private route: ActivatedRoute,
