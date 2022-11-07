@@ -61,25 +61,24 @@
             <span
               class="help-block"
               *ngIf="
-                !taskForm.get('comments')['controls']['0'].get('comment').valid &&
-                taskForm.get('comments')['controls']['0'].get('comment').touched"
+                !taskForm.get('comments')['controls'][i].get('comment').valid &&
+                taskForm.get('comments')['controls'][i].get('comment').touched"
             >
                 <span
                   class="help-block"
-                  *ngIf="taskForm.get('comments')['controls']['0'].get('comment').errors?.['required']"
+                  *ngIf="taskForm.get('comments')['controls'][i].get('comment').errors?.['required']"
                 >
                   This field is required!
                 </span>
                 <span
                   class="help-block"
-                  *ngIf="taskForm.get('comments')['controls']['0'].get('comment').errors?.['minlength']"
+                  *ngIf="taskForm.get('comments')['controls'][i].get('comment').errors?.['minlength']"
                 >
                   Comment should have 5 characters minimum!
                 </span>
               </span>
           </div>
           <button
-            [disabled]="!taskForm.get('comments')['controls']['0'].get('comment').valid"
             type="button"
             class="button btn-success"
             (click)="onAddComment()"
