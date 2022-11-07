@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs'
-import {AuthModel} from '../auth/auth.model';
-import {User} from '../auth/user.model';
+import {AuthModel} from '../components/auth/auth.model';
+import {User} from '../components/auth/user.model';
 import {Router} from '@angular/router';
-import {AuthResponseData} from '../auth/interfaces/auth-response-data'
+import {AuthResponseData} from '../components/auth/interfaces/auth-response-data'
 import {ErrorService} from './errors/error.service';
 import {API, API_PATH_AUTH, PATH_LOGIN, PATH_REGISTER, PATH_HOME} from '../constants/constants'
 
