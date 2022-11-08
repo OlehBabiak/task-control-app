@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 
@@ -14,14 +13,12 @@ import {TaskComponent} from "../board.detail/task-list/task/task.component";
 import {TaskEditComponent} from "../board.detail/task-list/task-edit/task-edit.component";
 import {DashboardRoutingModule} from "../dashboard-routing/dashboard-routing.module";
 import {ColumnEditComponent} from "../board.detail/board-column/column-edit/column-edit.component";
-import {ErrorPageComponent} from "../../../shared/errors/error-page/error-page.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {TruncatePipe} from "../../../pipes/truncate.pipe";
+import {SharedModule} from "../../../shared/shared.module";
 
 
 @NgModule({
   declarations: [
-    ErrorPageComponent,
     BoardItemComponent,
     BoardDetailComponent,
     ColumnEditComponent,
@@ -30,18 +27,16 @@ import {TruncatePipe} from "../../../pipes/truncate.pipe";
     TaskComponent,
     TaskEditComponent,
     TaskListComponent,
-    TruncatePipe,
   ],
   imports: [
     BrowserAnimationsModule,
     DashboardRoutingModule,
     DragDropModule,
     FormsModule,
-    CommonModule,
     MatIconModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    ReactiveFormsModule
+    SharedModule
   ]
 })
 export class DashboardModule {
