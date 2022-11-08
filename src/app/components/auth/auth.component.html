@@ -1,10 +1,10 @@
+<ng-template appPlaceholder></ng-template>
 <div class="container">
-
   <div class="alert alert-success" *ngIf="userCreateMessage">
     <p>{{ userCreateMessage }}</p>
     <button class="button btn-success" (click)="closeAlert()">OK</button>
   </div>
-  <app-error-page *ngIf="error" (newItemEvent)="onErrorHide($event)" [error]="error"></app-error-page>
+<!--  <app-error-page *ngIf="error" (close)="onErrorHide($event)" [error]="error"></app-error-page>-->
   <div *ngIf="isLoading" style="text-align: center">
     <app-loading-spinner></app-loading-spinner>
   </div>

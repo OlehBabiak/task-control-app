@@ -25,7 +25,7 @@
     >+ Add column
     </button>
     <div class="error-wrapper" *ngIf="error">
-      <app-error-page (newItemEvent)="onErrorHide($event)" [error]="error"></app-error-page>
+      <app-error-page (close)="onErrorHide($event)" [error]="error"></app-error-page>
     </div>
     <router-outlet></router-outlet>
   </div>

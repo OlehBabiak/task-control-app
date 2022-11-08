@@ -9,9 +9,9 @@ import {ErrorModel} from '../error-model';
 export class ErrorPageComponent {
 
   @Input() error: ErrorModel
-  @Output() newItemEvent = new EventEmitter<null>();
+  @Output() close = new EventEmitter<null>();
 
-  onHandleError() {
-    this.newItemEvent.emit(null)
+  onClose() {
+    this.close.emit(null)
   }
 }

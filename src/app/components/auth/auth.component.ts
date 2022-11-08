@@ -1,24 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/auth.service';
 import {AuthResponseData} from './interfaces/auth-response-data'
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {ErrorModel} from '../../shared/errors/error-model';
 import {CustomValidators} from '../../validators/custom-validators';
+import {ErrorPageComponent} from '../../shared/errors/error-page/error-page.component'
+import {PlaceholderDirective} from "../../shared/placeholder/placeholder.directive";
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   signupForm: FormGroup;
   isLoginMode = true;
   submitted = false;
   isLoading = false;
   error: ErrorModel | null = null;
-  userCreateMessage: string = null
+  userCreateMessage: string = null;
   pattern: string = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$'
+  @ViewChild(PlaceholderDirective, {static: false}) errorHost: PlaceholderDirective;
+
+  private closeSub: Subscription
 
 
   constructor(private authService: AuthService) {
@@ -66,12 +71,13 @@ export class AuthComponent implements OnInit {
       },
       error: (err) => {
         this.error = err;
+        this.showErrorAlert(err)
         this.isLoading = false;
       }
     })
 
     this.signupForm.reset();
- }
+  }
 
   closeAlert() {
     this.userCreateMessage = null
@@ -79,5 +85,22 @@ export class AuthComponent implements OnInit {
 
   onErrorHide(event: null) {
     this.error = event
+  }
+
+  ngOnDestroy() {
+    if(this.closeSub) {
+      this.closeSub.unsubscribe()
+    }
+  }
+
+  private showErrorAlert(err: ErrorModel) {
+    const hostViewContainerRef = this.errorHost.vieContainerRef;
+    hostViewContainerRef.clear();
+    const componentRef = hostViewContainerRef.createComponent(ErrorPageComponent);
+    componentRef.instance.error = err;
+    this.closeSub = componentRef.instance.close.subscribe(() => {
+      this.closeSub.unsubscribe();
+      hostViewContainerRef.clear();
+    })
   }
 }
