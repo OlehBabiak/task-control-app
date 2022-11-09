@@ -5,6 +5,7 @@ import {PlaceholderDirective} from "./placeholder/placeholder.directive";
 import {CommonModule} from "@angular/common";
 import {TruncatePipe} from "../pipes/truncate.pipe";
 import {UsernameTransformPipe} from "../pipes/username-transform.pipe";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,13 +16,17 @@ import {UsernameTransformPipe} from "../pipes/username-transform.pipe";
     UsernameTransformPipe
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ErrorPageComponent,
     LoadingSpinnerComponent,
+    ReactiveFormsModule,
     PlaceholderDirective,
     CommonModule,
+    FormsModule,
     UsernameTransformPipe,
     TruncatePipe
   ],

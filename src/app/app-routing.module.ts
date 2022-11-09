@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadingStrategy, RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 
 const routes: Routes = [
@@ -9,19 +9,19 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./components/dashboard/dashboard-routing/dashboard-routing.module')
-      .then(module => module.DashboardRoutingModule),
+    loadChildren: () => import('./components/dashboard/dashboard.module')
+      .then(module => module.DashboardModule),
   },
   {
     path: 'archive',
-    loadChildren: () => import('./components/archive/archive-routing/archive-routing.module')
-      .then(module => module.ArchiveRoutingModule)
+    loadChildren: () => import('./components/archive/archive.module')
+      .then(module => module.ArchiveModule)
   },
   {path: 'home', component: HomeComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadingStrategy})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
