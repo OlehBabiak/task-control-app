@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
-import {AuthComponent} from './components/auth/auth.component';
-
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'auth', loadChildren: () => import('./components/auth/auth.module')
+      .then(module => module.AuthModule)
+  },
   {
     path: 'dashboard',
     loadChildren: () => import('./components/dashboard/dashboard-routing/dashboard-routing.module')
@@ -17,7 +18,6 @@ const routes: Routes = [
       .then(module => module.ArchiveRoutingModule)
   },
   {path: 'home', component: HomeComponent},
-  {path: 'auth', component: AuthComponent}
 ];
 
 @NgModule({
