@@ -13,7 +13,6 @@ import {ErrorModel} from '../../../shared/errors/error-model';
 })
 export class DashboardListComponent implements OnInit, OnDestroy {
   boards$: Observable<BoardModel[]>;
-  subscription: Subscription;
   private errorSubscription: Subscription;
   error: ErrorModel | null;
 
@@ -49,9 +48,6 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.errorSubscription) {
       this.errorSubscription.unsubscribe()
-    }
-    if (this.subscription) {
-      this.subscription.unsubscribe()
     }
   };
 }

@@ -3,7 +3,8 @@ import {DataStorageService} from '../../shared/data-storage/data-storage.service
 import {ActivatedRoute, Router} from '@angular/router';
 import {BoardService} from '../../services/board.service';
 import {ColumnTaskModel} from '../../shared/column.task-model';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {ErrorModel} from "../../shared/errors/error-model";
 
 @Component({
   selector: 'app-archive',
@@ -12,9 +13,9 @@ import {Subscription} from 'rxjs';
 })
 export class ArchiveComponent implements OnInit, OnDestroy {
 
-  tasks: ColumnTaskModel[]
-  isLoading = false;
-  private subscription: Subscription
+  tasks$: Observable<ColumnTaskModel[]>;
+  error: ErrorModel | null;
+  private errorSubscription: Subscription;
 
   constructor(
     private dataStorage: DataStorageService,
@@ -25,28 +26,33 @@ export class ArchiveComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.isLoading = true
     this.dataStorage.getArchiveTask('archive')
       .subscribe({
         next: (res: ColumnTaskModel[]) => {
-          this.isLoading = false;
           this.boardService.setTask(res)
         },
         error: (err) => {
-          this.isLoading = false;
           this.dataStorage.errorSubj.next(err)
         }
       })
 
-    this.subscription = this.boardService
-      .tasksChanged
-      .subscribe((tasks: ColumnTaskModel[]) => {
-        this.tasks = tasks
+    this.tasks$ = this.boardService.tasksChanged;
+
+    this.errorSubscription = this.dataStorage
+      .errorSubj
+      .subscribe(err => {
+        this.error = err
       })
-  }
+  };
+
+  onErrorHide(event: null) {
+    this.error = event
+  };
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    if (this.errorSubscription) {
+      this.errorSubscription.unsubscribe()
+    }
   }
 
   onDetailShow(index: string) {
