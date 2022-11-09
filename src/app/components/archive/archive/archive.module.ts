@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import {ArchiveComponent} from "../archive.component";
 import {ArchiveTaskDetailComponent} from "../archive-task-detail/archive-task-detail.component";
 import {ArchiveRoutingModule} from "../archive-routing/archive-routing.module";
+import {SharedModule} from "../../../shared/shared.module";
 
 
 
@@ -14,7 +15,8 @@ import {ArchiveRoutingModule} from "../archive-routing/archive-routing.module";
   ],
   imports: [
     CommonModule,
-    ArchiveRoutingModule
+    ArchiveRoutingModule,
+    SharedModule
   ]
 })
 export class ArchiveModule { }
