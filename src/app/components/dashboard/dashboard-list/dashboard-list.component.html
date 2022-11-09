@@ -1,14 +1,20 @@
 <div>
-  <p *ngIf="boards.length < 1">Please, add new board</p>
   <div class="error-wrapper" *ngIf="error">
     <app-error-page (close)="onErrorHide($event)" [error]="error"></app-error-page>
   </div>
-  <div class="item-list-block" *ngIf="boards.length >= 1">
+
+  <div class="item-list-block" *ngIf="(boards$ | async) as boards; else loading">
+    <p *ngIf="boards.length < 1">Please, add new board</p>
     <app-board-item
       *ngFor="let boardEl of boards"
       [board]="boardEl"
     ></app-board-item>
   </div>
+  <ng-template #loading>
+    <div class='loader-wrapper'>
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+  </ng-template>
 </div>
 
 

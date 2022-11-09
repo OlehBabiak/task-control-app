@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
+
 import {BoardModel} from '../../../shared/board-model';
 import {BoardService} from '../../../services/board.service';
-import {ModalService} from '../../../services/modal.service';
-import {Subscription} from 'rxjs';
 import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
-import {ActivatedRoute} from '@angular/router';
 import {ErrorModel} from '../../../shared/errors/error-model';
 
 @Component({
@@ -13,47 +12,39 @@ import {ErrorModel} from '../../../shared/errors/error-model';
   styleUrls: ['./dashboard-list.component.scss']
 })
 export class DashboardListComponent implements OnInit, OnDestroy {
-  boards: BoardModel[]
-  subscription: Subscription
-  private errorSubscription: Subscription
-  error: ErrorModel | null
+  boards$: Observable<BoardModel[]>;
+  subscription: Subscription;
+  private errorSubscription: Subscription;
+  error: ErrorModel | null;
 
   constructor(
     private dataStorage: DataStorageService,
     private boardService: BoardService,
-    private modalService: ModalService,
-    private routes: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.routes.data.subscribe({
-      next: ({boards}) => this.boards = boards,
-    })
-
     this.dataStorage.getBoards().subscribe({
-      next: (res: BoardModel[]) => this.boardService.setBoards(res),
+      next: (res: BoardModel[]) => {
+        this.boardService.setBoards(res)
+      },
       error: (err) => {
         this.dataStorage.errorSubj.next(err)
       }
-    })
+    });
 
-    this.subscription = this.boardService
-      .boardsChanged
-      .subscribe((value: any) => {
-        this.boards = value;
-      })
+    this.boards$ = this.boardService.boardsChanged;
 
     this.errorSubscription = this.dataStorage
       .errorSubj
       .subscribe(err => {
         this.error = err
       })
-  }
+  };
 
   onErrorHide(event: null) {
     this.error = event
-  }
+  };
 
   ngOnDestroy() {
     if (this.errorSubscription) {
@@ -62,5 +53,5 @@ export class DashboardListComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe()
     }
-  }
+  };
 }
