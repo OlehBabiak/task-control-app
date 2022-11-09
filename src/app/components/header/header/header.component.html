@@ -12,13 +12,13 @@
           <li routerLinkActive="active"><a (click)="collapsed = !collapsed" routerLink="/home">Home</a></li>
           <li routerLinkActive="active"><a *ngIf="isUserAuth" (click)="collapsed = !collapsed" routerLink="/dashboard">Dashboard</a></li>
           <li routerLinkActive="active"><a *ngIf="isUserAuth" (click)="collapsed = !collapsed" routerLink="/archive">Archive</a></li>
-          <li routerLinkActive="active" *ngIf="!isUserAuth"><a style="cursor: pointer" routerLink="/auth">Authenticate</a></li>
+          <li routerLinkActive="active" *ngIf="!isUserAuth"><a (click)="collapsed = !collapsed" style="cursor: pointer" routerLink="/auth">Authenticate</a></li>
         </ul>
       </div>
 
       <div class="navbar-nav navbar-right" *ngIf="isUserAuth">
         <ul>
-          <li><a>{{ user | usernameTransform: "@"}}</a></li>
+          <li><a (click)="collapsed = !collapsed">{{ user | usernameTransform: "@"}}</a></li>
           <li><a style="cursor: pointer" (click)="onLogout()">Logout</a></li>
         </ul>
       </div>

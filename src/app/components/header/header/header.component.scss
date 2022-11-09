@@ -88,9 +88,11 @@
       border-color: #e7e7e7;
       position: absolute;
       top: 52px;
-      background-color: #f8f8f8;
+      background-color: rgba(248, 248, 248, 0.8);
       width: 300px;
       right: 0;
+      z-index: 5;
+
     }
   }
   @media (min-width: 768px) {
@@ -112,6 +114,7 @@
       }
 
       .navbar-collapse {
+        z-index: 5;
         display: grid;
         grid-template-columns: 3fr 2fr;
 
