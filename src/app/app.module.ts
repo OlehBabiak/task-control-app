@@ -11,6 +11,9 @@ import {HomeComponent} from './components/home/home.component';
 import {NewBoardModalComponent} from './components/dashboard/dashboard-list/new-board.modal/new-board.modal.component';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {FooterComponent} from './components/footer/footer/footer.component';
+import {DashboardModule} from "./components/dashboard/dashboard/dashboard.module";
+import {AuthModule} from "./components/auth/auth.module";
+import {ArchiveModule} from "./components/archive/archive/archive.module";
 import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
@@ -23,8 +26,11 @@ import {SharedModule} from "./shared/shared.module";
   ],
   imports: [
     AppRoutingModule,
+    AuthModule,
+    ArchiveModule,
     BrowserAnimationsModule,
     BrowserModule,
+    DashboardModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
