@@ -1,6 +1,8 @@
-<div class='backdrop' (click)="onClose()"></div>
-<div class="alert-danger">
-  <h4>Error code: {{ error.errorCode }}</h4>
-  <p>Error message: {{ error.errorMessage }}</p>
-  <button class="button btn-danger" (click)="onClose()">OK</button>
+<div class='error-wrapper'>
+  <div class='backdrop' (click)="onClose()"></div>
+  <div class="alert-danger">
+    <h4>Error code: {{ error.errorCode }}</h4>
+    <p>Error message: {{ error.errorMessage }}</p>
+    <button class="button btn-danger" (click)="onClose()">OK</button>
+  </div>
 </div>
