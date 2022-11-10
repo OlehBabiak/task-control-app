@@ -1,4 +1,4 @@
-export const API = 'http://localhost:8080';
+export const API = 'https://server-task-manager-ap.herokuapp.com';
 export const API_PATH_BOARD = 'api/board';
 export const API_PATH_COLUMN = 'api/columns';
 export const API_PATH_TASK = 'api/tasks';
