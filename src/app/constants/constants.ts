@@ -1,4 +1,4 @@
-export const API = 'https://tasks-node-server.herokuapp.com';
+export const API = 'https://server-task-control.herokuapp.com';
 export const API_PATH_BOARD = 'api/board';
 export const API_PATH_COLUMN = 'api/columns';
 export const API_PATH_TASK = 'api/tasks';
