@@ -6,4 +6,6 @@ export const API_PATH_AUTH = 'api/auth';
 export const PATH_LOGIN = 'login';
 export const PATH_REGISTER = 'register';
 export const PATH_HOME = 'home';
+export const EMAIL_PATTERN = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$';
+
 

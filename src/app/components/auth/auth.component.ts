@@ -7,6 +7,7 @@ import {ErrorModel} from '../../shared/errors/error-model';
 import {CustomValidators} from '../../validators/custom-validators';
 import {ErrorPageComponent} from '../../shared/errors/error-page/error-page.component'
 import {PlaceholderDirective} from "../../shared/placeholder/placeholder.directive";
+import {EMAIL_PATTERN} from "../../constants/constants";
 
 @Component({
   selector: 'app-auth',
@@ -20,7 +21,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   isLoading = false;
   error: ErrorModel | null = null;
   userCreateMessage: string = null;
-  pattern: string = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$'
   @ViewChild(PlaceholderDirective, {static: false}) errorHost: PlaceholderDirective;
 
   private closeSub: Subscription
@@ -36,7 +36,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           CustomValidators.forbiddenEmails,
-          Validators.pattern(this.pattern)]),
+          Validators.pattern(EMAIL_PATTERN)]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
     })
   }
