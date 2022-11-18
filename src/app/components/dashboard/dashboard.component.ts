@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ModalService} from '../../services/modal.service';
-import {BoardService} from '../../services/board.service';
+import {BOARDS_SORT_VALUES} from "../../constants/constants";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +8,11 @@ import {BoardService} from '../../services/board.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  sortValues: string[] = ['ASC Name', 'DESC Name', 'ASC Create date', 'DSC Create Date'];
+  sortValues: string[] = BOARDS_SORT_VALUES;
   filter: string = '';
   sort: string = ''
 
-  constructor(private modalService: ModalService, private boardService: BoardService) {
+  constructor(private modalService: ModalService) {
   }
 
   onModalOpen() {
@@ -20,10 +20,10 @@ export class DashboardComponent {
   }
 
   sortValueChange(e) {
-    this.boardService.sortBoards(e.target.value)
+    this.sort = e.target.value
   }
 
   filterChange(e) {
-    this.boardService.filterBoards(e.target.value)
+    this.filter = e.target.value
   }
 }

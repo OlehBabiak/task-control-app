@@ -5,6 +5,7 @@ import {BoardService} from '../../services/board.service';
 import {ColumnTaskModel} from '../../shared/column.task-model';
 import {Observable, Subscription} from 'rxjs';
 import {ErrorModel} from "../../shared/errors/error-model";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-archive',
@@ -13,7 +14,7 @@ import {ErrorModel} from "../../shared/errors/error-model";
 })
 export class ArchiveComponent implements OnInit, OnDestroy {
 
-  tasks$: Observable<ColumnTaskModel[]>;
+  tasks$: Observable<{ tasks: ColumnTaskModel[] }>;
   error: ErrorModel | null;
   private errorSubscription: Subscription;
 
@@ -21,7 +22,8 @@ export class ArchiveComponent implements OnInit, OnDestroy {
     private dataStorage: DataStorageService,
     private boardService: BoardService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private store: Store<{ dashboardList: { tasks: ColumnTaskModel[] } }>
   ) {
   }
 
@@ -36,7 +38,7 @@ export class ArchiveComponent implements OnInit, OnDestroy {
         }
       })
 
-    this.tasks$ = this.boardService.tasksChanged;
+    this.tasks$ = this.store.select('dashboardList');
 
     this.errorSubscription = this.dataStorage
       .errorSubj

@@ -7,7 +7,7 @@ import {User} from '../components/auth/user.model';
 import {Router} from '@angular/router';
 import {AuthResponseData} from '../components/auth/interfaces/auth-response-data'
 import {ErrorService} from './errors/error.service';
-import {API, API_PATH_AUTH, PATH_LOGIN, PATH_REGISTER, PATH_HOME} from '../constants/constants'
+import {API, API_PATH_AUTH, PATH_LOGIN, PATH_REGISTER, PATH_HOME, API_PATH} from '../constants/constants'
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   login(body: AuthModel) {
-    return this.http.post<AuthResponseData>(`${API}/${API_PATH_AUTH}/${PATH_LOGIN}`, body)
+    return this.http.post<AuthResponseData>(`${API_PATH}/${API_PATH_AUTH}/${PATH_LOGIN}`, body)
       .pipe(
         catchError(this.errorService.handleError),
         tap(

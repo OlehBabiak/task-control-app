@@ -33,7 +33,7 @@ import {CommonModule} from "@angular/common";
     DragDropModule,
     MatIconModule,
     MatCheckboxModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class DashboardModule {

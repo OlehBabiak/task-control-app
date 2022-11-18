@@ -1,5 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
+import {Store} from "@ngrx/store";
 
 import {BoardModel} from '../../../shared/board-model';
 import {BoardService} from '../../../services/board.service';
@@ -12,17 +13,21 @@ import {ErrorModel} from '../../../shared/errors/error-model';
   styleUrls: ['./dashboard-list.component.scss']
 })
 export class DashboardListComponent implements OnInit, OnDestroy {
-  boards$: Observable<BoardModel[]>;
+  @Input() sort: string;
+  @Input() filter: string;
+  boards$: Observable<{ boards: BoardModel[] }>;
   private errorSubscription: Subscription;
   error: ErrorModel | null;
 
   constructor(
     private dataStorage: DataStorageService,
     private boardService: BoardService,
+    private store: Store<{ dashboardList: { boards: BoardModel[] } }>
   ) {
   }
 
   ngOnInit(): void {
+    this.boards$ = this.store.select('dashboardList');
     this.dataStorage.getBoards().subscribe({
       next: (res: BoardModel[]) => {
         this.boardService.setBoards(res)
@@ -31,8 +36,6 @@ export class DashboardListComponent implements OnInit, OnDestroy {
         this.dataStorage.errorSubj.next(err)
       }
     });
-
-    this.boards$ = this.boardService.boardsChanged;
 
     this.errorSubscription = this.dataStorage
       .errorSubj

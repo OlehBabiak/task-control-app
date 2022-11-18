@@ -4,7 +4,7 @@
 <div class="error-wrapper" *ngIf="error">
   <app-error-page (close)="onErrorHide($event)" [error]="error"></app-error-page>
 </div>
-<div class='archive-page' *ngIf='(tasks$ | async) as tasks; else loading'>
+<div class='archive-page' *ngIf='(tasks$ | async).tasks; let tasks else loading'>
   <p *ngIf="tasks.length < 1">No any archive tasks</p>
   <div class='archive-block-wrapper' *ngFor='let task of tasks; let index = index'>
     <header>

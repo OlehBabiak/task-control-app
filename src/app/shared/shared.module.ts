@@ -6,6 +6,8 @@ import {CommonModule} from "@angular/common";
 import {TruncatePipe} from "../pipes/truncate.pipe";
 import {UsernameTransformPipe} from "../pipes/username-transform.pipe";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SortPipe} from "../pipes/sort.pipe";
+import {FilterPipe} from "../pipes/filter.pipe";
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     LoadingSpinnerComponent,
     PlaceholderDirective,
     TruncatePipe,
-    UsernameTransformPipe
+    UsernameTransformPipe,
+    SortPipe,
+    FilterPipe
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     FormsModule,
     UsernameTransformPipe,
-    TruncatePipe
+    TruncatePipe,
+    SortPipe,
+    FilterPipe
   ],
   entryComponents: [
     ErrorPageComponent

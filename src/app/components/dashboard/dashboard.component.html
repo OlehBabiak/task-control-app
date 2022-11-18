@@ -15,4 +15,4 @@
     <input type="text" name="filter" id="filter" (input)="filterChange($event)">
   </div>
 </div>
-<app-dashboard-list></app-dashboard-list>
+<app-dashboard-list [sort]='sort' [filter]='filter'></app-dashboard-list>

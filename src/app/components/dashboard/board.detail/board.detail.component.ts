@@ -1,12 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BoardModel} from '../../../shared/board-model';
 import {BoardService} from '../../../services/board.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ModalService} from '../../../services/modal.service';
 import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {BoardColumnModel} from '../../../shared/board.column-model';
 import {ErrorModel} from "../../../shared/errors/error-model";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-board.detail',
@@ -14,7 +15,7 @@ import {ErrorModel} from "../../../shared/errors/error-model";
   styleUrls: ['./board.detail.component.scss']
 })
 export class BoardDetailComponent implements OnInit, OnDestroy {
-  boardDetail: BoardModel;
+  boardDetail$: Observable<{ board: BoardModel }>;
   private subscription: Subscription;
   private errorSubscription: Subscription
   error: ErrorModel | null
@@ -24,20 +25,25 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private dataStorage: DataStorageService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private store: Store<{ dashboardList: { board: BoardModel } }>
   ) {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(({data}) => {
-      this.boardDetail = data
-    })
-
-    this.subscription = this.boardService
-      .boardChanged
-      .subscribe((value: BoardModel) => {
-        this.boardDetail = value
+    this.route.params
+      .subscribe((params: Params) => {
+        this.dataStorage.getBoardById(params['id']).subscribe({
+          next: (res: BoardModel) => {
+            this.boardService.setBoard(res)
+          },
+          error: (err) => {
+            this.dataStorage.errorSubj.next(err)
+          }
+        })
       })
+
+    this.boardDetail$ = this.store.select('dashboardList');
 
     this.errorSubscription = this.dataStorage
       .errorSubj
