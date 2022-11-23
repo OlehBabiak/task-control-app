@@ -1,4 +1,5 @@
 export const API = 'https://task-control-app.herokuapp.com';
+export const API_AUTH = 'http://localhost:8060';
 export const API_PATH_BOARD = 'api/board';
 export const API_PATH_COLUMN = 'api/columns';
 export const API_PATH_TASK = 'api/tasks';
