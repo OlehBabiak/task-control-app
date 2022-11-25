@@ -9,6 +9,8 @@ import {ColumnTaskModel} from '../../../../../shared/column.task-model';
 import {BoardModel} from '../../../../../shared/board-model';
 import {Store} from "@ngrx/store";
 import * as fromError from "../../../store/reducers/error.reducer";
+import {ErrorModel} from "../../../../../shared/errors/error-model";
+import * as ErrorActions from "../../../store/actions/error.actions";
 
 @Component({
   selector: 'app-task-edit',
@@ -23,6 +25,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
   taskForm: FormGroup
   task: ColumnTaskModel
   private subscription: Subscription;
+  error: ErrorModel | null
 
 
   constructor(
@@ -108,8 +111,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
             this.boardService.setBoard(res)
           },
           error: (err) => {
-            this.errStore.dispatch(err)
-            // this.dataStorage.errorSubj.next(err)
+            this.errStore.dispatch(new ErrorActions.SetError(err))
           }
         })
     } else {
@@ -122,8 +124,8 @@ export class TaskEditComponent implements OnInit, OnDestroy {
             this.boardService.setBoard(res)
           },
           error: (err) => {
-            this.errStore.dispatch(err)
-            // this.dataStorage.errorSubj.next(err)
+            console.log(err)
+            this.errStore.dispatch(new ErrorActions.SetError(err))
           }
         })
     }

@@ -61,6 +61,6 @@ export class BoardDetailComponent implements OnInit {
   }
 
   onErrorHide(event: null) {
-    this.error = event
+    this.errStore.dispatch(new ErrorActions.SetError(event))
   }
 }

@@ -47,6 +47,6 @@ export class DashboardListComponent implements OnInit {
   };
 
   onErrorHide(event: null) {
-    this.error = event
+    this.errorStore.dispatch(new ErrorActions.SetError(event))
   };
 }

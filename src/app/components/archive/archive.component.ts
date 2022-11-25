@@ -8,6 +8,7 @@ import {ErrorModel} from "../../shared/errors/error-model";
 import {Store} from "@ngrx/store";
 import * as fromDashboardList from '../dashboard/store/reducers/dashboard.reducer'
 import * as fromError from "../dashboard/store/reducers/error.reducer";
+import * as ErrorActions from '../../components/dashboard/store/actions/error.actions'
 
 @Component({
   selector: 'app-archive',
@@ -36,7 +37,7 @@ export class ArchiveComponent implements OnInit {
           this.boardService.setTask(res)
         },
         error: (err) => {
-          this.errStore.dispatch(err)
+          this.errStore.dispatch(new ErrorActions.SetError(err))
         }
       })
 
@@ -47,7 +48,7 @@ export class ArchiveComponent implements OnInit {
   };
 
   onErrorHide(event: null) {
-    this.error = event
+    this.errStore.dispatch(new ErrorActions.SetError(event))
   };
 
   onDetailShow(index: string) {
