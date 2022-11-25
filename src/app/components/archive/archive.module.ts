@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import {ArchiveComponent} from "./archive.component";
-import {ArchiveTaskDetailComponent} from "./archive-task-detail/archive-task-detail.component";
-import {ArchiveRoutingModule} from "./archive-routing.module";
-import {SharedModule} from "../../shared/shared.module";
-
+import {ArchiveComponent} from './archive.component';
+import {ArchiveTaskDetailComponent} from './archive-task-detail/archive-task-detail.component';
+import {ArchiveRoutingModule} from './archive-routing.module';
+import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({

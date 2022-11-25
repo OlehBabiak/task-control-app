@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ColumnTaskModel} from '../../../shared/column.task-model';
 import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
-import {Store} from "@ngrx/store";
-import * as fromError from "../../dashboard/store/reducers/error.reducer";
+import {Store} from '@ngrx/store';
+import * as fromError from '../../dashboard/store/reducers/error.reducer';
 
 @Component({
   selector: 'app-archive-task-detail',
@@ -15,7 +15,7 @@ export class ArchiveTaskDetailComponent implements OnInit {
   id: string;
   isLoading = false;
 
-  @Input() index: number
+  @Input() index: number;
 
   constructor(
     private dataStorage: DataStorageService,
@@ -26,7 +26,7 @@ export class ArchiveTaskDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = true
+    this.isLoading = true;
     this.route.params
       .subscribe((params: Params) => {
         this.id = params['id']
@@ -36,12 +36,11 @@ export class ArchiveTaskDetailComponent implements OnInit {
       .subscribe({
         next: (res: ColumnTaskModel) => {
           this.isLoading = false;
-          this.task = res
+          this.task = res;
         },
         error: (err) => {
           this.isLoading = false;
-          this.store.dispatch(err)
-          // this.dataStorage.errorSubj.next(err)
+          this.store.dispatch(err);
         }
       })
   }

@@ -1,13 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 import {ColumnTaskModel} from '../../../../shared/column.task-model';
 import {BoardColumnModel} from '../../../../shared/board.column-model';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {DataStorageService} from '../../../../shared/data-storage/data-storage.service';
 import {BoardModel} from '../../../../shared/board-model';
 import {BoardService} from '../../../../services/board.service';
 import * as ErrorActions from '../../store/actions/error.actions'
-import {Store} from "@ngrx/store";
-import * as fromError from "../../store/reducers/error.reducer";
+import {Store} from '@ngrx/store';
+import * as fromError from '../../store/reducers/error.reducer';
 
 @Component({
   selector: 'app-task-list',
@@ -41,9 +42,7 @@ export class TaskListComponent implements OnInit {
         event.currentIndex,
       );
       const dragEl: ColumnTaskModel = {...event.item.data};
-      console.log('1', dragEl)
       dragEl.status = event.container.element.nativeElement.classList[1];
-      console.log(dragEl)
       const updatedTask = new ColumnTaskModel(dragEl.boardID, dragEl.name, dragEl.status, dragEl.description, dragEl._id, dragEl.comments);
       this.dataStorage.updateTask(updatedTask)
         .subscribe({

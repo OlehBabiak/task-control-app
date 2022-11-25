@@ -11,9 +11,9 @@ import {HeaderComponent} from './components/header/header/header.component';
 import {NewBoardModalComponent} from './components/dashboard/dashboard-list/new-board.modal/new-board.modal.component';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {FooterComponent} from './components/footer/footer/footer.component';
-import {SharedModule} from "./shared/shared.module";
-import {dashboardReducer} from "./components/dashboard/store/reducers/dashboard.reducer";
-import {errorReducer} from "./components/dashboard/store/reducers/error.reducer";
+import {SharedModule} from './shared/shared.module';
+import {dashboardReducer} from './components/dashboard/store/reducers/dashboard.reducer';
+import {errorReducer} from './components/dashboard/store/reducers/error.reducer';
 
 
 @NgModule({

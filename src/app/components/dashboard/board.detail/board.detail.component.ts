@@ -6,10 +6,10 @@ import {ModalService} from '../../../services/modal.service';
 import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
 import {Observable, Subscription} from 'rxjs';
 import {BoardColumnModel} from '../../../shared/board.column-model';
-import {ErrorModel} from "../../../shared/errors/error-model";
-import {Store} from "@ngrx/store";
+import {ErrorModel} from '../../../shared/errors/error-model';
+import {Store} from '@ngrx/store';
 import * as fromDashboardList from '../store/reducers/dashboard.reducer'
-import * as fromError from "../store/reducers/error.reducer";
+import * as fromError from '../store/reducers/error.reducer';
 import * as ErrorActions from '../store/actions/error.actions'
 
 @Component({

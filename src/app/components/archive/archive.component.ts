@@ -4,10 +4,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BoardService} from '../../services/board.service';
 import {ColumnTaskModel} from '../../shared/column.task-model';
 import {Observable, Subscription} from 'rxjs';
-import {ErrorModel} from "../../shared/errors/error-model";
-import {Store} from "@ngrx/store";
+import {ErrorModel} from '../../shared/errors/error-model';
+import {Store} from '@ngrx/store';
 import * as fromDashboardList from '../dashboard/store/reducers/dashboard.reducer'
-import * as fromError from "../dashboard/store/reducers/error.reducer";
+import * as fromError from '../dashboard/store/reducers/error.reducer';
 import * as ErrorActions from '../../components/dashboard/store/actions/error.actions'
 
 @Component({

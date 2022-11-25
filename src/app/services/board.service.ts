@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Store} from "@ngrx/store";
-import * as DashboardActions from "../components/dashboard/store/actions/dashboard.actions";
+import {Store} from '@ngrx/store';
+import * as DashboardActions from '../components/dashboard/store/actions/dashboard.actions';
 import * as fromDashboardList from '../components/dashboard/store/reducers/dashboard.reducer'
 
 import {BoardModel} from '../shared/board-model';

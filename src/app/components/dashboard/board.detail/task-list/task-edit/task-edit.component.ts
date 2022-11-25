@@ -1,16 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {ModalService} from '../../../../../services/modal.service';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {Store} from '@ngrx/store';
+
+import {ModalService} from '../../../../../services/modal.service';
 import {BoardService} from '../../../../../services/board.service';
 import {DataStorageService} from '../../../../../shared/data-storage/data-storage.service';
 import {ColumnTaskModel} from '../../../../../shared/column.task-model';
 import {BoardModel} from '../../../../../shared/board-model';
-import {Store} from "@ngrx/store";
-import * as fromError from "../../../store/reducers/error.reducer";
-import {ErrorModel} from "../../../../../shared/errors/error-model";
-import * as ErrorActions from "../../../store/actions/error.actions";
+import * as fromError from '../../../store/reducers/error.reducer';
+import {ErrorModel} from '../../../../../shared/errors/error-model';
+import * as ErrorActions from '../../../store/actions/error.actions';
 
 @Component({
   selector: 'app-task-edit',
@@ -125,7 +126,6 @@ export class TaskEditComponent implements OnInit, OnDestroy {
             this.boardService.setBoard(res)
           },
           error: (err) => {
-            console.log(err)
             this.errStore.dispatch(new ErrorActions.SetError(err))
           }
         })

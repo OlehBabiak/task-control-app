@@ -1,5 +1,5 @@
-import * as ErrorActions from "../actions/error.actions";
-import {ErrorModel} from "../../../../shared/errors/error-model";
+import * as ErrorActions from '../actions/error.actions';
+import {ErrorModel} from '../../../../shared/errors/error-model';
 
 export interface State {
   error: ErrorModel

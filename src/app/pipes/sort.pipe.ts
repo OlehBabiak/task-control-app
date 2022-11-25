@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {BoardModel} from "../shared/board-model";
+import {BoardModel} from '../shared/board-model';
 
 @Pipe({
   name: 'sort'

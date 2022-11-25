@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ModalService} from '../../services/modal.service';
-import {BOARDS_SORT_VALUES} from "../../constants/constants";
+import {BOARDS_SORT_VALUES} from '../../constants/constants';
 
 @Component({
   selector: 'app-dashboard',

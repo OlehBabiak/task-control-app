@@ -1,6 +1,6 @@
-import * as DashboardActions from "../actions/dashboard.actions";
-import {BoardModel} from "../../../../shared/board-model";
-import {ColumnTaskModel} from "../../../../shared/column.task-model";
+import * as DashboardActions from '../actions/dashboard.actions';
+import {BoardModel} from '../../../../shared/board-model';
+import {ColumnTaskModel} from '../../../../shared/column.task-model';
 
 
 export interface State {

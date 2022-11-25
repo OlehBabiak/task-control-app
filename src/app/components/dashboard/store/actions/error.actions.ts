@@ -1,5 +1,5 @@
-import {Action} from "@ngrx/store";
-import {ErrorModel} from "../../../../shared/errors/error-model";
+import {Action} from '@ngrx/store';
+import {ErrorModel} from '../../../../shared/errors/error-model';
 
 export const SET_ERROR = 'SET_ERROR';
 

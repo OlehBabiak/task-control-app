@@ -6,8 +6,8 @@ import {Observable, Subscription} from 'rxjs';
 import {ErrorModel} from '../../shared/errors/error-model';
 import {CustomValidators} from '../../validators/custom-validators';
 import {ErrorPageComponent} from '../../shared/errors/error-page/error-page.component'
-import {PlaceholderDirective} from "../../shared/placeholder/placeholder.directive";
-import {EMAIL_PATTERN} from "../../constants/constants";
+import {PlaceholderDirective} from '../../shared/placeholder/placeholder.directive';
+import {EMAIL_PATTERN} from '../../constants/constants';
 
 @Component({
   selector: 'app-auth',

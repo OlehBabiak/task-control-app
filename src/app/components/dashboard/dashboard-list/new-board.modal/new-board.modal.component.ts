@@ -7,8 +7,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DataStorageService} from '../../../../shared/data-storage/data-storage.service';
 import {BoardModel} from '../../../../shared/board-model';
 import * as ErrorActions from '../../store/actions/error.actions'
-import {Store} from "@ngrx/store";
-import * as fromError from "../../store/reducers/error.reducer";
+import {Store} from '@ngrx/store';
+import * as fromError from '../../store/reducers/error.reducer';
 
 @Component({
   selector: 'app-new-board-modal',

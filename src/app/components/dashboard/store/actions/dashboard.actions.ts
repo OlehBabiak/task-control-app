@@ -1,6 +1,6 @@
-import {Action} from "@ngrx/store";
-import {BoardModel} from "../../../../shared/board-model";
-import {ColumnTaskModel} from "../../../../shared/column.task-model";
+import {Action} from '@ngrx/store';
+import {BoardModel} from '../../../../shared/board-model';
+import {ColumnTaskModel} from '../../../../shared/column.task-model';
 
 export const SET_BOARDS = 'SET_BOARDS';
 export const SET_BOARD = 'SET_BOARD';

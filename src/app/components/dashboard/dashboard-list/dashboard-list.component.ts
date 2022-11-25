@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {Store} from "@ngrx/store";
+import {Store} from '@ngrx/store';
 
 import {BoardModel} from '../../../shared/board-model';
 import {BoardService} from '../../../services/board.service';

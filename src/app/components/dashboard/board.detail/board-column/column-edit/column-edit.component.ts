@@ -4,10 +4,10 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {BoardService} from '../../../../../services/board.service';
 import {DataStorageService} from '../../../../../shared/data-storage/data-storage.service';
 import {BoardModel} from '../../../../../shared/board-model';
-import {ErrorModel} from "../../../../../shared/errors/error-model";
-import {Store} from "@ngrx/store";
-import * as fromError from "../../../store/reducers/error.reducer";
-import * as ErrorActions from "../../../store/actions/error.actions";
+import {ErrorModel} from '../../../../../shared/errors/error-model';
+import {Store} from '@ngrx/store';
+import * as fromError from '../../../store/reducers/error.reducer';
+import * as ErrorActions from '../../../store/actions/error.actions';
 
 @Component({
   selector: 'app-column-edit',
