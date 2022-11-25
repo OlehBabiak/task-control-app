@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BoardModel} from '../../../shared/board-model';
 import {BoardService} from '../../../services/board.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ModalService} from '../../../services/modal.service';
 import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {BoardColumnModel} from '../../../shared/board.column-model';
 import {ErrorModel} from "../../../shared/errors/error-model";
 import {Store} from "@ngrx/store";
@@ -17,9 +17,11 @@ import * as ErrorActions from '../store/actions/error.actions'
   templateUrl: './board.detail.component.html',
   styleUrls: ['./board.detail.component.scss']
 })
-export class BoardDetailComponent implements OnInit {
+export class BoardDetailComponent implements OnInit, OnDestroy {
   boardDetail$: Observable<{ board: BoardModel }>;
-  error: ErrorModel | null
+  error: ErrorModel | null;
+  private errorSubscription: Subscription
+
 
   constructor(
     private boardService: BoardService,
@@ -47,9 +49,11 @@ export class BoardDetailComponent implements OnInit {
       })
 
     this.boardDetail$ = this.store.select('dashboardList');
-    this.errStore.select('errorItem').subscribe((state) => {
-      this.error = state.error
-    });
+    this.errorSubscription = this.errStore
+      .select('errorItem')
+      .subscribe((state) => {
+        this.error = state.error
+      });
   }
 
   onNewColumn() {
@@ -62,5 +66,9 @@ export class BoardDetailComponent implements OnInit {
 
   onErrorHide(event: null) {
     this.errStore.dispatch(new ErrorActions.SetError(event))
+  }
+
+  ngOnDestroy() {
+    this.errorSubscription.unsubscribe()
   }
 }
