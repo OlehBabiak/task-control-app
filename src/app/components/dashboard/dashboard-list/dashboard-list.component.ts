@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {Store} from "@ngrx/store";
 
 import {BoardModel} from '../../../shared/board-model';
@@ -19,9 +19,10 @@ import * as ErrorActions from '../store/actions/error.actions'
 export class DashboardListComponent implements OnInit, OnDestroy {
   @Input() sort: string;
   @Input() filter: string;
-  boards$: Observable<{ boards: BoardModel[] }>;
+  boards: BoardModel[];
   error: ErrorModel | null;
-  private errorSubscription: Subscription
+  private errorSubscription: Subscription;
+  private subscription: Subscription;
 
   constructor(
     private dataStorage: DataStorageService,
@@ -32,7 +33,9 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.boards$ = this.store.select('dashboardList');
+    this.subscription = this.store.select('dashboardList').subscribe((state) => {
+      this.boards = state.boards
+    });
     this.errorSubscription = this.errorStore.select('errorItem').subscribe((state) => {
       this.error = state.error
     });
