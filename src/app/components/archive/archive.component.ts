@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataStorageService} from '../../shared/data-storage/data-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BoardService} from '../../services/board.service';
 import {ColumnTaskModel} from '../../shared/column.task-model';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {ErrorModel} from "../../shared/errors/error-model";
 import {Store} from "@ngrx/store";
 import * as fromDashboardList from '../dashboard/store/reducers/dashboard.reducer'
@@ -15,10 +15,11 @@ import * as ErrorActions from '../../components/dashboard/store/actions/error.ac
   templateUrl: './archive.component.html',
   styleUrls: ['./archive.component.scss']
 })
-export class ArchiveComponent implements OnInit {
+export class ArchiveComponent implements OnInit, OnDestroy {
 
   tasks$: Observable<{ tasks: ColumnTaskModel[] }>;
   error: ErrorModel | null;
+  private errorSubscription: Subscription
 
   constructor(
     private dataStorage: DataStorageService,
@@ -42,7 +43,7 @@ export class ArchiveComponent implements OnInit {
       })
 
     this.tasks$ = this.store.select('dashboardList');
-    this.errStore.select('errorItem').subscribe((state) => {
+    this.errorSubscription = this.errStore.select('errorItem').subscribe((state) => {
       this.error = state.error
     })
   };
@@ -53,5 +54,9 @@ export class ArchiveComponent implements OnInit {
 
   onDetailShow(index: string) {
     this.router.navigate([index], {relativeTo: this.route})
+  }
+
+  ngOnDestroy() {
+    this.errorSubscription.unsubscribe()
   }
 }
