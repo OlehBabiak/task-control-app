@@ -1,14 +1,28 @@
-import * as DashboardActions from "./dashboard.actions";
-import {BoardModel} from "../../../shared/board-model";
+import * as DashboardActions from "../actions/dashboard.actions";
+import {BoardModel} from "../../../../shared/board-model";
+import {ColumnTaskModel} from "../../../../shared/column.task-model";
 
-const initialState = {
+
+export interface State {
+  boards: BoardModel[];
+  board: BoardModel;
+  tasks: ColumnTaskModel[];
+  task: ColumnTaskModel;
+}
+
+export interface BoardState {
+  dashboardList: State;
+}
+
+const initialState: State = {
   boards: [],
-  board: BoardModel,
-  tasks: []
+  board: null,
+  tasks: [],
+  task: null
 }
 
 export function dashboardReducer(
-  state = initialState,
+  state: State = initialState,
   action: DashboardActions.DashboardActions) {
   switch (action.type) {
     case DashboardActions.SET_BOARDS:
