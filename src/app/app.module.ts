@@ -12,7 +12,9 @@ import {NewBoardModalComponent} from './components/dashboard/dashboard-list/new-
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {FooterComponent} from './components/footer/footer/footer.component';
 import {SharedModule} from "./shared/shared.module";
-import {dashboardReducer} from "./components/dashboard/store/dashboard.reducer";
+import {dashboardReducer} from "./components/dashboard/store/reducers/dashboard.reducer";
+import {errorReducer} from "./components/dashboard/store/reducers/error.reducer";
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import {dashboardReducer} from "./components/dashboard/store/dashboard.reducer";
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
-    StoreModule.forRoot({dashboardList: dashboardReducer})
+    StoreModule.forRoot({dashboardList: dashboardReducer, errorItem: errorReducer})
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
