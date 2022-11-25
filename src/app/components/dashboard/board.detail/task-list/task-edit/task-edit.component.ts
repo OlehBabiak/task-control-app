@@ -26,6 +26,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
   task: ColumnTaskModel
   private subscription: Subscription;
   error: ErrorModel | null
+  private newStatus = ''
 
 
   constructor(
@@ -74,7 +75,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
 
           this.taskForm = new FormGroup({
             'name': new FormControl(name, [Validators.required, Validators.minLength(5)]),
-            'archive': new FormControl(this.task.status),
+            'archive': new FormControl(checkBox),
             'description': new FormControl(desc),
             'comments': comments
           })
@@ -115,8 +116,8 @@ export class TaskEditComponent implements OnInit, OnDestroy {
           }
         })
     } else {
-      const {status, _id, boardID} = this.task
-      const taskStatus = this.task.status !== 'archive' ? status : this.task.status;
+      let {status, _id, boardID} = this.task
+      const taskStatus = this.newStatus !== 'archive' ? status : this.newStatus;
       const updatedTask = new ColumnTaskModel(boardID, this.taskForm.value.name, taskStatus, this.taskForm.value.description, _id, this.taskForm.value.comments)
       this.dataStorage.updateTask(updatedTask)
         .subscribe({
@@ -144,7 +145,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
 
   changeStatus(checked: Boolean) {
     if (checked) {
-      this.task.status = 'archive'
+      this.newStatus = 'archive'
     } else {
       return
     }
