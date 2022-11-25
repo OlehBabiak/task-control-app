@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ColumnTaskModel} from '../../../shared/column.task-model';
 import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
+import {Store} from "@ngrx/store";
+import * as fromError from "../../dashboard/store/reducers/error.reducer";
 
 @Component({
   selector: 'app-archive-task-detail',
@@ -18,7 +20,8 @@ export class ArchiveTaskDetailComponent implements OnInit {
   constructor(
     private dataStorage: DataStorageService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private store: Store<fromError.ErrorState>
   ) {
   }
 
@@ -37,7 +40,8 @@ export class ArchiveTaskDetailComponent implements OnInit {
         },
         error: (err) => {
           this.isLoading = false;
-          this.dataStorage.errorSubj.next(err)
+          this.store.dispatch(err)
+          // this.dataStorage.errorSubj.next(err)
         }
       })
   }

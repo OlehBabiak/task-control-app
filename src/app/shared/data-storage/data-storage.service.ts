@@ -2,12 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BoardService} from '../../services/board.service';
 import {BoardModel} from '../board-model';
-import {Subject} from 'rxjs';
 
 import {ColumnTaskModel} from '../column.task-model';
 import {catchError} from 'rxjs/operators';
 import {ErrorService} from '../errors/error.service';
-import {ErrorModel} from '../errors/error-model';
 import {API_PATH, API_PATH_BOARD, API_PATH_COLUMN, API_PATH_TASK} from '../../constants/constants'
 
 @Injectable({
@@ -21,8 +19,6 @@ export class DataStorageService {
     private errorService: ErrorService,
   ) {
   }
-
-  errorSubj = new Subject<ErrorModel>()
 
   storeBoard(board: BoardModel) {
     return this.http

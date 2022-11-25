@@ -1,23 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BoardModel} from '../../../shared/board-model';
 import {BoardService} from '../../../services/board.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ModalService} from '../../../services/modal.service';
 import {DataStorageService} from '../../../shared/data-storage/data-storage.service';
-import {Observable, Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 import {BoardColumnModel} from '../../../shared/board.column-model';
 import {ErrorModel} from "../../../shared/errors/error-model";
 import {Store} from "@ngrx/store";
+import * as fromDashboardList from '../store/reducers/dashboard.reducer'
+import * as fromError from "../store/reducers/error.reducer";
+import * as ErrorActions from '../store/actions/error.actions'
 
 @Component({
   selector: 'app-board.detail',
   templateUrl: './board.detail.component.html',
   styleUrls: ['./board.detail.component.scss']
 })
-export class BoardDetailComponent implements OnInit, OnDestroy {
+export class BoardDetailComponent implements OnInit {
   boardDetail$: Observable<{ board: BoardModel }>;
-  private subscription: Subscription;
-  private errorSubscription: Subscription
   error: ErrorModel | null
 
   constructor(
@@ -26,44 +27,33 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private dataStorage: DataStorageService,
     private modalService: ModalService,
-    private store: Store<{ dashboardList: { board: BoardModel } }>
+    private store: Store<fromDashboardList.BoardState>,
+    private errStore: Store<fromError.ErrorState>
   ) {
   }
 
   ngOnInit(): void {
     this.route.params
       .subscribe((params: Params) => {
-        this.dataStorage.getBoardById(params['id']).subscribe({
-          next: (res: BoardModel) => {
-            this.boardService.setBoard(res)
-          },
-          error: (err) => {
-            this.dataStorage.errorSubj.next(err)
-          }
-        })
+        this.dataStorage.getBoardById(params['id'])
+          .subscribe({
+            next: (res: BoardModel) => {
+              this.boardService.setBoard(res)
+            },
+            error: (err) => {
+              this.errStore.dispatch(new ErrorActions.SetError(err))
+            }
+          })
       })
 
     this.boardDetail$ = this.store.select('dashboardList');
-
-    this.errorSubscription = this.dataStorage
-      .errorSubj
-      .subscribe(err => {
-        this.error = err
-      })
+    this.errStore.select('errorItem').subscribe((state) => {
+      this.error = state.error
+    });
   }
 
   onNewColumn() {
     this.router.navigate(['new'], {relativeTo: this.route})
-  }
-
-
-  ngOnDestroy() {
-    if (this.errorSubscription) {
-      this.errorSubscription.unsubscribe()
-    }
-    if (this.subscription) {
-      this.subscription.unsubscribe()
-    }
   }
 
   onAddTask(column: BoardColumnModel) {

@@ -4,6 +4,9 @@ import {BoardService} from '../../../../services/board.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalService} from '../../../../services/modal.service';
 import {DataStorageService} from '../../../../shared/data-storage/data-storage.service';
+import * as ErrorActions from '../../store/actions/error.actions'
+import {Store} from "@ngrx/store";
+import * as fromError from "../../store/reducers/error.reducer";
 
 @Component({
   selector: 'app-board-item',
@@ -22,7 +25,8 @@ export class BoardItemComponent {
     private router: Router,
     private route: ActivatedRoute,
     private modalService: ModalService,
-    private dataStorage: DataStorageService
+    private dataStorage: DataStorageService,
+    private errorStore: Store<fromError.ErrorState>
   ) {
   }
 
@@ -48,7 +52,7 @@ export class BoardItemComponent {
         .subscribe({
           next: (res: BoardModel[]) => this.boardService.setBoards(res),
           error: (err) => {
-            this.dataStorage.errorSubj.next(err)
+            this.errorStore.dispatch(new ErrorActions.SetError(err))
           }
         })
     }

@@ -5,6 +5,8 @@ import {BoardService} from '../../../../../services/board.service';
 import {DataStorageService} from '../../../../../shared/data-storage/data-storage.service';
 import {BoardModel} from '../../../../../shared/board-model';
 import {ErrorModel} from "../../../../../shared/errors/error-model";
+import {Store} from "@ngrx/store";
+import * as fromError from "../../../store/reducers/error.reducer";
 
 @Component({
   selector: 'app-column-edit',
@@ -19,7 +21,8 @@ export class ColumnEditComponent implements OnInit {
     private route: ActivatedRoute,
     private boardService: BoardService,
     private router: Router,
-    private dataStorage: DataStorageService
+    private dataStorage: DataStorageService,
+    private errStore: Store<fromError.ErrorState>
   ) {
   }
 
@@ -42,7 +45,8 @@ export class ColumnEditComponent implements OnInit {
       .subscribe({
         next: (res: BoardModel) => this.boardService.setBoard(res),
         error: (err) => {
-          this.dataStorage.errorSubj.next(err)
+          this.errStore.dispatch(err)
+          // this.dataStorage.errorSubj.next(err)
         }
       })
     this.router.navigate(['../'], {relativeTo: this.route})

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Store} from "@ngrx/store";
-import * as DashboardActions from "../components/dashboard/store/dashboard.actions";
+import * as DashboardActions from "../components/dashboard/store/actions/dashboard.actions";
+import * as fromDashboardList from '../components/dashboard/store/reducers/dashboard.reducer'
 
 import {BoardModel} from '../shared/board-model';
 import {ColumnTaskModel} from '../shared/column.task-model';
@@ -10,7 +11,7 @@ import {ColumnTaskModel} from '../shared/column.task-model';
 })
 export class BoardService {
 
-  constructor(private store: Store<{ dashboardList: { boards: BoardModel[], board: BoardModel }, tasks: ColumnTaskModel[] }>) {
+  constructor(private store: Store<fromDashboardList.BoardState>) {
   }
 
   setBoards(boards: BoardModel[]) {

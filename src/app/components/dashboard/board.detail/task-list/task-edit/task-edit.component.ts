@@ -7,6 +7,8 @@ import {BoardService} from '../../../../../services/board.service';
 import {DataStorageService} from '../../../../../shared/data-storage/data-storage.service';
 import {ColumnTaskModel} from '../../../../../shared/column.task-model';
 import {BoardModel} from '../../../../../shared/board-model';
+import {Store} from "@ngrx/store";
+import * as fromError from "../../../store/reducers/error.reducer";
 
 @Component({
   selector: 'app-task-edit',
@@ -28,6 +30,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private boardService: BoardService,
     private dataStorage: DataStorageService,
+    private errStore: Store<fromError.ErrorState>
   ) {
   }
 
@@ -101,9 +104,12 @@ export class TaskEditComponent implements OnInit, OnDestroy {
       const newTask = new ColumnTaskModel(boardID, this.taskForm.value.name, name)
       this.dataStorage.createTask(newTask)
         .subscribe({
-          next: (res: BoardModel) => this.boardService.setBoard(res),
+          next: (res: BoardModel) => {
+            this.boardService.setBoard(res)
+          },
           error: (err) => {
-            this.dataStorage.errorSubj.next(err)
+            this.errStore.dispatch(err)
+            // this.dataStorage.errorSubj.next(err)
           }
         })
     } else {
@@ -112,9 +118,12 @@ export class TaskEditComponent implements OnInit, OnDestroy {
       const updatedTask = new ColumnTaskModel(boardID, this.taskForm.value.name, taskStatus, this.taskForm.value.description, _id, this.taskForm.value.comments)
       this.dataStorage.updateTask(updatedTask)
         .subscribe({
-          next: (res: BoardModel) => this.boardService.setBoard(res),
+          next: (res: BoardModel) => {
+            this.boardService.setBoard(res)
+          },
           error: (err) => {
-            this.dataStorage.errorSubj.next(err)
+            this.errStore.dispatch(err)
+            // this.dataStorage.errorSubj.next(err)
           }
         })
     }

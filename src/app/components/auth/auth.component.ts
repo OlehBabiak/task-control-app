@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   isLoginMode = true;
   submitted = false;
   isLoading = false;
-  error: ErrorModel | null = null;
+  // error: ErrorModel | null = null;
   userCreateMessage: string = null;
   @ViewChild(PlaceholderDirective, {static: false}) errorHost: PlaceholderDirective;
 
@@ -67,10 +67,10 @@ export class AuthComponent implements OnInit, OnDestroy {
       next: data => {
         this.isLoading = false;
         this.userCreateMessage = data['message']
-        this.error = null
+        // this.error = null
       },
       error: (err) => {
-        this.error = err;
+        // this.error = err;
         this.showErrorAlert(err)
         this.isLoading = false;
       }
@@ -83,12 +83,12 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.userCreateMessage = null
   }
 
-  onErrorHide(event: null) {
-    this.error = event
-  }
+  // onErrorHide(event: null) {
+  //   this.error = event
+  // }
 
   ngOnDestroy() {
-    if(this.closeSub) {
+    if (this.closeSub) {
       this.closeSub.unsubscribe()
     }
   }

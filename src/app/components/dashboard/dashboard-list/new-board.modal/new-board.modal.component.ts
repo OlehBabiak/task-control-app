@@ -6,6 +6,9 @@ import {BoardService} from '../../../../services/board.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataStorageService} from '../../../../shared/data-storage/data-storage.service';
 import {BoardModel} from '../../../../shared/board-model';
+import * as ErrorActions from '../../store/actions/error.actions'
+import {Store} from "@ngrx/store";
+import * as fromError from "../../store/reducers/error.reducer";
 
 @Component({
   selector: 'app-new-board-modal',
@@ -23,6 +26,7 @@ export class NewBoardModalComponent implements OnInit {
     private boardService: BoardService,
     private dataStorage: DataStorageService,
     private route: ActivatedRoute, private router: Router,
+    private errorStore: Store<fromError.ErrorState>
   ) {
   }
 
@@ -38,7 +42,7 @@ export class NewBoardModalComponent implements OnInit {
         .subscribe({
           next: (res: BoardModel[]) => this.boardService.setBoards(res),
           error: (err) => {
-            this.dataStorage.errorSubj.next(err)
+            this.errorStore.dispatch(new ErrorActions.SetError(err))
           }
         })
 
@@ -48,7 +52,7 @@ export class NewBoardModalComponent implements OnInit {
         .subscribe({
           next: (res: BoardModel[]) => this.boardService.setBoards(res),
           error: (err) => {
-            this.dataStorage.errorSubj.next(err)
+            this.errorStore.dispatch(new ErrorActions.SetError(err))
           }
         })
       this.router.navigate(['dashboard'], {relativeTo: this.route.parent})
