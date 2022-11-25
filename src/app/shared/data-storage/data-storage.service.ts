@@ -73,6 +73,7 @@ export class DataStorageService {
   }
 
   updateTask(task: ColumnTaskModel) {
+    console.log('updated task', task)
     return this.http.put<BoardModel>(`${API_PATH}/${API_PATH_TASK}`, task)
       .pipe(
         catchError(this.errorService.handleError)
